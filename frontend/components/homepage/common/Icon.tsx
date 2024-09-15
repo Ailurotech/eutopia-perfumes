@@ -1,10 +1,12 @@
 import { IconBaseProps } from "react-icons";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
+import { IoMenu } from "react-icons/io5";
 
 const commonIcon = {
   search: IoMdSearch,
   shoppingBag: MdOutlineShoppingBag,
+  menu: IoMenu,
 };
 
 const icons = {

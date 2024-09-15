@@ -95,4 +95,4 @@ export const NavigationRoute = {
   Site,
 };
 
-export type NavigationMenuProps = typeof NavigationRoute;
+export type NavigationMenuTypes = typeof NavigationRoute;
