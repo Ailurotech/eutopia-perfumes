@@ -10,7 +10,7 @@ const Rout = {
 
 const All = {
   Path: "/all",
-  Name: "All",
+  Name: "ALL",
   Link: ({ children }: { children: React.ReactNode }) => (
     <Link href={All.Path}>{children}</Link>
   ),
@@ -18,7 +18,7 @@ const All = {
 
 const ForHer = {
   Path: "/for-her",
-  Name: "ForHer",
+  Name: "For Her",
   Link: ({
     children,
     className,
@@ -34,7 +34,7 @@ const ForHer = {
 
 const ForHim = {
   Path: "/for-him",
-  Name: "ForHim",
+  Name: "For Him",
   Link: ({ children }: { children: React.ReactNode }) => (
     <Link href={ForHim.Path}>{children}</Link>
   ),
@@ -94,3 +94,5 @@ export const NavigationRoute = {
   Join,
   Site,
 };
+
+export type NavigationMenuProps = typeof NavigationRoute;
