@@ -16,7 +16,7 @@ import { Icon } from "../common/Icon";
 export function NavigationDrawer() {
   const { onOpen, isOpen, onClose } = useDisclosure();
   return (
-    <>
+    <div className="block md:hidden">
       <Button
         onClick={onOpen}
         colorScheme="whiteAlpha"
@@ -25,11 +25,11 @@ export function NavigationDrawer() {
       >
         <Icon name="menu" />
       </Button>
-      <Drawer isOpen={isOpen} onClose={onClose} size="xs" colorScheme="green">
+      <Drawer isOpen={isOpen} onClose={onClose} colorScheme="green">
         <DrawerOverlay />
         <DrawerContent
           className={clsx("py-4")}
-          backgroundColor="rgba(102,104,90,0.9)"
+          backgroundColor="rgba(0,0,0,0.4)"
           color="white"
         >
           <DrawerCloseButton fontSize="0.8rem" top="1.5rem" right="1.5rem" />
@@ -41,15 +41,13 @@ export function NavigationDrawer() {
             Menu
           </DrawerHeader>
           <DrawerBody>
-            <ul className="space-y-4">
-              <NavigationMenu
-                navigationMenuRoute={NavigationRoute}
-                direction="vertical"
-              />
-            </ul>
+            <NavigationMenu
+              navigationMenuRoute={NavigationRoute}
+              direction="vertical"
+            />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-    </>
+    </div>
   );
 }
