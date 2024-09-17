@@ -13,9 +13,9 @@ export default function Home() {
       <ProductCard
         slug="example-product"
         image="Rectangle 1142.png"
-        title="Example Product"
-        description="This is an example product."
-        price="$19.99"
+        title="ARMAF PASSION"
+        description="For Him"
+        price="$51.74"
         onAddToCart={() => console.log('Added to cart')}
       />
     </div>

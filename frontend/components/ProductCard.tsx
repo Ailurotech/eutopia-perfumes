@@ -32,13 +32,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ slug, image, title, descripti
         </button>
       </div>
       <div className="p-4 text-center">
-        <p className="text-[#808274] mb-4" style={{ fontFamily: 'Poppins', fontSize: '16px', fontWeight: 400, lineHeight: '24px' }}>
+        <p className="text-[#808274] mb-4 font-poppins text-base font-normal leading-6">
           {description}
         </p>
-        <h2 className="text-[#808274] text-xl font-semibold mb-2" style={{ fontFamily: 'Literata', fontSize: '20px', fontWeight: 700, lineHeight: '29.7px' }}>
+        <h2 className="text-[#808274] text-xl font-literata font-bold mb-2 leading-[29.7px]">
           {title}
         </h2>
-        <p className="text-[#808274] text-xl font-bold mb-4" style={{ fontFamily: 'Rokkitt', fontSize: '30px', fontWeight: 400, lineHeight: '45px' }}>
+        <p className="text-[#808274] text-[30px] font-rokkitt font-normal mb-4 leading-[45px]">
           {price}
         </p>
       </div>
