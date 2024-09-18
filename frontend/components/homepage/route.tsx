@@ -80,6 +80,54 @@ const Site = {
   ),
 };
 
+const AboutUs = {
+  Path: "/about-us",
+  Name: "About Us",
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <Link href={AboutUs.Path}>{children}</Link>
+  ),
+};
+
+const StoreLocation = {
+  Path: "/store-location",
+  Name: "Store Location",
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <Link href={StoreLocation.Path}>{children}</Link>
+  ),
+};
+
+const Privacy = {
+  Path: "/privacy",
+  Name: "Privacy Policy",
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <Link href={Privacy.Path}>{children}</Link>
+  ),
+};
+
+const Terms = {
+  Path: "/terms",
+  Name: "Terms of Service",
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <Link href={Terms.Path}>{children}</Link>
+  ),
+};
+
+const FAQ = {
+  Path: "/frequently-asked-questions",
+  Name: "FAQ",
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <Link href={FAQ.Path}>{children}</Link>
+  ),
+};
+
+const FRR = {
+  Path: "/shipping-returns-refund",
+  Name: "FRR",
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <Link href={FRR.Path}>{children}</Link>
+  ),
+};
+
 export const RoutRoute = {
   Rout,
 };
@@ -93,6 +141,12 @@ export const NavigationRoute = {
   Contact,
   Join,
   Site,
+  AboutUs,
+  StoreLocation,
+  Privacy,
+  Terms,
+  FAQ,
+  FRR,
 };
 
 export type NavigationMenuTypes = typeof NavigationRoute;
