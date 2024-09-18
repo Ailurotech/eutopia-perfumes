@@ -1,6 +1,12 @@
 import React from 'react';
 import { Text, Link, Image } from '@chakra-ui/react';
 import { footerTheme } from '../styles/footer-style'; 
+import {
+  facebookIconStyle,
+  instagramIconStyle,
+  twitterIconStyle,
+  youtubeIconStyle,
+} from '../styles/footer-style'; 
 
 const Footer: React.FC = () => {
   return (
@@ -39,11 +45,20 @@ const Footer: React.FC = () => {
           <Link href="/contact" sx={footerTheme.baseStyle?.link}>Shipping, Returns and Refund</Link>
         
           <div className="flex-1 flex justify-center text-center space-x-4">
-            <Link href="#"><Image src="/images/facebook.png" alt="Facebook Link" width="40" height="40" /></Link>
-            <Link href="#"><Image src="/images/instagram.png" alt="Instagram Link" width="40" height="40" /></Link>
-            <Link href="#"><Image src="/images/twitter.png" alt="Twitter Link" width="40" height="40" /></Link>
-            <Link href="#"><Image src="/images/youtube.png" alt="Youtube Link" width="40" height="40" /></Link>
+            <Link href="#">
+              <Image src="/images/facebook.png" alt="Facebook" sx={facebookIconStyle} />
+            </Link>
+            <Link href="#">
+              <Image src="/images/instagram.png" alt="Instagram" sx={instagramIconStyle} />
+            </Link>
+            <Link href="#">
+              <Image src="/images/twitter.png" alt="Twitter" sx={twitterIconStyle} />
+            </Link>
+            <Link href="#">
+              <Image src="/images/youtube.png" alt="Youtube" sx={youtubeIconStyle} />
+            </Link>
           </div>
+
       </div>
     </div>
   );
