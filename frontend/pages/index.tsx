@@ -1,24 +1,31 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../menu/ProductCard';
+import { GetServerSideProps } from 'next';
+import client from '../../studio/sanityClient'; 
+import { ProductCardProps } from '../types';  
+const inter = Inter({ subsets: ['latin'] });  
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
+const HomePage = ({ perfumes }: { perfumes: ProductCardProps[] }) => {
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
-      <div>
-      <ProductCard
-        slug="example-product"
-        image="Rectangle 1142.png"
-        title="ARMAF PASSION"
-        description="For Him"
-        price="$51.74"
-        onAddToCart={() => console.log('Added to cart')}
-      />
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {perfumes.map((perfume) => (
+        <ProductCard 
+          key={perfume.slug} 
+          slug={perfume.slug} 
+          image={perfume.image} 
+          tag={perfume.tag}
+          name={perfume.name} 
+          price={perfume.price} 
+          description={perfume.description} 
+          onAddToCart={() => console.log(`Added ${perfume.name} to cart`)} 
+        />
+      ))}
     </div>
+    
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           Get started by editing&nbsp;
@@ -124,6 +131,30 @@ export default function Home() {
           </p>
         </a>
       </div>
+    
     </main>
   );
 }
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const perfumes = await client.fetch(`
+    *[_type == "perfume"]{
+      name,
+      "slug": slug.current,
+      price,
+      description,
+      "tag": categories,
+      "image": image.asset->url 
+    }
+  `);
+  console.log(perfumes);
+
+  return {
+    props: {
+      perfumes, 
+    },
+  };
+};
+
+export default HomePage;
