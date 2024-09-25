@@ -2,6 +2,8 @@ import Image from "next/image";
 import perfume from "./assets/Image.png";
 import Link from "next/link";
 import { StarRating } from "./components/StarRating";
+import { Button } from "@chakra-ui/react";
+import { NumberAdder } from "./components/NumberAdder";
 
 export function ProductPage() {
   return (
@@ -20,13 +22,16 @@ export function ProductPage() {
               Read Review
             </Link>
           </div>
-
           <h3>100ml / 3.4 oz</h3>
           <span>
-            This item has
+            {"This item has\n"}
             <Link href="/product" className="underline">
               special conditions for returns
             </Link>
+          </span>
+          <span className="flex">
+            <NumberAdder />
+            <Button>Add to Cart</Button>
           </span>
         </div>
       </div>
