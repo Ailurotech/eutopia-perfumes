@@ -2,6 +2,9 @@ import { IconBaseProps } from "react-icons";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { IoMenu } from "react-icons/io5";
+import { MdOutlineWarehouse } from "react-icons/md";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { IoSearch } from "react-icons/io5";
 
 const commonIcon = {
   search: IoMdSearch,
@@ -9,8 +12,15 @@ const commonIcon = {
   menu: IoMenu,
 };
 
+const productIcon = {
+  warehouse: MdOutlineWarehouse,
+  info: IoIosInformationCircleOutline,
+  search: IoSearch,
+};
+
 const icons = {
   ...commonIcon,
+  ...productIcon,
 };
 
 export type Icon = keyof typeof icons;

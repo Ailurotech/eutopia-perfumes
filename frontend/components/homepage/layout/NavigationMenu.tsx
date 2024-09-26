@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Icon } from "../common/Icon";
+import { Icon } from "../../common/Icon";
 import { Poppins } from "next/font/google";
 import { cva, type VariantProps } from "class-variance-authority";
-import { NavigationMenuTypes } from "../route";
+import { NavigationMenuTypes } from "../../route";
 import clsx from "clsx";
 
 export interface NavigationMenuVariants
