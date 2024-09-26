@@ -56,8 +56,8 @@ export function DetailedProduct() {
           </div>
           <div className="flex gap-4">
             <NumberAdder onSetQuantity={setQuantity} />
-            <Button className="bg-default text-white px-24 rounded-xl font-bold text-sm">
-              {"Add To Cart".toUpperCase()}
+            <Button className="bg-default text-white px-24 rounded-xl font-bold text-sm uppercase">
+              Add To Cart
             </Button>
           </div>
           <div className="text-[32px] font-black">

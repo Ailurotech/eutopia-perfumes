@@ -9,10 +9,10 @@ export function Description() {
       <h1
         className={clsx(
           actor.className,
-          "text-[48px] flex items-center justify-center"
+          "text-[48px] flex items-center justify-center uppercase"
         )}
       >
-        {"Description".toUpperCase()}
+        Description
       </h1>
       <p className="text-[20px] flex items-center justify-center">
         Zara Seoul 532-8 Sinsa Dong Gangnam-Gu was launched in 2015. Aromatic

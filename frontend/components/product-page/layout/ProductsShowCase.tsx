@@ -88,8 +88,13 @@ export function ProductsShowCase({ category }: ProductsShowCaseProps) {
   return (
     <>
       <div className="flex flex-col items-center justify-center text-center gap-4">
-        <h1 className={clsx(playFair.className, "text-[48px] font-extrabold")}>
-          {category.toUpperCase()}
+        <h1
+          className={clsx(
+            playFair.className,
+            "text-[48px] font-extrabold uppercase"
+          )}
+        >
+          {category}
         </h1>
         <Link
           href="/products"
