@@ -5,6 +5,8 @@ import { IoMenu } from "react-icons/io5";
 import { MdOutlineWarehouse } from "react-icons/md";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
+import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 
 const commonIcon = {
   search: IoMdSearch,
@@ -16,6 +18,8 @@ const productIcon = {
   warehouse: MdOutlineWarehouse,
   info: IoIosInformationCircleOutline,
   search: IoSearch,
+  back: IoIosArrowBack,
+  forward: IoIosArrowForward,
 };
 
 const icons = {
