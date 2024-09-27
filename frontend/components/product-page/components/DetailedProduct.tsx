@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import Image from "next/image";
-import perfume from "../assets/Image.png";
 import Link from "next/link";
 import { Libre_Bodoni, Poppins } from "next/font/google";
 import { NavigationRoute } from "@/components/route";
@@ -9,11 +8,20 @@ import { NumberAdder } from "./NumberAdder";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@/components/common/Icon";
 import { useState } from "react";
+import { ProductPageContent } from "@/type";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
 
-export function DetailedProduct() {
+interface DetailedProductProps {
+  detailedProductContent: Omit<ProductPageContent, "description">;
+}
+
+export function DetailedProduct({
+  detailedProductContent,
+}: DetailedProductProps) {
+  const { name, slug, price, image, volumeOfMl, volumeOfOz, category } =
+    detailedProductContent;
   const [quantity, setQuantity] = useState(1);
 
   return (
@@ -23,20 +31,20 @@ export function DetailedProduct() {
         "flex flex-col gap-10 xl:gap-10 xl:grid xl:grid-cols-[50%_1fr]"
       )}
     >
-      <Image src={perfume} alt="perfume" width={800} height={800} />
+      <Image src={image} alt="perfume" width={800} height={800} />
       <div className="xl:p-10 flex flex-col gap-[26px] 2xl:gap-8">
         <h1 className="text-[32px] 2xl:text-[40px] tracking-[0.4rem]">
           PERFUME
         </h1>
         <div className="space-y-3">
           <h1 className={clsx(libreBodoni.className, "text-3xl 2xl:text-4xl ")}>
-            Sinsa Dong Gangnam-Gu Zara
+            {name}
           </h1>
           <div className="space-y-1">
             <h3>
-              SKU: E994-50-1 Category:
+              {slug} Category:
               <NavigationRoute.ForHim.Link className="underline">
-                For Him
+                {category}
               </NavigationRoute.ForHim.Link>
               Tag:
               <Link href="/men" className="underline">
@@ -51,7 +59,9 @@ export function DetailedProduct() {
             </span>
           </div>
           <div className="space-y-1">
-            <h3 className="text-2xl font-semibold">100ml / 3.4 oz</h3>
+            <h3 className="text-2xl font-semibold">
+              {volumeOfMl}ml / {volumeOfOz} oz
+            </h3>
             <span className="text-xl">
               {"This item has\n"}
               <Link href="/product" className="underline">
@@ -66,7 +76,7 @@ export function DetailedProduct() {
             </Button>
           </div>
           <div className="text-[32px] font-black">
-            ${quantity ? (quantity * 19.5).toFixed(2) : 0}
+            ${quantity ? (quantity * price).toFixed(2) : 0}
           </div>
         </div>
         <div className="space-y-3">

@@ -38,7 +38,7 @@ function CommonStar({ clip }: CommonStarProps) {
         fillRule="evenodd"
         d="M10 3l2.5 5.5 5.5.5-4 4 1 5.5-5-2-5 2 1-5.5-4-4 5.5-.5L10 3z"
         clipRule="evenodd"
-        clip-path={clip}
+        clipPath={clip}
       />
       <StarOutline />
     </>
@@ -51,7 +51,7 @@ function StarOutline() {
       fill="none"
       d="M10 3l2.5 5.5 5.5.5-4 4 1 5.5-5-2-5 2 1-5.5-4-4 5.5-.5L10 3z"
       stroke="#808274"
-      stroke-width="2"
+      strokeWidth="2"
     />
   );
 }
