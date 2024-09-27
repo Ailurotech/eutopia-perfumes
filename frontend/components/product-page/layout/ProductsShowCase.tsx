@@ -77,6 +77,29 @@ export function ProductsShowCase({ category }: ProductsShowCaseProps) {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 1536,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   let sliderRef = useRef<Slider>(null);
   const next = () => {
@@ -97,17 +120,17 @@ export function ProductsShowCase({ category }: ProductsShowCaseProps) {
           {category}
         </h1>
         <Link
-          href="/products"
+          href="/product"
           className={clsx(poppins.className, "underline text-[35px]")}
         >
           Shop Now
         </Link>
       </div>
       <div className="relative flex items-center">
-        <button onClick={previous}>
+        <button onClick={next}>
           <Icon name="back" className="text-3xl" />
         </button>
-        <div className="space-x-4 max-w-[70rem] ">
+        <div className="space-x-4 w-full xl:max-w-[60rem] 2xl:max-w-[70rem] ">
           <Slider ref={sliderRef} {...settings}>
             {testProducts.map((product) => (
               <RecommendedProduct
@@ -120,7 +143,7 @@ export function ProductsShowCase({ category }: ProductsShowCaseProps) {
             ))}
           </Slider>
         </div>
-        <button onClick={next}>
+        <button onClick={previous}>
           <Icon name="forward" className="text-3xl" />
         </button>
       </div>

@@ -17,14 +17,19 @@ export function DetailedProduct() {
   const [quantity, setQuantity] = useState(1);
 
   return (
-    <div className={clsx(poppins.className, "flex gap-10")}>
-      <div className="w-[50%] h-1/2">
-        <Image src={perfume} alt="perfume" width={700} height={700} />
-      </div>
-      <div className="p-10 flex flex-col gap-8">
-        <h1 className="text-[40px] tracking-[0.4rem]">PERFUME</h1>
+    <div
+      className={clsx(
+        poppins.className,
+        "flex flex-col gap-10 xl:gap-10 xl:grid xl:grid-cols-[50%_1fr]"
+      )}
+    >
+      <Image src={perfume} alt="perfume" width={800} height={800} />
+      <div className="xl:p-10 flex flex-col gap-[26px] 2xl:gap-8">
+        <h1 className="text-[32px] 2xl:text-[40px] tracking-[0.4rem]">
+          PERFUME
+        </h1>
         <div className="space-y-3">
-          <h1 className={clsx(libreBodoni.className, "text-4xl")}>
+          <h1 className={clsx(libreBodoni.className, "text-3xl 2xl:text-4xl ")}>
             Sinsa Dong Gangnam-Gu Zara
           </h1>
           <div className="space-y-1">
@@ -40,7 +45,7 @@ export function DetailedProduct() {
             </h3>
             <span className="flex gap-3">
               <StarRating starNum={4} />
-              <Link href="/product" className="underline text-xl">
+              <Link href="/product" className="underline text-lg 2xl:text-xl">
                 Read Review
               </Link>
             </span>
@@ -61,7 +66,7 @@ export function DetailedProduct() {
             </Button>
           </div>
           <div className="text-[32px] font-black">
-            ${(quantity * 12.95).toFixed(2)}
+            ${quantity ? (quantity * 19.5).toFixed(2) : 0}
           </div>
         </div>
         <div className="space-y-3">
@@ -71,7 +76,7 @@ export function DetailedProduct() {
               Find your item in store
             </span>
           </div>
-          <div className="bg-[#e4f0f5] py-4 px-8 border-l-4 border-[#79b6cb] grid grid-cols-[50px_1fr] grid-rows-2 items-center">
+          <div className="bg-[#e4f0f5] py-4 px-8 border-l-4 border-[#79b6cb] grid grid-cols-[50px_1fr] grid-rows-2 items-center max-w-[80%] xl:max-w-full">
             <Icon name="info" className="text-[#79b6cb] text-3xl"></Icon>
             <h5 className="text-xs text-black">
               We are unable to determine your nearest store

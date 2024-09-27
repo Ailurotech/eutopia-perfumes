@@ -13,7 +13,7 @@ export function NumberAdder({ onSetQuantity }: NumberAdderProps) {
   return (
     <NumberInput
       step={1}
-      min={1}
+      min={0}
       max={999}
       defaultValue={1}
       onChange={(_, value) => onSetQuantity(value)}
