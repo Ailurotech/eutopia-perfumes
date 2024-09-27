@@ -2,6 +2,7 @@ import { IconBaseProps } from "react-icons";
 import { IoMdSearch } from "react-icons/io";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { IoMenu } from "react-icons/io5";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const commonIcon = {
   search: IoMdSearch,
@@ -9,8 +10,13 @@ const commonIcon = {
   menu: IoMenu,
 };
 
+const homeBannerIcon={
+  arrow: FaRegArrowAltCircleRight,
+}
+
 const icons = {
   ...commonIcon,
+  ...homeBannerIcon,
 };
 
 export type Icon = keyof typeof icons;
