@@ -59,5 +59,14 @@ export default defineType({
       title: 'Volume of Oz',
       type: 'number',
     }),
+    defineField({
+      name: 'tag',
+      title: 'Tag',
+      type: 'string',
+      options: {
+        list: ['women', 'men', 'neutral'],
+        layout: 'dropdown',
+      },
+    }),
   ],
 })

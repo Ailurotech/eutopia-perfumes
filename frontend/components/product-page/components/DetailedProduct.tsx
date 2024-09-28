@@ -20,7 +20,7 @@ interface DetailedProductProps {
 export function DetailedProduct({
   detailedProductContent,
 }: DetailedProductProps) {
-  const { name, slug, price, image, volumeOfMl, volumeOfOz, category } =
+  const { name, slug, price, image, volumeOfMl, volumeOfOz, category, tag } =
     detailedProductContent;
   const [quantity, setQuantity] = useState(1);
 
@@ -41,23 +41,28 @@ export function DetailedProduct({
             {name}
           </h1>
           <div className="space-y-1">
-            <h3>
-              {slug} Category:
-              <NavigationRoute.ForHim.Link className="underline">
-                {category}
-              </NavigationRoute.ForHim.Link>
-              Tag:
-              <Link href="/men" className="underline">
-                Men
-              </Link>
-            </h3>
-            <span className="flex gap-3">
-              <StarRating starNum={4} />
-              <Link href="/product" className="underline text-lg 2xl:text-xl">
-                Read Review
-              </Link>
+            <span className="flex gap-2">
+              <h3>SKU:{slug}</h3>
+              <h3>
+                Category:
+                <Link href={`/${category}`} className="underline capitalize">
+                  {category}
+                </Link>
+              </h3>
+              <h3>
+                Tag:
+                <Link href={`/${category}`} className="underline">
+                  {tag}
+                </Link>
+              </h3>
             </span>
           </div>
+          <span className="flex gap-3">
+            <StarRating starNum={4} />
+            <Link href="/product" className="underline text-lg 2xl:text-xl">
+              Read Review
+            </Link>
+          </span>
           <div className="space-y-1">
             <h3 className="text-2xl font-semibold">
               {volumeOfMl}ml / {volumeOfOz} oz

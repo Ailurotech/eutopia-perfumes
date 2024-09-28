@@ -7,4 +7,5 @@ export interface ProductPageContent {
   volumeOfOz: number;
   price: number;
   category: string;
+  tag: string;
 }
