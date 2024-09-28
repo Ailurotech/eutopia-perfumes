@@ -22,6 +22,21 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'stars',
+      title: 'Stars',
+      type: 'number',
+      validation: (rule) => [
+        rule.positive().max(5),
+        rule.custom((value) => {
+          if (typeof value === 'undefined') return 'Stars is required'
+          if (value % 0.5 !== 0 && value % 1 !== 0) {
+            return 'Stars must be in increments of 0.5'
+          }
+          return true
+        }),
+      ],
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',

@@ -20,10 +20,18 @@ interface DetailedProductProps {
 export function DetailedProduct({
   detailedProductContent,
 }: DetailedProductProps) {
-  const { name, slug, price, image, volumeOfMl, volumeOfOz, category, tag } =
-    detailedProductContent;
+  const {
+    name,
+    slug,
+    price,
+    image,
+    volumeOfMl,
+    volumeOfOz,
+    category,
+    tag,
+    stars,
+  } = detailedProductContent;
   const [quantity, setQuantity] = useState(1);
-
   return (
     <div
       className={clsx(
@@ -58,7 +66,7 @@ export function DetailedProduct({
             </span>
           </div>
           <span className="flex gap-3">
-            <StarRating starNum={4} />
+            <StarRating starNum={stars} />
             <Link href="/product" className="underline text-lg 2xl:text-xl">
               Read Review
             </Link>

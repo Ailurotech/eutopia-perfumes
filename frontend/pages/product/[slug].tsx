@@ -1,12 +1,16 @@
 import { ProductPage } from "@/components/product-page/ProductPage";
 import { sanityClient } from "@/lib/sanityClient";
-import { Category, ProductPageContent, RecommendedProducts } from "@/type";
+import {
+  productPageQuery,
+  recommendedProductQuery,
+} from "@/query/product-page.query";
+import { ProductPageContent, RecommendedProducts } from "@/type";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Product() {
   const router = useRouter();
-  const slug = router.query.slug;
+  const slug = router.query.slug as string;
 
   const [productPageContent, setProductPageContent] =
     useState<ProductPageContent>();
@@ -16,31 +20,13 @@ export default function Product() {
 
   useEffect(() => {
     if (slug) {
-      const sanityQuery = `
-      *[_type == "perfume" && slug.current == "${slug}"]{
-          volumeOfMl,
-          name,
-          "slug": slug.current,
-          "image": image.asset->url,
-          description,
-          volumeOfOz,
-          price,
-          category,
-          tag
-        }
-      `;
+      const mainSanityQuery = productPageQuery(slug);
       const fetchProduct = async () => {
-        const productItem = await sanityClient.fetch(sanityQuery);
+        const productItem = await sanityClient.fetch(mainSanityQuery);
         const data = productItem[0];
         const category = data.category;
-        const sanitySecondQuery = `
-        *[_type == "perfume" && slug.current != "${slug}" && category == "${category}"]{
-          name,
-          "image": image.asset -> url,
-          price
-        }[0...10]
-        `;
-        const recommendedItem = await sanityClient.fetch(sanitySecondQuery);
+        const secondSanityQuery = recommendedProductQuery(slug, category);
+        const recommendedItem = await sanityClient.fetch(secondSanityQuery);
         setRecommendedProducts(recommendedItem);
         setProductPageContent(data);
         setLoading(false);

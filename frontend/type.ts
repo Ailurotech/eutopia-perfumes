@@ -8,6 +8,7 @@ export interface ProductPageContent {
   price: number;
   category: string;
   tag: string;
+  stars: number;
 }
 
 export interface RecommendedProducts {
@@ -15,6 +16,3 @@ export interface RecommendedProducts {
   image: string;
   price: number;
 }
-
-const category = ["for-her", "for-him", "neutral"] as const;
-export type Category = (typeof category)[number];
