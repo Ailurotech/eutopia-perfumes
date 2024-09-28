@@ -9,7 +9,7 @@ export function Description({ description }: { description: string }) {
       <h1
         className={clsx(
           actor.className,
-          "text-[48px] flex items-center justify-center uppercase"
+          "text-[48px] xl:text-[40px] 2xl:text-[48px] flex items-center justify-center uppercase"
         )}
       >
         Description

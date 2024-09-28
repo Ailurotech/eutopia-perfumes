@@ -47,6 +47,13 @@ export function ProductsShowCase({
       {
         breakpoint: 1024,
         settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 640,
+        settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         },
@@ -66,7 +73,7 @@ export function ProductsShowCase({
         <h1
           className={clsx(
             playFair.className,
-            "text-[48px] font-extrabold uppercase"
+            "text-[48px] xl:text-[40px] 2xl:text-[48px] font-extrabold uppercase"
           )}
         >
           {title}
@@ -82,7 +89,7 @@ export function ProductsShowCase({
         <button onClick={next}>
           <Icon name="back" className="text-3xl" />
         </button>
-        <div className="space-x-4 w-full xl:max-w-[60rem] 2xl:max-w-[70rem] ">
+        <div className="space-x-4 w-full max-w-[28rem] md:max-w-[3rem] lg:max-w-[45rem] xl:max-w-[42rem] 2xl:max-w-[55rem] min-[1600px]:max-w-[70rem]">
           <Slider ref={sliderRef} {...settings}>
             {recommendedProducts.map((product) => (
               <RecommendedProduct
