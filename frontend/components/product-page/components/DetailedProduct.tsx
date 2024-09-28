@@ -65,7 +65,7 @@ export function DetailedProduct({
           </span>
           <div className="space-y-1">
             <h3 className="text-2xl font-semibold">
-              {volumeOfMl}ml / {volumeOfOz} oz
+              {volumeOfMl}ml / {volumeOfOz}oz
             </h3>
             <span className="text-xl">
               {"This item has\n"}

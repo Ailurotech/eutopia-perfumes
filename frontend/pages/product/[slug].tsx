@@ -1,7 +1,6 @@
 import { ProductPage } from "@/components/product-page/ProductPage";
 import { sanityClient } from "@/lib/sanityClient";
-import { ProductPageContent } from "@/type";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { Category, ProductPageContent, RecommendedProducts } from "@/type";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -11,6 +10,8 @@ export default function Product() {
 
   const [productPageContent, setProductPageContent] =
     useState<ProductPageContent>();
+  const [recommendedProducts, setRecommendedProducts] =
+    useState<RecommendedProducts[]>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -28,17 +29,32 @@ export default function Product() {
           tag
         }
       `;
-      console.log(sanityQuery);
       const fetchProduct = async () => {
         const productItem = await sanityClient.fetch(sanityQuery);
-        setProductPageContent(productItem[0]);
+        const data = productItem[0];
+        const category = data.category;
+        const sanitySecondQuery = `
+        *[_type == "perfume" && slug.current != "${slug}" && category == "${category}"]{
+          name,
+          "image": image.asset -> url,
+          price
+        }[0...10]
+        `;
+        const recommendedItem = await sanityClient.fetch(sanitySecondQuery);
+        setRecommendedProducts(recommendedItem);
+        setProductPageContent(data);
         setLoading(false);
       };
       fetchProduct();
     }
   }, [slug]);
 
-  if (!loading && productPageContent) {
-    return <ProductPage productPageContent={productPageContent!} />;
+  if (!loading && productPageContent && recommendedProducts) {
+    return (
+      <ProductPage
+        productPageContent={productPageContent}
+        recommendedProducts={recommendedProducts}
+      />
+    );
   }
 }

@@ -1,76 +1,28 @@
 import Link from "next/link";
 import { Playfair_Display, Poppins } from "next/font/google";
 import clsx from "clsx";
-import { RecommendedProduct } from "./RecommendedProduct";
+import { RecommendedProducts } from "@/type";
 import Slider from "react-slick";
-import image1 from "../assets/test1.png";
-import image2 from "../assets/test2.png";
-import image3 from "../assets/test3.png";
-import image4 from "../assets/test4.png";
 import { Icon } from "@/components/common/Icon";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRef } from "react";
+import { RecommendedProduct } from "./RecommendedProduct";
 
 interface ProductsShowCaseProps {
+  title: string;
   category: string;
+  recommendedProducts: RecommendedProducts[];
 }
 
 const playFair = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
-const testProducts = [
-  {
-    image: image1,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-  {
-    image: image2,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-  {
-    image: image3,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-  {
-    image: image4,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-  {
-    image: image1,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-  {
-    image: image2,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-  {
-    image: image3,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-  {
-    image: image4,
-    category: "for him",
-    name: "ARMAF PASSION",
-    price: 51.74,
-  },
-];
-
-export function ProductsShowCase({ category }: ProductsShowCaseProps) {
+export function ProductsShowCase({
+  title,
+  category,
+  recommendedProducts,
+}: ProductsShowCaseProps) {
   const settings = {
     infinite: true,
     speed: 500,
@@ -117,7 +69,7 @@ export function ProductsShowCase({ category }: ProductsShowCaseProps) {
             "text-[48px] font-extrabold uppercase"
           )}
         >
-          {category}
+          {title}
         </h1>
         <Link
           href="/product"
@@ -132,11 +84,11 @@ export function ProductsShowCase({ category }: ProductsShowCaseProps) {
         </button>
         <div className="space-x-4 w-full xl:max-w-[60rem] 2xl:max-w-[70rem] ">
           <Slider ref={sliderRef} {...settings}>
-            {testProducts.map((product) => (
+            {recommendedProducts.map((product) => (
               <RecommendedProduct
                 key={product.name}
                 image={product.image}
-                category={product.category}
+                category={category}
                 name={product.name}
                 price={product.price}
               />
