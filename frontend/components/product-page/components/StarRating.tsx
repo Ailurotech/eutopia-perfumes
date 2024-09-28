@@ -17,14 +17,17 @@ function Stars(num: number) {
       if (i === int) return { filled: false, half: true };
       return { filled: false, half: false };
     });
-    return stars.map((star) => {
-      return Star(star.filled, star.half);
+    return stars.map((star, i) => {
+      return Star(star.filled, star.half, i);
     });
   }
 }
 
-function Star(filled: boolean, half: boolean) {
-  return (filled && <FullStar />) || (half && <HalfStar />) || <EmptyStar />;
+function Star(filled: boolean, half: boolean, index: number) {
+  return (
+    (filled && <FullStar key={index} />) ||
+    (half && <HalfStar key={index} />) || <EmptyStar key={index} />
+  );
 }
 
 type CommonStarProps = {
