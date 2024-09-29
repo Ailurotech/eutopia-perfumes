@@ -93,8 +93,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   try {
     const data = await sanityClient.fetch(query);
-    console.log("Fetched data:", data);
-
     const homePageContent = data[0];
 
     return {

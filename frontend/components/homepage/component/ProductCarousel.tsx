@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "@/styles/homepage.module.css";
@@ -16,13 +16,13 @@ interface ProductCarouselProps {
   shopLink: string;
 }
 
-const ProductCarousel: React.FC<ProductCarouselProps> = ({
+const ProductCarousel = ({
   title,
   items,
   itemsPerPage,
   shopLink,
-}) => {
-  const [currentIndex, setCurrentIndex] = React.useState(0);
+}: ProductCarouselProps) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePrev = () => {
     if (currentIndex > 0) {

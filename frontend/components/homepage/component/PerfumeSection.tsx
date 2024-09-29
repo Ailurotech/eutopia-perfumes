@@ -12,14 +12,14 @@ interface PerfumeSectionProps {
   imageOnLeft?: boolean;
 }
 
-const PerfumeSection: React.FC<PerfumeSectionProps> = ({
+const PerfumeSection = ({
   title,
   subtitle,
   image,
   linkText,
   linkUrl,
   imageOnLeft = true,
-}) => {
+}: PerfumeSectionProps) => {
   return (
     <section
       className={`flex flex-col md:flex-row mt-10 ${imageOnLeft ? "" : "md:flex-row-reverse"}`}
