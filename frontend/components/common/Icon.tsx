@@ -7,6 +7,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { IoSearch } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const commonIcon = {
   search: IoMdSearch,
@@ -22,9 +23,14 @@ const productIcon = {
   forward: IoIosArrowForward,
 };
 
+const homeBannerIcon = {
+  arrow: FaRegArrowAltCircleRight,
+};
+
 const icons = {
   ...commonIcon,
   ...productIcon,
+  ...homeBannerIcon,
 };
 
 export type Icon = keyof typeof icons;

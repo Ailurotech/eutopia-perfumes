@@ -1,8 +1,8 @@
-import { createClient } from "@sanity/client";
+import {createClient} from '@sanity/client';
 
 export const sanityClient = createClient({
-  projectId: "djpnf221",
-  dataset: "uat",
+  projectId: 'djpnf221',  
+  dataset: 'uat', 
   useCdn: false,
-  apiVersion: "2022-03-07",
+  apiVersion: '2022-03-07',
 });
