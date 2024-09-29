@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { useRef } from "react";
 import { RecommendedProduct } from "./RecommendedProduct";
 
-interface ProductsShowCaseProps {
+interface ProductsCarouselProps {
   title: string;
   category: string;
   recommendedProducts: RecommendedProducts[];
@@ -18,11 +18,11 @@ interface ProductsShowCaseProps {
 const playFair = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 
-export function ProductsShowCase({
+export function ProductsCarousel({
   title,
   category,
   recommendedProducts,
-}: ProductsShowCaseProps) {
+}: ProductsCarouselProps) {
   const settings = {
     infinite: true,
     speed: 500,
@@ -86,7 +86,7 @@ export function ProductsShowCase({
         </Link>
       </div>
       <div className="relative flex items-center">
-        <button onClick={next}>
+        <button onClick={previous}>
           <Icon name="back" className="text-3xl" />
         </button>
         <div className="space-x-4 w-full max-w-[28rem] md:max-w-[3rem] lg:max-w-[45rem] xl:max-w-[42rem] 2xl:max-w-[55rem] min-[1600px]:max-w-[70rem]">
@@ -102,7 +102,7 @@ export function ProductsShowCase({
             ))}
           </Slider>
         </div>
-        <button onClick={previous}>
+        <button onClick={next}>
           <Icon name="forward" className="text-3xl" />
         </button>
       </div>

@@ -1,7 +1,7 @@
 import { ProductPageContent, RecommendedProducts } from "@/type";
 import { Description } from "./components/Description";
 import { DetailedProduct } from "./components/DetailedProduct";
-import { ProductsShowCase } from "./layout/ProductsShowCase";
+import { ProductsCarousel } from "../common/ProductsCarousel";
 
 interface ProductPageProps {
   productPageContent: ProductPageContent;
@@ -19,12 +19,12 @@ export function ProductPage({
       <DetailedProduct detailedProductContent={detailedProductContent} />
       <div className="flex flex-col gap-14 xl:gap-20 xl:grid xl:grid-rows-[15%_2fr] xl:grid-cols-[20%_1fr] xl:gap-x-20 xl:gap-y-20 xl:min-h-[50rem]">
         <Description description={description} />
-        <ProductsShowCase
+        <ProductsCarousel
           category={category}
           title="Related Products"
           recommendedProducts={recommendedProducts}
         />
-        <ProductsShowCase
+        <ProductsCarousel
           category={category}
           title="Top Seller"
           recommendedProducts={recommendedProducts}
