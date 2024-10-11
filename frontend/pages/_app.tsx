@@ -1,5 +1,5 @@
 import Navigation from "@/components/homepage/layout/Navigation";
-import { buttonTheme } from "@/components/homepage/styles/button-style";
+import { buttonTheme } from "@/components/common/styles/button-style";
 import "@/styles/globals.css";
 import {
   extendBaseTheme,
@@ -9,7 +9,7 @@ import {
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { Button, Drawer, Input, NumberInput } = chakraTheme.components;
+  const { Button, Drawer, Input, NumberInput, Menu } = chakraTheme.components;
 
   const theme = extendBaseTheme({
     components: {
@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
       Drawer,
       Input,
       NumberInput,
+      Menu,
     },
   });
   return (

@@ -20,7 +20,7 @@ export function NavigationDrawer() {
       <Button
         onClick={onOpen}
         colorScheme="whiteAlpha"
-        variant="buttonLink"
+        variant="linkButton"
         size="lg"
       >
         <Icon name="menu" />
