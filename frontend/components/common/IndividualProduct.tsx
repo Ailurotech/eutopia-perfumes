@@ -29,7 +29,7 @@ export function IndividualProduct({
         {isHovered && (
           <span
             className={clsx(
-              `group-hover:block hidden bg-[${themeColor}] uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-default w-4/5 text-center py-1 rounded-xl text-sm font-extrabold cursor-pointer`
+              `group-hover:block hidden ${themeColor} uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-default w-4/5 text-center py-1 rounded-xl text-sm font-extrabold cursor-pointer`
             )}
           >
             add to cart

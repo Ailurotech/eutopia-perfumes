@@ -1,11 +1,11 @@
 import { HeroImage } from "./HeroImage";
-import { ShoppingDisplay } from "./ShoppingDisplay";
+import { ShoppingDisplay, ShoppingDisplayVariants } from "./ShoppingDisplay";
 
-export function ShoppingPageLayout() {
+export function ShoppingPageLayout({ variant }: ShoppingDisplayVariants) {
   return (
     <section className="space-y-16 text-default">
       <HeroImage />
-      <ShoppingDisplay />
+      <ShoppingDisplay variant={variant} />
     </section>
   );
 }

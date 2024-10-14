@@ -2,23 +2,29 @@ import { Button } from "@chakra-ui/react";
 import { Icon } from "../common/Icon";
 import { useState } from "react";
 
-export function Pagination() {
+interface PaginationProps {
+  maxPage: number;
+}
+
+export function Pagination({ maxPage }: PaginationProps) {
   const [page, setPage] = useState<number>(1);
   const paginationList = [
     { page: <Icon name="back" /> },
     { page: page },
     { page: page + 1 },
     { page: "..." },
-    { page: 9 },
-    { page: 10 },
+    { page: maxPage - 1 },
+    { page: maxPage },
     { page: <Icon name="forward" /> },
   ];
+  const displayPageNum = paginationList.length - 3;
+  const multiplyPageNum = 5;
 
   function nextPage() {
-    if (page < 10) {
+    if (page < maxPage) {
       setPage(page + 1);
     } else {
-      setPage(10);
+      setPage(maxPage);
     }
   }
 
@@ -31,11 +37,19 @@ export function Pagination() {
   }
 
   function goToPage(page: number) {
-    if (page > 6) {
-      setPage(6);
+    if (page > maxPage - displayPageNum) {
+      setPage(maxPage - displayPageNum);
       return;
     }
     setPage(page);
+  }
+
+  function goToNextFivePages() {
+    if (page + multiplyPageNum < maxPage - displayPageNum) {
+      setPage(page + multiplyPageNum);
+    } else {
+      setPage(maxPage - displayPageNum);
+    }
   }
 
   return (
@@ -53,12 +67,22 @@ export function Pagination() {
                 {item.page}
               </Button>
             );
+          case 3:
+            return (
+              <Button
+                key={index}
+                variant="pageNumberButton"
+                onClick={goToNextFivePages}
+              >
+                {item.page}
+              </Button>
+            );
           case paginationList.length - 1:
             return (
               <Button
                 key={index}
                 variant="pageArrowButton"
-                isDisabled={page === paginationList.length - 1 && true}
+                isDisabled={page === maxPage - displayPageNum && true}
                 onClick={nextPage}
               >
                 {item.page}

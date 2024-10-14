@@ -1,8 +1,23 @@
+import clsx from "clsx";
 import { DropdownMenu } from "../common/DropdownMenu";
 import { IndividualProduct } from "../common/IndividualProduct";
 import testImage from "./assets/Rectangle 1142.png";
 import { Filters } from "./Filters";
 import { Pagination } from "./Pagination";
+import { cva, type VariantProps } from "class-variance-authority";
+
+export type ShoppingDisplayVariants = VariantProps<
+  typeof shoppingDisplayVariants
+>;
+export const shoppingDisplayVariants = cva("", {
+  variants: {
+    variant: {
+      forHim: ["bg-forHim"],
+      forHer: ["bg-forHer"],
+      neutral: ["bg-neutral"],
+    },
+  },
+});
 
 const filterLists = [
   {
@@ -23,9 +38,16 @@ const filterLists = [
   },
 ];
 
-export function ShoppingDisplay() {
+type ShoppingDisplayProps = ShoppingDisplayVariants;
+
+export function ShoppingDisplay({ variant }: ShoppingDisplayProps) {
   return (
-    <div className="bg-[#ECF2F5] px-56 py-20 space-y-20">
+    <div
+      className={clsx(
+        shoppingDisplayVariants({ variant }),
+        "px-56 py-20 space-y-20"
+      )}
+    >
       <div className="grid grid-cols-4 grid-rows-[50px_50px_4fr] gap-y-10 gap-x-20">
         <div className="col-span-4">
           <div className="flex justify-between">
@@ -51,11 +73,11 @@ export function ShoppingDisplay() {
             category="for him"
             price={51.74}
             isHovered={true}
-            themeColor="#ECF2F5"
+            themeColor={shoppingDisplayVariants({ variant })}
           />
         ))}
       </div>
-      <Pagination />
+      <Pagination maxPage={50} />
     </div>
   );
 }
