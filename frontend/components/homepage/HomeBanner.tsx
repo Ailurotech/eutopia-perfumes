@@ -9,7 +9,7 @@ import "@splidejs/react-splide/css/sea-green";
 import { Potta_One } from "next/font/google";
 import Link from "next/link";
 import { HomeBannerItems } from "../../types";
-import { Icon } from "./common/Icon";
+import { Icon } from "../common/Icon";
 const pattaOne = Potta_One({
   weight: "400",
   style: "normal",
