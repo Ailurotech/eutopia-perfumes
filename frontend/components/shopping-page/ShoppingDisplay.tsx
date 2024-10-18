@@ -39,6 +39,8 @@ const filterLists = [
   },
 ];
 
+const selectedFilters = ["Chanel", "Dior", "Gucci", "Prada", "Versace"];
+
 type ShoppingDisplayProps = ShoppingDisplayVariants;
 
 export function ShoppingDisplay({ variant }: ShoppingDisplayProps) {
@@ -46,12 +48,17 @@ export function ShoppingDisplay({ variant }: ShoppingDisplayProps) {
     <div
       className={clsx(
         shoppingDisplayVariants({ variant }),
-        "px-56 py-20 space-y-20"
+        "px-14 md:px-20 lg:px-40 xl:px-56 py-20 space-y-20"
       )}
     >
-      <div className="grid grid-cols-4 grid-rows-[50px_50px_4fr] gap-y-10 gap-x-20">
+      <div
+        className={clsx(
+          "grid grid-cols-4 grid-rows-[50px_50px_4fr]",
+          "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20"
+        )}
+      >
         <div className="col-span-4">
-          <div className="flex justify-between">
+          <div className="flex justify-between gap-4 lg:gap-10 xl:gap-16">
             {filterLists.map((list) => (
               <DropdownMenu
                 key={list.title}
@@ -62,8 +69,10 @@ export function ShoppingDisplay({ variant }: ShoppingDisplayProps) {
           </div>
         </div>
         <div className="col-span-4">
-          <div className="flex">
-            <Filters filter="chanel" />
+          <div className="flex justify-start gap-4 lg:gap-8">
+            {selectedFilters.map((filter) => (
+              <Filters key={filter} filter={filter} />
+            ))}
           </div>
         </div>
         {Array.from({ length: 16 }).map((_, index) => (

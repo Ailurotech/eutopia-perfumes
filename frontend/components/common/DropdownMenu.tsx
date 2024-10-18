@@ -19,7 +19,7 @@ export function DropdownMenu({ buttonTitle, menuItems }: DropdownMenuProps) {
       <MenuButton
         className={clsx(
           poppins.className,
-          "uppercase text-start text-2xl flex gap-16"
+          "uppercase text-start text-sm lg:text-base xl:text-xl 2xl:text-2xl flex"
         )}
         as={Button}
         rightIcon={<Icon name="arrowDown" />}

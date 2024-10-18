@@ -23,26 +23,31 @@ export function IndividualProduct({
   themeColor,
 }: IndividualProductProps) {
   return (
-    <div className="flex flex-col items-center group gap-4">
+    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4">
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image src={image} alt={name} className="object-contain" fill />
         {isHovered && (
           <span
             className={clsx(
-              `group-hover:block hidden ${themeColor} uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-default w-4/5 text-center py-1 rounded-xl text-sm font-extrabold cursor-pointer`
+              `group-hover:block hidden ${themeColor} uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `,
+              "border-2 border-default w-4/5 text-center py-1 rounded-xl font-extrabold cursor-pointer",
+              " text-xs md:text-sm"
             )}
           >
             add to cart
           </span>
         )}
       </div>
-      <h5 className="capitalize">{category}</h5>
+      <h5 className="capitalize text-xs md:text-base">{category}</h5>
       <h2
-        className={clsx(literata.className, "text-[20px] mt-2 mb-1 uppercase")}
+        className={clsx(
+          literata.className,
+          "text-[12px] xl:text-lg 2xl:text-[20px] mt-2 mb-1 uppercase"
+        )}
       >
         {name}
       </h2>
-      <h2 className="text-[26px]">${price}</h2>
+      <h2 className=" text-lg xl:text-[22px] 2xl:text-[26px]">${price}</h2>
     </div>
   );
 }

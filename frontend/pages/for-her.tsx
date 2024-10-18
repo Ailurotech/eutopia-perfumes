@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      video: video,
+      video,
     },
   };
 };
