@@ -16,7 +16,7 @@ const poppins = Poppins({
 
 export function HeroImage() {
   return (
-    <div className="w-full aspect-[1440/600] relative">
+    <div className="w-full relative">
       <Image src={shoppingImage} alt="hero pic" fill className="-z-10" />
       <span className="top-1/2 left-1/2 absolute -translate-x-1/2 -translate-y-1/2 text-white flex flex-col items-center gap-32">
         <h1 className={clsx(pottaOne.className, "text-[32px]")}>

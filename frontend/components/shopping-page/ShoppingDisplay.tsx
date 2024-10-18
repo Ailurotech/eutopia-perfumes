@@ -12,6 +12,7 @@ export type ShoppingDisplayVariants = VariantProps<
 export const shoppingDisplayVariants = cva("", {
   variants: {
     variant: {
+      all: ["bg-all"],
       forHim: ["bg-forHim"],
       forHer: ["bg-forHer"],
       neutral: ["bg-neutral"],

@@ -6,21 +6,16 @@ import {
   SplideTrack,
 } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
-import { Potta_One } from "next/font/google";
-import Link from "next/link";
-import { HomeBannerItems } from "../../types";
 import { Icon } from "../common/Icon";
-const pattaOne = Potta_One({
-  weight: "400",
-  style: "normal",
-  subsets: ["latin"],
-});
+import { VideoPlayer } from "../common/VideoPlayer";
+import { VideoType } from "@/type";
+import { NavigationRoute, RoutRoute } from "../route";
 
 interface HomeBannerProps {
-  bannerItems: HomeBannerItems[];
+  videos: VideoType[];
 }
 
-const HomeBanner = ({ bannerItems }: HomeBannerProps) => {
+const HomeBanner = ({ videos }: HomeBannerProps) => {
   const options: SplideProps["options"] = {
     type: "loop",
     perPage: 1,
@@ -30,34 +25,30 @@ const HomeBanner = ({ bannerItems }: HomeBannerProps) => {
     interval: 3000,
   };
 
+  const matchPath = (path: string) => {
+    switch (path) {
+      case "for-him":
+        return NavigationRoute.ForHim.Path;
+      case "for-her":
+        return NavigationRoute.ForHer.Path;
+      case "neutral":
+        return NavigationRoute.Neutral.Path;
+      default:
+        return RoutRoute.Rout.Path;
+    }
+  };
+
   return (
     <div className="bg-[#F5E1C9] w-screen md:h-[80vh] flex items-center">
       <Splide hasTrack={false} options={options} className="">
         <SplideTrack>
-          {bannerItems.map((item) => (
+          {videos.map((item) => (
             <SplideSlide key={item._id} className="flex justify-center">
-              <Link href={"/#"}>
-                <div className="relative w-full h-[60vh] mx-auto rounded-lg overflow-hidden">
-                  <video
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    muted
-                    loop
-                  >
-                    <source src={item.video} type="video/mp4" />
-                  </video>
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl text-center flex flex-col gap-2 md:gap-16">
-                    <h1
-                      className={`${pattaOne.className} text-base md:text-3xl`}
-                    >
-                      {item.title}
-                    </h1>
-                    <p className="text-sm md:text-base lg:text-lg underline">
-                      {item.description}{" "}
-                    </p>
-                  </div>
-                </div>
-              </Link>
+              <VideoPlayer
+                video={item}
+                page="home"
+                linkPath={matchPath(item.slug)}
+              />
             </SplideSlide>
           ))}
         </SplideTrack>

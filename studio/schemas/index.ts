@@ -134,9 +134,9 @@ const objects = [
 
 import perfume from '../schemas/customized/perfume'
 import richText from '../schemas/customized/richText'
-import homeBanner from '../schemas/customized/homeBanner'
+import videos from './customized/videos'
 
-const customized = [perfume, richText, homeBanner]
+const customized = [perfume, richText, videos]
 
 export const schemaTypes = [
   ...annotations,

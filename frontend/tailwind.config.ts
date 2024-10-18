@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         default: "#808274",
+        all: "#FFFFFF",
         forHim: "#ECF2F5",
         forHer: "#FFF7EF",
         neutral: "#E2E2E2",

@@ -16,3 +16,15 @@ export interface RecommendedProducts {
   image: string;
   price: number;
 }
+
+export interface VideoType {
+  _id: string;
+  title: string;
+  description: string;
+  slug: string;
+  video: string;
+}
+
+export interface ShoppingPageProps {
+  video: VideoType;
+}

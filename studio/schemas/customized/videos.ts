@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'homeBanner',
-  title: 'HomeBanner',
+  name: 'videos',
+  title: 'Videos',
   type: 'document',
   fields: [
     defineField({
@@ -29,7 +29,7 @@ export default defineType({
       title: 'Video File',
       type: 'file',
       options: {
-        accept: 'video/mp4,video/x-m4v,video/*'
+        accept: 'video/mp4,video/x-m4v,video/*',
       },
     }),
   ],

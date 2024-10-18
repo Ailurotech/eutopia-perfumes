@@ -2,45 +2,45 @@ import { Inter } from "next/font/google";
 import HomeBanner from "../components/homepage/HomeBanner";
 import { GetStaticProps } from "next";
 import { sanityClient } from "@/lib/sanityClient";
-import { HomeBannerItems } from "@/types";
+import { VideoType } from "@/type";
 const inter = Inter({ subsets: ["latin"] });
 interface HomeProps {
-  bannerItems: HomeBannerItems[];
+  videos: VideoType[];
 }
 
-export default function Home({ bannerItems }: HomeProps) {
+export default function Home({ videos }: HomeProps) {
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
-      <HomeBanner bannerItems={bannerItems} />
+      <HomeBanner videos={videos} />
     </main>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
   const query = `
-    *[_type == "homeBanner"]{
+    *[_type == "videos"]{
       _id,
       title,
-      slug,
+      "slug": slug.current,
       description,
       "video": videoFile.asset->url
     }
   `;
 
-  let bannerItems = [];
+  let videos = [];
 
   try {
-    bannerItems = await sanityClient.fetch(query);
+    videos = await sanityClient.fetch(query);
   } catch (error) {
     console.error("Error fetching banner items:", error);
-    bannerItems = [];
+    videos = [];
   }
 
   return {
     props: {
-      bannerItems,
+      videos,
     },
   };
 };
