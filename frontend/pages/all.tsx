@@ -1,16 +1,18 @@
 import { NavigationRoute } from "@/components/route";
-import { ShoppingPageLayout } from "@/components/shopping-page/ShppingPageLayout";
+import { ShoppingPageLayout } from "@/components/shopping-page/ShoppingPageLayout";
 import { sanityClient } from "@/lib/sanityClient";
 import { shoppingVideoQuery } from "@/query";
 import { ShoppingPageProps } from "@/type";
 import { GetStaticProps } from "next";
+import mockProducts from "@/components/shopping-page/assets/mockdata.json";
 
-export default function Page({ video }: ShoppingPageProps) {
+export default function Page({ video, products }: ShoppingPageProps) {
   return (
     <ShoppingPageLayout
       variant="all"
       video={video}
       linkPath={NavigationRoute.All.Path}
+      products={products}
     />
   );
 }
@@ -29,6 +31,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       video,
+      products: mockProducts,
     },
   };
 };

@@ -1,3 +1,4 @@
+import { productType } from "./../studio/schemasTypes/documents/product";
 export interface ProductPageContent {
   volumeOfMl: number;
   name: string;
@@ -25,6 +26,19 @@ export interface VideoType {
   video: string;
 }
 
+export interface ProductType {
+  title: string;
+  description: string;
+  maxPrice: number;
+  minPrice: number;
+  image: string;
+  tag: string;
+  productType: string;
+  weightML: number;
+  weightOZ: number;
+}
+
 export interface ShoppingPageProps {
   video: VideoType;
+  products: ProductType[];
 }

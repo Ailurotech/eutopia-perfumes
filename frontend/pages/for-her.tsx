@@ -1,5 +1,5 @@
 import { NavigationRoute } from "@/components/route";
-import { ShoppingPageLayout } from "@/components/shopping-page/ShppingPageLayout";
+import { ShoppingPageLayout } from "@/components/shopping-page/ShoppingPageLayout";
 import { sanityClient } from "@/lib/sanityClient";
 import { shoppingVideoQuery } from "@/query";
 import { ShoppingPageProps } from "@/type";

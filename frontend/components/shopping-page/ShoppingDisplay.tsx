@@ -1,10 +1,11 @@
 import clsx from "clsx";
 import { DropdownMenu } from "../common/DropdownMenu";
 import { IndividualProduct } from "../common/IndividualProduct";
-import testImage from "./assets/Rectangle 1142.png";
 import { Filters } from "./Filters";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
+import { ProductType } from "@/type";
+import { useEffect, useState } from "react";
 
 export type ShoppingDisplayVariants = VariantProps<
   typeof shoppingDisplayVariants
@@ -41,9 +42,26 @@ const filterLists = [
 
 const selectedFilters = ["Chanel", "Dior", "Gucci", "Prada", "Versace"];
 
-type ShoppingDisplayProps = ShoppingDisplayVariants;
+type ShoppingDisplayProps = {
+  products: ProductType[];
+} & ShoppingDisplayVariants;
 
-export function ShoppingDisplay({ variant }: ShoppingDisplayProps) {
+export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [displayProducts, setDisplayProducts] = useState<ProductType[]>([]);
+  const displayNum = 16;
+  function paginatedProducts(products: ProductType[]) {
+    const startIndex = (currentPage - 1) * displayNum;
+    const endIndex = startIndex + displayNum;
+    return products.slice(startIndex, endIndex);
+  }
+
+  useEffect(() => {
+    const parsedProducts = paginatedProducts(products);
+    setDisplayProducts(parsedProducts);
+  }, [currentPage]);
+
+  console.log(currentPage);
   return (
     <div
       className={clsx(
@@ -75,19 +93,23 @@ export function ShoppingDisplay({ variant }: ShoppingDisplayProps) {
             ))}
           </div>
         </div>
-        {Array.from({ length: 16 }).map((_, index) => (
+        {displayProducts.map((product, index) => (
           <IndividualProduct
             key={index}
-            image={testImage}
-            name="Armaf Passion"
-            category="for him"
-            price={51.74}
+            image={product.image}
+            name={product.title}
+            category={product.tag}
+            price={product.maxPrice}
             isHovered={true}
             themeColor={shoppingDisplayVariants({ variant })}
           />
         ))}
       </div>
-      <Pagination maxPage={50} />
+      <Pagination
+        maxPage={Math.ceil(products.length / displayNum)}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }

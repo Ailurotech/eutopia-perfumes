@@ -1,17 +1,21 @@
 import { Button } from "@chakra-ui/react";
 import { Icon } from "../common/Icon";
-import { useState } from "react";
 
 interface PaginationProps {
   maxPage: number;
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
 }
-
-export function Pagination({ maxPage }: PaginationProps) {
-  const [page, setPage] = useState<number>(1);
+//TODO: refactor those magic numbers
+export function Pagination({
+  maxPage,
+  currentPage,
+  setCurrentPage,
+}: PaginationProps) {
   const paginationList = [
     { page: <Icon name="back" /> },
-    { page: page },
-    { page: page + 1 },
+    { page: currentPage + 3 >= maxPage ? maxPage - 3 : currentPage },
+    { page: currentPage + 2 >= maxPage ? maxPage - 2 : currentPage + 1 },
     { page: "..." },
     { page: maxPage - 1 },
     { page: maxPage },
@@ -21,34 +25,26 @@ export function Pagination({ maxPage }: PaginationProps) {
   const multiplyPageNum = 5;
 
   function nextPage() {
-    if (page < maxPage) {
-      setPage(page + 1);
+    if (currentPage < maxPage) {
+      setCurrentPage(currentPage + 1);
     } else {
-      setPage(maxPage);
+      setCurrentPage(maxPage);
     }
   }
 
   function previousPage() {
-    if (page > 1) {
-      setPage(page - 1);
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     } else {
-      setPage(1);
+      setCurrentPage(1);
     }
-  }
-
-  function goToPage(page: number) {
-    if (page > maxPage - displayPageNum) {
-      setPage(maxPage - displayPageNum);
-      return;
-    }
-    setPage(page);
   }
 
   function goToNextFivePages() {
-    if (page + multiplyPageNum < maxPage - displayPageNum) {
-      setPage(page + multiplyPageNum);
+    if (currentPage + multiplyPageNum < maxPage - displayPageNum) {
+      setCurrentPage(currentPage + multiplyPageNum);
     } else {
-      setPage(maxPage - displayPageNum);
+      setCurrentPage(maxPage - displayPageNum);
     }
   }
 
@@ -61,7 +57,7 @@ export function Pagination({ maxPage }: PaginationProps) {
               <Button
                 key={index}
                 variant="pageArrowButton"
-                isDisabled={page === 1 && true}
+                isDisabled={currentPage === 1 && true}
                 onClick={previousPage}
               >
                 {item.page}
@@ -82,7 +78,7 @@ export function Pagination({ maxPage }: PaginationProps) {
               <Button
                 key={index}
                 variant="pageArrowButton"
-                isDisabled={page === maxPage - displayPageNum && true}
+                isDisabled={currentPage + displayPageNum > maxPage && true}
                 onClick={nextPage}
               >
                 {item.page}
@@ -93,7 +89,7 @@ export function Pagination({ maxPage }: PaginationProps) {
               <Button
                 key={index}
                 variant="pageNumberButton"
-                onClick={() => goToPage(item.page as number)}
+                onClick={() => setCurrentPage(item.page as number)}
               >
                 {item.page}
               </Button>
