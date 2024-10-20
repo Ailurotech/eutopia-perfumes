@@ -1,9 +1,9 @@
-import { productType } from "./../studio/schemasTypes/documents/product";
 import {
   InspiredBy,
   PerfumeType,
   Size,
-} from "./components/shopping-page/utils/comboFilter";
+} from "./components/shopping-page/utils/filters";
+
 export interface ProductPageContent {
   volumeOfMl: number;
   name: string;

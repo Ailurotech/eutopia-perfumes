@@ -4,13 +4,15 @@ import { sanityClient } from "@/lib/sanityClient";
 import { shoppingVideoQuery } from "@/query";
 import { ShoppingPageProps } from "@/type";
 import { GetStaticProps } from "next";
+import mockProducts from "@/components/shopping-page/assets/mockdata.json";
 
-export default function Page({ video }: ShoppingPageProps) {
+export default function Page({ video, products }: ShoppingPageProps) {
   return (
     <ShoppingPageLayout
       variant="forHer"
       video={video}
       linkPath={NavigationRoute.ForHer.Path}
+      products={products}
     />
   );
 }
@@ -30,6 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       video,
+      products: mockProducts,
     },
   };
 };

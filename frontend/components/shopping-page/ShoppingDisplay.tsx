@@ -1,12 +1,13 @@
 import clsx from "clsx";
 import { DropdownMenu } from "../common/DropdownMenu";
 import { IndividualProduct } from "../common/IndividualProduct";
-import { Filters } from "./Filters";
+import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ProductType } from "@/type";
-import { comboFilter, filterLists, SelectedFilters } from "./utils/comboFilter";
+import { combinedFilter, filterLists, SelectedFilters } from "./utils/filters";
 import { usePagination } from "@/hooks/usePagination";
+import { useEffect, useState } from "react";
 
 export type ShoppingDisplayVariants = VariantProps<
   typeof shoppingDisplayVariants
@@ -27,18 +28,18 @@ type ShoppingDisplayProps = {
 } & ShoppingDisplayVariants;
 
 export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
-  const selectInspiredBy = [
-    { title: "Inspired by", filters: ["Chanel", "Dior"] },
-    { title: "Perfume Type", filters: ["For-Him"] },
-    { title: "Size", filters: ["100ml/3.4oz"] },
-  ] as SelectedFilters[];
-  const filteredProducts = comboFilter(products, selectInspiredBy);
-  const selectFilters = [...selectInspiredBy];
-  console.log("select", selectFilters);
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>();
+  const [filteredProducts, setFilteredProducts] =
+    useState<ProductType[]>(products);
   const { displayNum, currentPage, setCurrentPage, displayProducts } =
     usePagination({
       filteredProducts,
     });
+  useEffect(() => {
+    selectedFilters
+      ? setFilteredProducts(combinedFilter(products, selectedFilters))
+      : setFilteredProducts(products);
+  }, [selectedFilters]);
   return (
     <div
       className={clsx(
@@ -57,17 +58,18 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
             {filterLists.map((list) => (
               <DropdownMenu
                 key={list.title}
-                buttonTitle={list.title}
+                menuTitle={list.title}
                 menuItems={list.filters}
+                setSelectedFilters={setSelectedFilters}
               />
             ))}
           </div>
         </div>
         <div className="col-span-4">
           <div className="flex justify-start gap-4 lg:gap-8">
-            {selectFilters.map((filter) =>
+            {selectedFilters?.map((filter) =>
               filter.filters.map((filter, index) => (
-                <Filters key={index} filter={filter} />
+                <FilterTag key={index} filter={filter} />
               ))
             )}
           </div>

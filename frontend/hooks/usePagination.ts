@@ -9,6 +9,7 @@ export function usePagination({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [displayProducts, setDisplayProducts] = useState<ProductType[]>([]);
   const displayNum = 16;
+
   function paginatedProducts(products: ProductType[]) {
     const startIndex = (currentPage - 1) * displayNum;
     const endIndex = startIndex + displayNum;
@@ -18,7 +19,7 @@ export function usePagination({
   useEffect(() => {
     const parsedProducts = paginatedProducts(filteredProducts);
     setDisplayProducts(parsedProducts);
-  }, [currentPage]);
+  }, [currentPage, filteredProducts]);
 
   return {
     displayNum,
