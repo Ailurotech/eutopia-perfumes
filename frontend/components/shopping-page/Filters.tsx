@@ -1,9 +1,10 @@
 import { Button } from "@chakra-ui/button";
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
+import { FilterListFilters } from "./utils/comboFilter";
 
 interface FiltersProps {
-  filter: string;
+  filter: FilterListFilters;
 }
 
 export function Filters({ filter }: FiltersProps) {

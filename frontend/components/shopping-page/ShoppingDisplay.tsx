@@ -5,7 +5,8 @@ import { Filters } from "./Filters";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ProductType } from "@/type";
-import { useEffect, useState } from "react";
+import { comboFilter, filterLists, SelectedFilters } from "./utils/comboFilter";
+import { usePagination } from "@/hooks/usePagination";
 
 export type ShoppingDisplayVariants = VariantProps<
   typeof shoppingDisplayVariants
@@ -21,47 +22,23 @@ export const shoppingDisplayVariants = cva("", {
   },
 });
 
-const filterLists = [
-  {
-    title: "Inspired by",
-    items: ["All", "Tops", "Bottoms", "Dresses", "Outerwear", "Accessories"],
-  },
-  {
-    title: "Perfume Type",
-    items: ["All", "For-Him", "For-Her", "Neutral"],
-  },
-  {
-    title: "Size",
-    items: ["All", "XS", "S", "M", "L", "XL", "XXL"],
-  },
-  {
-    title: "Sort by Price",
-    items: ["All", "Low to High", "High to Low", "Discounted", "Best Sellers"],
-  },
-];
-
-const selectedFilters = ["Chanel", "Dior", "Gucci", "Prada", "Versace"];
-
 type ShoppingDisplayProps = {
   products: ProductType[];
 } & ShoppingDisplayVariants;
 
 export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [displayProducts, setDisplayProducts] = useState<ProductType[]>([]);
-  const displayNum = 16;
-  function paginatedProducts(products: ProductType[]) {
-    const startIndex = (currentPage - 1) * displayNum;
-    const endIndex = startIndex + displayNum;
-    return products.slice(startIndex, endIndex);
-  }
-
-  useEffect(() => {
-    const parsedProducts = paginatedProducts(products);
-    setDisplayProducts(parsedProducts);
-  }, [currentPage]);
-
-  console.log(currentPage);
+  const selectInspiredBy = [
+    { title: "Inspired by", filters: ["Chanel", "Dior"] },
+    { title: "Perfume Type", filters: ["For-Him"] },
+    { title: "Size", filters: ["100ml/3.4oz"] },
+  ] as SelectedFilters[];
+  const filteredProducts = comboFilter(products, selectInspiredBy);
+  const selectFilters = [...selectInspiredBy];
+  console.log("select", selectFilters);
+  const { displayNum, currentPage, setCurrentPage, displayProducts } =
+    usePagination({
+      filteredProducts,
+    });
   return (
     <div
       className={clsx(
@@ -81,16 +58,18 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
               <DropdownMenu
                 key={list.title}
                 buttonTitle={list.title}
-                menuItems={list.items}
+                menuItems={list.filters}
               />
             ))}
           </div>
         </div>
         <div className="col-span-4">
           <div className="flex justify-start gap-4 lg:gap-8">
-            {selectedFilters.map((filter) => (
-              <Filters key={filter} filter={filter} />
-            ))}
+            {selectFilters.map((filter) =>
+              filter.filters.map((filter, index) => (
+                <Filters key={index} filter={filter} />
+              ))
+            )}
           </div>
         </div>
         {displayProducts.map((product, index) => (
@@ -106,7 +85,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
         ))}
       </div>
       <Pagination
-        maxPage={Math.ceil(products.length / displayNum)}
+        maxPage={Math.ceil(filteredProducts.length / displayNum)}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

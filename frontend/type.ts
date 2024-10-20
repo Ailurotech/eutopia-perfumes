@@ -1,4 +1,9 @@
 import { productType } from "./../studio/schemasTypes/documents/product";
+import {
+  InspiredBy,
+  PerfumeType,
+  Size,
+} from "./components/shopping-page/utils/comboFilter";
 export interface ProductPageContent {
   volumeOfMl: number;
   name: string;
@@ -32,10 +37,9 @@ export interface ProductType {
   maxPrice: number;
   minPrice: number;
   image: string;
-  tag: string;
-  productType: string;
-  weightML: number;
-  weightOZ: number;
+  tag: PerfumeType;
+  productType: InspiredBy;
+  weight: Size;
 }
 
 export interface ShoppingPageProps {

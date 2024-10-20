@@ -13,8 +13,7 @@ function getRandomPrice() {
 function generateRandomProducts(num) {
   const tags = ["For-Him", "For-Her", "Neutral"];
   const productTypes = ["Chanel", "Zara", "TomFord", "Dior", "JoMalone"];
-  const weightMLs = [100, 120, 150];
-  const weightOZs = [3.4, 3.8, 4.2];
+  const weight = ["100ml/3.4oz", "120ml/3.8oz", "150ml/4.2oz"];
 
   const products = [];
 
@@ -28,8 +27,7 @@ function generateRandomProducts(num) {
       title: `Armaf Passion ${i + 1}`,
       tag: getRandomElement(tags),
       productType: getRandomElement(productTypes),
-      weightML: getRandomElement(weightMLs),
-      weightOZ: getRandomElement(weightOZs),
+      weight: getRandomElement(weight),
     };
 
     // Ensure minPrice is less than or equal to maxPrice
