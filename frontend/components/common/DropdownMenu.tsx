@@ -42,25 +42,25 @@ export function DropdownMenu({
       setSelectedFilters((prev) => {
         return prev.filter((filter) => filter.title !== menuTitle);
       });
-    } else {
-      const selectedFilters = { title: menuTitle, filters: e };
-      setSelectedFilters((prev) => {
-        if (!prev) {
-          return [selectedFilters];
-        }
-
-        const isExisting = prev.some(
-          (filter) => filter.title === selectedFilters.title
-        );
-
-        if (isExisting) {
-          return prev.map((filter) =>
-            filter.title === selectedFilters.title ? selectedFilters : filter
-          );
-        }
-        return [...prev, selectedFilters];
-      });
+      return;
     }
+    const selectedFilters = { title: menuTitle, filters: e };
+    setSelectedFilters((prev) => {
+      if (!prev) {
+        return [selectedFilters];
+      }
+
+      const isExisting = prev.some(
+        (filter) => filter.title === selectedFilters.title
+      );
+
+      if (isExisting) {
+        return prev.map((filter) =>
+          filter.title === selectedFilters.title ? selectedFilters : filter
+        );
+      }
+      return [...prev, selectedFilters];
+    });
   }
 
   return (

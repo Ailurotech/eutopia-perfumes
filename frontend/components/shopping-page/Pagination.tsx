@@ -1,5 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { Icon } from "../common/Icon";
+import { ReactNode } from "react";
 
 interface PaginationProps {
   maxPage: number;
@@ -8,22 +9,10 @@ interface PaginationProps {
 }
 //TODO: refactor those magic numbers
 export function Pagination({
-  maxPage,
+  maxPage = 1,
   currentPage,
   setCurrentPage,
 }: PaginationProps) {
-  const paginationList = [
-    { page: <Icon name="back" /> },
-    { page: currentPage + 3 >= maxPage ? maxPage - 3 : currentPage },
-    { page: currentPage + 2 >= maxPage ? maxPage - 2 : currentPage + 1 },
-    { page: "..." },
-    { page: maxPage - 1 },
-    { page: maxPage },
-    { page: <Icon name="forward" /> },
-  ];
-  const displayPageNum = paginationList.length - 3;
-  const multiplyPageNum = 5;
-
   function nextPage() {
     if (currentPage < maxPage) {
       setCurrentPage(currentPage + 1);
@@ -48,54 +37,101 @@ export function Pagination({
     }
   }
 
+  function goToPage(page: number) {
+    setCurrentPage(page);
+  }
+
+  interface PageButtonProps {
+    key?: number;
+    variant: "pageNumberButton" | "pageArrowButton";
+    page: number | React.ReactNode;
+    onClick: () => void;
+    isDisabled?: boolean;
+  }
+  function PageButton({ variant, page, onClick, isDisabled }: PageButtonProps) {
+    return (
+      <Button variant={variant} isDisabled={isDisabled} onClick={onClick}>
+        {page}
+      </Button>
+    );
+  }
+
+  function PageContainer({ children }: { children: ReactNode }) {
+    return <div className="flex justify-center gap-2">{children}</div>;
+  }
+
+  //when maxPage less than five only show one page
+  if (maxPage <= 5) {
+    const paginationList = Array.from({ length: maxPage }, (_, i) => i + 1);
+    return (
+      <PageContainer>
+        {paginationList.map((page, index) => (
+          <PageButton
+            key={index}
+            variant="pageNumberButton"
+            page={page}
+            onClick={() => goToPage(page)}
+          />
+        ))}
+      </PageContainer>
+    );
+  }
+
+  //when maxPage more than five only show one page
+  const displayPageNum = 4;
+  const multiplyPageNum = 5;
+  const numBetweenFirstAndLast = maxPage - currentPage + 1;
+  const maxNumOfFirst = maxPage - displayPageNum + 1;
+  const numBetweenSecondAndLast = numBetweenFirstAndLast + 1;
+  const maxNumOfSecond = maxNumOfFirst + 1;
+
+  const paginationList = [
+    numBetweenFirstAndLast <= displayPageNum ? maxNumOfFirst : currentPage,
+    numBetweenSecondAndLast <= displayPageNum
+      ? maxNumOfSecond
+      : currentPage + 1,
+    "...",
+    maxPage - 1,
+    maxPage,
+  ];
+
   return (
-    <div className="flex justify-center gap-2">
-      {paginationList.map((item, index) => {
+    <PageContainer>
+      <PageButton
+        variant="pageArrowButton"
+        page={<Icon name="back" />}
+        onClick={previousPage}
+        isDisabled={currentPage === 1 && true}
+      />
+      {paginationList.map((page, index) => {
         switch (index) {
-          case 0:
+          case 2:
             return (
-              <Button
-                key={index}
-                variant="pageArrowButton"
-                isDisabled={currentPage === 1 && true}
-                onClick={previousPage}
-              >
-                {item.page}
-              </Button>
-            );
-          case 3:
-            return (
-              <Button
+              <PageButton
                 key={index}
                 variant="pageNumberButton"
                 onClick={goToNextFivePages}
-              >
-                {item.page}
-              </Button>
-            );
-          case paginationList.length - 1:
-            return (
-              <Button
-                key={index}
-                variant="pageArrowButton"
-                isDisabled={currentPage + displayPageNum > maxPage && true}
-                onClick={nextPage}
-              >
-                {item.page}
-              </Button>
+                page={page}
+                isDisabled={currentPage + multiplyPageNum >= maxPage && true}
+              />
             );
           default:
             return (
-              <Button
+              <PageButton
                 key={index}
                 variant="pageNumberButton"
-                onClick={() => setCurrentPage(item.page as number)}
-              >
-                {item.page}
-              </Button>
+                onClick={() => goToPage(page as number)}
+                page={page}
+              />
             );
         }
       })}
-    </div>
+      <PageButton
+        variant="pageArrowButton"
+        isDisabled={currentPage + displayPageNum > maxPage && true}
+        onClick={nextPage}
+        page={<Icon name="forward" />}
+      />
+    </PageContainer>
   );
 }
