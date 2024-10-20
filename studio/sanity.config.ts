@@ -1,14 +1,14 @@
 import {defineConfig, isDev} from 'sanity'
 import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemas'
-import {deskTool} from 'sanity/desk'
-import {structure} from './desk'
+import {schemaTypes} from './schemasTypes'
+import {structure} from './structure'
 
+import {visionTool} from '@sanity/vision'
 import {colorInput} from '@sanity/color-input'
 import {imageHotspotArrayPlugin} from 'sanity-plugin-hotspot-array'
 import {media, mediaAssetSource} from 'sanity-plugin-media'
-import {customDocumentActions} from './customDocumentActions'
+import {customDocumentActions} from './plugins/customDocumentActions'
+import Navbar from './components/studio/Navbar'
 
 const devOnlyPlugins = [visionTool()]
 
@@ -20,9 +20,7 @@ export default defineConfig({
   dataset: 'uat',
 
   plugins: [
-    structureTool(),
-    visionTool(),
-    deskTool({structure}),
+    structureTool({structure}),
     colorInput(),
     imageHotspotArrayPlugin(),
     customDocumentActions(),
@@ -44,6 +42,12 @@ export default defineConfig({
       assetSources: (previousAssetSources) => {
         return previousAssetSources.filter((assetSource) => assetSource === mediaAssetSource)
       },
+    },
+  },
+
+  studio: {
+    components: {
+      navbar: Navbar,
     },
   },
 })
