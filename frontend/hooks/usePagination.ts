@@ -17,6 +17,10 @@ export function usePagination({
   }
 
   useEffect(() => {
+    const lastPage = Math.ceil(filteredProducts.length / displayNum);
+    if (currentPage > lastPage) {
+      setCurrentPage(lastPage);
+    }
     const parsedProducts = paginatedProducts(filteredProducts);
     setDisplayProducts(parsedProducts);
   }, [currentPage, filteredProducts]);

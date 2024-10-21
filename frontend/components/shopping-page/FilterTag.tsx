@@ -12,14 +12,16 @@ interface FilterTagProps {
 export function FilterTag({ filter, setSelectedFilters }: FilterTagProps) {
   const handleFilterTagsClick = (condition: FilterListFilters) => {
     setSelectedFilters((prev) => {
-      const res = prev.map((item) => {
+      const remainSelectedConditions = prev.map((item) => {
         const newCondition = item.conditions.filter((f: string) => {
           return f.toLocaleLowerCase() !== condition.toLocaleLowerCase();
         });
         return { ...item, conditions: newCondition };
       });
-      const allEmpty = res.every((item) => item.conditions.length === 0);
-      return allEmpty ? [] : res;
+      const exceptEmptyConditions = remainSelectedConditions.filter(
+        (item) => item.conditions.length > 0
+      );
+      return exceptEmptyConditions;
     });
   };
 

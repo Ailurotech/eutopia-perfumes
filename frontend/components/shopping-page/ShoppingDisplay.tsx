@@ -50,7 +50,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
     >
       <div
         className={clsx(
-          "grid grid-cols-4 grid-rows-[50px_50px_4fr]",
+          "grid grid-cols-4 grid-rows-[3%_5fr]",
           "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20"
         )}
       >
@@ -68,7 +68,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
           </div>
         </div>
         <div className="col-span-4">
-          <div className="flex justify-start gap-4 lg:gap-8">
+          <div className="flex justify-start gap-x-4 lg:gap-x-8 flex-wrap gap-y-2">
             {selectedFilters?.map((filter) =>
               filter.conditions.map((filter, index) => (
                 <FilterTag
