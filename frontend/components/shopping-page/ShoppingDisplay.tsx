@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import { DropdownMenu } from "../common/DropdownMenu";
+import { DropdownMenu } from "./DropdownMenu";
 import { IndividualProduct } from "../common/IndividualProduct";
 import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ProductType } from "@/type";
-import { combinedFilter, filterLists, SelectedFilters } from "./utils/filters";
+import { filterProcessor, filterLists, SelectedFilters } from "./utils/filters";
 import { usePagination } from "@/hooks/usePagination";
 import { useEffect, useState } from "react";
 
@@ -35,9 +35,10 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
     usePagination({
       filteredProducts,
     });
+
   useEffect(() => {
     selectedFilters
-      ? setFilteredProducts(combinedFilter(products, selectedFilters))
+      ? setFilteredProducts(filterProcessor(products, selectedFilters))
       : setFilteredProducts(products);
   }, [selectedFilters, products]);
 
@@ -51,7 +52,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
       <div
         className={clsx(
           "grid grid-cols-4 grid-rows-[3%_5fr]",
-          "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-8 lg:gap-x-12 xl:gap-x-16 2xl:gap-x-20"
+          "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-20"
         )}
       >
         <div className="col-span-4">
@@ -60,7 +61,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
               <DropdownMenu
                 key={list.title}
                 menuTitle={list.title}
-                menuItems={list.conditions}
+                menuItems={list.filterLists}
                 setSelectedFilters={setSelectedFilters}
                 selectedFilters={selectedFilters}
               />
@@ -70,7 +71,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
         <div className="col-span-4">
           <div className="flex justify-start gap-x-4 lg:gap-x-8 flex-wrap gap-y-2">
             {selectedFilters?.map((filter) =>
-              filter.conditions.map((filter, index) => (
+              filter.filterLists.map((filter, index) => (
                 <FilterTag
                   key={index}
                   filter={filter}

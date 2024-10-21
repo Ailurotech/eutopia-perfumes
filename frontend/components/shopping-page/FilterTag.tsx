@@ -1,26 +1,29 @@
 import { Button } from "@chakra-ui/button";
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
-import { FilterListFilters, SelectedFilters } from "./utils/filters";
+import { FilterLists, SelectedFilters } from "./utils/filters";
 import { Dispatch, SetStateAction } from "react";
 
 interface FilterTagProps {
-  filter: FilterListFilters;
+  filter: FilterLists;
   setSelectedFilters: Dispatch<SetStateAction<SelectedFilters[]>>;
 }
 
 export function FilterTag({ filter, setSelectedFilters }: FilterTagProps) {
-  const handleFilterTagsClick = (condition: FilterListFilters) => {
+  const handleFilterTagsClick = (filter: FilterLists) => {
     setSelectedFilters((prev) => {
       const remainSelectedConditions = prev.map((item) => {
-        const newCondition = item.conditions.filter((f: string) => {
-          return f.toLocaleLowerCase() !== condition.toLocaleLowerCase();
+        const newCondition = item.filterLists.filter((f: string) => {
+          return f.toLocaleLowerCase() !== filter.toLocaleLowerCase();
         });
-        return { ...item, conditions: newCondition };
+
+        return { ...item, filterLists: newCondition };
       });
+
       const exceptEmptyConditions = remainSelectedConditions.filter(
-        (item) => item.conditions.length > 0
+        (item) => item.filterLists.length > 0
       );
+
       return exceptEmptyConditions;
     });
   };
@@ -34,7 +37,7 @@ export function FilterTag({ filter, setSelectedFilters }: FilterTagProps) {
       )}
       onClick={(e) => {
         e.preventDefault;
-        const condition = e.currentTarget.innerText as FilterListFilters;
+        const condition = e.currentTarget.innerText as FilterLists;
         handleFilterTagsClick(condition);
       }}
     >

@@ -31,23 +31,23 @@ export function IndividualProduct({
             className={clsx(
               `group-hover:block hidden ${themeColor} uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `,
               "border-2 border-default w-4/5 text-center py-1 rounded-xl font-extrabold cursor-pointer",
-              " text-xs md:text-sm"
+              "text-xs md:text-sm"
             )}
           >
             add to cart
           </span>
         )}
       </div>
-      <h5 className="capitalize text-xs md:text-base">{category}</h5>
+      <h5 className="capitalize text-xs xl:text-base">{category}</h5>
       <h2
         className={clsx(
           literata.className,
-          "text-[12px] xl:text-lg 2xl:text-[20px] mt-2 mb-1 uppercase"
+          "text-[14px] xl:text-base 2xl:text-[20px] uppercase text-center"
         )}
       >
         {name}
       </h2>
-      <h2 className=" text-lg xl:text-[22px] 2xl:text-[26px]">${price}</h2>
+      <h2 className="text-lg xl:text-[22px] 2xl:text-[26px]">${price}</h2>
     </div>
   );
 }
