@@ -1,7 +1,8 @@
 import Image, { StaticImageData } from "next/image";
 import { Literata } from "next/font/google";
 import clsx from "clsx";
-import style from "styled-jsx/style";
+import src from "@emotion/styled";
+import { div, h5, h2 } from "framer-motion/client";
 
 interface IndividualProductProps {
   image: string | StaticImageData;
@@ -14,7 +15,7 @@ interface IndividualProductProps {
 
 const literata = Literata({ weight: "700", subsets: ["latin"] });
 
-export function IndividualProduct({
+export function IndividualProductForShoppingPage({
   image,
   category,
   name,
@@ -38,16 +39,38 @@ export function IndividualProduct({
           </span>
         )}
       </div>
-      <h5 className="capitalize text-xs xl:text-base">{category}</h5>
+      <h5 className="capitalize text-xs xl:text-lg">{category}</h5>
       <h2
         className={clsx(
           literata.className,
-          "text-[14px] xl:text-base 2xl:text-[20px] uppercase text-center"
+          "text-[14px] xl:text-base 2xl:text-xl uppercase text-center"
         )}
       >
         {name}
       </h2>
-      <h2 className="text-lg xl:text-[22px] 2xl:text-[26px]">${price}</h2>
+      <h2 className="text-lg xl:text-[22px] 2xl:text-[30px]">${price}</h2>
+    </div>
+  );
+}
+
+export function IndividualProductForProductPage({
+  image,
+  category,
+  name,
+  price,
+}: IndividualProductProps) {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="h-64 aspect-[23/30] relative">
+        <Image src={image} alt={name} className="object-contain" fill />
+      </div>
+      <h5 className="capitalize">{category}</h5>
+      <h2
+        className={clsx(literata.className, "text-[20px] mt-6 mb-4 uppercase")}
+      >
+        {name}
+      </h2>
+      <h2 className="text-[26px]">${price}</h2>
     </div>
   );
 }

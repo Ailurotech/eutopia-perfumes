@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { DropdownMenu } from "./DropdownMenu";
-import { IndividualProduct } from "../common/IndividualProduct";
+import { IndividualProductForShoppingPage } from "../common/IndividualProduct";
 import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -46,7 +46,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
     <div
       className={clsx(
         shoppingDisplayVariants({ variant }),
-        "px-14 md:px-20 lg:px-40 xl:px-56 py-20 space-y-20"
+        "px-14 md:px-20 lg:px-40 xl:px-48 2xl:px-56 py-20 space-y-20"
       )}
     >
       <div
@@ -82,7 +82,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
           </div>
         </div>
         {displayProducts.map((product, index) => (
-          <IndividualProduct
+          <IndividualProductForShoppingPage
             key={index}
             image={product.image}
             name={product.title}

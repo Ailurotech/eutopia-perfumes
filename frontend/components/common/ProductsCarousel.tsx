@@ -7,7 +7,7 @@ import { Icon } from "@/components/common/Icon";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRef } from "react";
-import { IndividualProduct } from "./IndividualProduct";
+import { IndividualProductForProductPage } from "./IndividualProduct";
 
 interface ProductsCarouselProps {
   title: string;
@@ -92,7 +92,7 @@ export function ProductsCarousel({
         <div className="space-x-4 w-full max-w-[28rem] md:max-w-[3rem] lg:max-w-[45rem] xl:max-w-[42rem] 2xl:max-w-[55rem] min-[1600px]:max-w-[70rem]">
           <Slider ref={sliderRef} {...settings}>
             {recommendedProducts.map((product) => (
-              <IndividualProduct
+              <IndividualProductForProductPage
                 key={product.name}
                 image={product.image}
                 category={category}

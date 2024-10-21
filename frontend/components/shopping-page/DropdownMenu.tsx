@@ -65,7 +65,7 @@ export function DropdownMenu({
       <MenuButton
         className={clsx(
           poppins.className,
-          "uppercase text-start text-sm lg:text-base xl:text-xl 2xl:text-2xl flex gap-4 md:gap-10 lg:gap-14 2xl:gap-20"
+          "uppercase text-start text-sm lg:text-base xl:text-xl 2xl:text-2xl flex gap-4 md:gap-8 2xl:gap-20"
         )}
         as={Button}
         rightIcon={<Icon name="arrowDown" />}
