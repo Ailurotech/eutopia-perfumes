@@ -2,13 +2,7 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
   Button,
-  Checkbox,
-  CheckboxGroup,
-  RadioGroup,
-  Radio,
-  MenuGroup,
   MenuOptionGroup,
   MenuItemOption,
 } from "@chakra-ui/react";
@@ -19,7 +13,6 @@ import {
   FilterListFilters,
   FilterListTitle,
 } from "../shopping-page/utils/filters";
-import { useState } from "react";
 
 const poppins = Poppins({
   weight: "400",

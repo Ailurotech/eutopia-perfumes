@@ -5,7 +5,12 @@ import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ProductType } from "@/type";
-import { combinedFilter, filterLists, SelectedFilters } from "./utils/filters";
+import {
+  combinedFilter,
+  FilterListFilters,
+  filterLists,
+  SelectedFilters,
+} from "./utils/filters";
 import { usePagination } from "@/hooks/usePagination";
 import { useEffect, useState } from "react";
 
@@ -40,6 +45,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
       ? setFilteredProducts(combinedFilter(products, selectedFilters))
       : setFilteredProducts(products);
   }, [selectedFilters]);
+
   return (
     <div
       className={clsx(
@@ -69,7 +75,11 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
           <div className="flex justify-start gap-4 lg:gap-8">
             {selectedFilters?.map((filter) =>
               filter.filters.map((filter, index) => (
-                <FilterTag key={index} filter={filter} />
+                <FilterTag
+                  key={index}
+                  filter={filter}
+                  setSelectedFilters={setSelectedFilters}
+                />
               ))
             )}
           </div>

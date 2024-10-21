@@ -7,7 +7,15 @@ interface PaginationProps {
   currentPage: number;
   setCurrentPage: (page: number) => void;
 }
-//TODO: refactor those magic numbers
+
+interface PageButtonProps {
+  key?: number;
+  variant: "pageNumberButton" | "pageArrowButton";
+  page: number | React.ReactNode;
+  onClick: () => void;
+  isDisabled?: boolean;
+}
+
 export function Pagination({
   maxPage = 1,
   currentPage,
@@ -41,13 +49,6 @@ export function Pagination({
     setCurrentPage(page);
   }
 
-  interface PageButtonProps {
-    key?: number;
-    variant: "pageNumberButton" | "pageArrowButton";
-    page: number | React.ReactNode;
-    onClick: () => void;
-    isDisabled?: boolean;
-  }
   function PageButton({ variant, page, onClick, isDisabled }: PageButtonProps) {
     return (
       <Button variant={variant} isDisabled={isDisabled} onClick={onClick}>
