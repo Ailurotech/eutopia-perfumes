@@ -14,19 +14,19 @@ export enum FilterListTitle {
 export const filterLists = [
   {
     title: FilterListTitle.InspiredBy,
-    filters: inspiredBy,
+    conditions: inspiredBy,
   },
   {
     title: FilterListTitle.PerfumeType,
-    filters: perfumeType,
+    conditions: perfumeType,
   },
   {
     title: FilterListTitle.Size,
-    filters: size,
+    conditions: size,
   },
   {
     title: FilterListTitle.SortPrice,
-    filters: sortPrice,
+    conditions: sortPrice,
   },
 ] as const;
 
@@ -38,7 +38,7 @@ export type SortPrice = (typeof sortPrice)[number];
 export type FilterListFilters = InspiredBy | PerfumeType | Size | SortPrice;
 export type SelectedFilters = {
   title: FilterListTitle;
-  filters: FilterListFilters[];
+  conditions: FilterListFilters[];
 };
 
 // Filter function
@@ -53,7 +53,7 @@ export function combinedFilter(
   if (selectedFilters.some((filter) => filter.title === "Sort by Price")) {
     const sortType = selectedFilters.find(
       (filter) => filter.title === "Sort by Price"
-    )?.filters[0];
+    )?.conditions[0];
     return sortType === "Low to High"
       ? filteredProducts.sort((a, b) => a.maxPrice - b.maxPrice)
       : filteredProducts.sort((a, b) => b.maxPrice - a.maxPrice);
@@ -68,11 +68,11 @@ function filterByCategory(
   return selectedFilters.every((filterItem) => {
     switch (filterItem.title) {
       case "Inspired by":
-        return filterItem.filters.includes(product.productType);
+        return filterItem.conditions.includes(product.productType);
       case "Perfume Type":
-        return filterItem.filters.includes(product.tag);
+        return filterItem.conditions.includes(product.tag);
       case "Size":
-        return filterItem.filters.includes(product.weight);
+        return filterItem.conditions.includes(product.weight);
       case "Sort by Price":
         return true;
       default:

@@ -12,7 +12,9 @@ import { Poppins } from "next/font/google";
 import {
   FilterListFilters,
   FilterListTitle,
+  SelectedFilters,
 } from "../shopping-page/utils/filters";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 const poppins = Poppins({
   weight: "400",
@@ -22,14 +24,25 @@ const poppins = Poppins({
 interface DropdownMenuProps {
   menuTitle: FilterListTitle;
   menuItems: readonly FilterListFilters[];
-  setSelectedFilters: any;
+  setSelectedFilters: Dispatch<SetStateAction<SelectedFilters[]>>;
+  selectedFilters: SelectedFilters[];
 }
 
 export function DropdownMenu({
   menuTitle,
   menuItems,
   setSelectedFilters,
+  selectedFilters,
 }: DropdownMenuProps) {
+  const [value, setValue] = useState<FilterListFilters[]>([]);
+
+  useEffect(() => {
+    const selectedValues = selectedFilters?.find(
+      (filter) => filter.title === menuTitle
+    );
+    setValue(selectedValues?.conditions || []);
+  }, [selectedFilters, menuTitle]);
+
   function onChangeHandler(e: FilterListFilters[]) {
     if (e.length === 0) {
       setSelectedFilters((prev) => {
@@ -37,7 +50,7 @@ export function DropdownMenu({
       });
       return;
     }
-    const selectedFilters = { title: menuTitle, filters: e };
+    const selectedFilters = { title: menuTitle, conditions: e };
     setSelectedFilters((prev) => {
       if (!prev) {
         return [selectedFilters];
@@ -55,7 +68,6 @@ export function DropdownMenu({
       return [...prev, selectedFilters];
     });
   }
-
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
@@ -75,6 +87,7 @@ export function DropdownMenu({
           <MenuOptionGroup
             type="checkbox"
             onChange={(value) => onChangeHandler(value as FilterListFilters[])}
+            value={value}
           >
             {menuItems.map((item, index) => (
               <MenuItemOption key={index} value={item}>
@@ -90,6 +103,7 @@ export function DropdownMenu({
               onChangeHandler(data as FilterListFilters[]);
             }}
             type="radio"
+            value={value[0] || ""}
           >
             {menuItems.map((item, index) => (
               <MenuItemOption key={index} value={item}>

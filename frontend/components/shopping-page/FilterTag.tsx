@@ -1,22 +1,25 @@
 import { Button } from "@chakra-ui/button";
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
-import { FilterListFilters } from "./utils/filters";
+import { FilterListFilters, SelectedFilters } from "./utils/filters";
+import { Dispatch, SetStateAction } from "react";
 
 interface FilterTagProps {
   filter: FilterListFilters;
-  setSelectedFilters: any;
+  setSelectedFilters: Dispatch<SetStateAction<SelectedFilters[]>>;
 }
 
 export function FilterTag({ filter, setSelectedFilters }: FilterTagProps) {
   const handleFilterTagsClick = (condition: FilterListFilters) => {
     setSelectedFilters((prev) => {
-      return prev.map((item) => {
-        const newCondition = item.filters.filter((f: string) => {
+      const res = prev.map((item) => {
+        const newCondition = item.conditions.filter((f: string) => {
           return f.toLocaleLowerCase() !== condition.toLocaleLowerCase();
         });
-        return { ...prev, filters: newCondition };
+        return { ...item, conditions: newCondition };
       });
+      const allEmpty = res.every((item) => item.conditions.length === 0);
+      return allEmpty ? [] : res;
     });
   };
 

@@ -5,12 +5,7 @@ import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ProductType } from "@/type";
-import {
-  combinedFilter,
-  FilterListFilters,
-  filterLists,
-  SelectedFilters,
-} from "./utils/filters";
+import { combinedFilter, filterLists, SelectedFilters } from "./utils/filters";
 import { usePagination } from "@/hooks/usePagination";
 import { useEffect, useState } from "react";
 
@@ -33,7 +28,7 @@ type ShoppingDisplayProps = {
 } & ShoppingDisplayVariants;
 
 export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>();
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>([]);
   const [filteredProducts, setFilteredProducts] =
     useState<ProductType[]>(products);
   const { displayNum, currentPage, setCurrentPage, displayProducts } =
@@ -44,7 +39,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
     selectedFilters
       ? setFilteredProducts(combinedFilter(products, selectedFilters))
       : setFilteredProducts(products);
-  }, [selectedFilters]);
+  }, [selectedFilters, products]);
 
   return (
     <div
@@ -65,8 +60,9 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
               <DropdownMenu
                 key={list.title}
                 menuTitle={list.title}
-                menuItems={list.filters}
+                menuItems={list.conditions}
                 setSelectedFilters={setSelectedFilters}
+                selectedFilters={selectedFilters}
               />
             ))}
           </div>
@@ -74,7 +70,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
         <div className="col-span-4">
           <div className="flex justify-start gap-4 lg:gap-8">
             {selectedFilters?.map((filter) =>
-              filter.filters.map((filter, index) => (
+              filter.conditions.map((filter, index) => (
                 <FilterTag
                   key={index}
                   filter={filter}
