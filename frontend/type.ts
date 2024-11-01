@@ -47,3 +47,6 @@ export interface ShoppingPageProps {
   video: VideoType;
   products: ProductType[];
 }
+
+const pages = ["all", "for-her", "for-him", "neutral"] as const;
+export type PageType = (typeof pages)[number];

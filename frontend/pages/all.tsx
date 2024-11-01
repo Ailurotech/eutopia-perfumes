@@ -4,6 +4,7 @@ import { sanityClient } from "@/lib/sanityClient";
 import { shoppingPageQuery, shoppingVideoQuery } from "@/query";
 import { ShoppingPageProps } from "@/type";
 import { productFormat } from "@/utils";
+import { productPageGetData } from "@/utils/product-page-get-data";
 import { GetStaticProps } from "next";
 
 export default function Page({ video, products }: ShoppingPageProps) {
@@ -17,23 +18,7 @@ export default function Page({ video, products }: ShoppingPageProps) {
   );
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const videoQuery = shoppingVideoQuery("all");
-  const pageQuery = shoppingPageQuery();
-  let video = {};
-  let products = [];
-  try {
-    const data = await Promise.all([
-      sanityClient.fetch(videoQuery),
-      sanityClient.fetch(pageQuery),
-    ]);
-    video = data[0][0];
-    products = productFormat(data[1]);
-  } catch (error) {
-    console.error("Error fetching banner items:", error);
-    video = {};
-    products = [];
-  }
-
+  const { video, products } = await productPageGetData("all");
   return {
     props: {
       video,
