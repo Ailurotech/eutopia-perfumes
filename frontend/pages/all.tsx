@@ -28,7 +28,6 @@ export const getStaticProps: GetStaticProps = async () => {
     ]);
     video = data[0][0];
     products = productFormat(data[1]);
-    console.log("products", products);
   } catch (error) {
     console.error("Error fetching banner items:", error);
     video = {};

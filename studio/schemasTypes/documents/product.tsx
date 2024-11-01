@@ -39,20 +39,6 @@ export const productType = defineType({
       options: {field: 'store.slug.current'},
     }),
     defineField({
-      name: 'weightOZ',
-      title: 'Weight(oz)',
-      type: 'number',
-      group: 'editorial',
-      validation: (Rule) => Rule.min(0).error('Weight must be a positive number'),
-    }),
-    defineField({
-      name: 'weightML',
-      title: 'Weight(ml)',
-      type: 'number',
-      group: 'editorial',
-      validation: (Rule) => Rule.min(0).error('Weight must be a positive number'),
-    }),
-    defineField({
       name: 'colorTheme',
       type: 'reference',
       to: [{type: 'colorTheme'}],

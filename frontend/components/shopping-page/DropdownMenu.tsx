@@ -36,6 +36,9 @@ export function DropdownMenu({
     const selectedValues = selectedFilters?.find(
       (filter) => filter.title === menuTitle
     );
+    if (selectedValues?.filterLists === undefined) {
+      return setValue([]);
+    }
     setValue(selectedValues?.filterLists);
   }, [selectedFilters, menuTitle]);
 
