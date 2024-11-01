@@ -37,9 +37,10 @@ export interface ProductType {
   maxPrice: number;
   minPrice: number;
   image: string;
-  tag: PerfumeType;
-  productType: InspiredBy;
+  tag: string;
+  productType: PerfumeType;
   weight: Size;
+  inspiredBy: InspiredBy;
 }
 
 export interface ShoppingPageProps {

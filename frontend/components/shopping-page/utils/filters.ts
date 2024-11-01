@@ -1,9 +1,45 @@
 import { ProductType } from "@/type";
 
 // All the filters
-const inspiredBy = ["Chanel", "Zara", "TomFord", "Dior", "JoMalone"];
-const perfumeType = ["For-Him", "For-Her", "Neutral"];
-const size = ["100ml/3.4oz", "120ml/3.8oz", "150ml/4.2oz"];
+const inspiredBy = [
+  "Lancôme",
+  "Paco Rabone",
+  "YSL",
+  "Maison",
+  "Dior",
+  "Versace",
+  "Jo Malone",
+  "Burberry",
+  "Prada",
+  "Hermes",
+  "Giorgio Armani",
+  "Chanel",
+  "Carolina Herrera",
+  "Anna Sui",
+  "Elizabeth Arden",
+  "Creed",
+  "Dolce Gabbana",
+  "Tom Ford",
+  "Boss",
+  "Gucci",
+  "Maison Francis Kurkdjian",
+  "Bvlgari",
+  "Dolce&Gabbana",
+];
+const perfumeType = [
+  "Eau de Parfum",
+  "Eau de Toilette",
+  "Eau de Cologne",
+  "Mirror HanginEau de Parfumg, Aircon Vent",
+  "Mirror HEau de Parfumanging, Aircon Vent",
+  "Mirror Hanging, AEau de Parfumircon Vent",
+  "Mirror Hanging, AirconEau de Toilette Vent",
+  "Mirror Hanging, Aircon VeEau de Toilettent",
+  "Mirror Hanging, Aircon Vent",
+  "Mirror Hanging",
+  "Aircon Vent",
+];
+const size = ["10ml", "50ml", "50ml&10ml"];
 const sortPrice = ["Low to High", "High to Low"];
 export enum FilterListTitle {
   InspiredBy = "Inspired by",
@@ -72,9 +108,9 @@ function filterByCategory(
   return selectedFilters.every((filterItem) => {
     switch (filterItem.title) {
       case "Inspired by":
-        return filterItem.filterLists.includes(product.productType);
+        return filterItem.filterLists.includes(product.inspiredBy);
       case "Perfume Type":
-        return filterItem.filterLists.includes(product.tag);
+        return filterItem.filterLists.includes(product.productType);
       case "Size":
         return filterItem.filterLists.includes(product.weight);
       default:
