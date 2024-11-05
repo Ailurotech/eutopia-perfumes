@@ -54,7 +54,7 @@ export function IndividualProductForShoppingPage({
         )}
       </div>
       <h5 className="capitalize text-xs xl:text-lg">{category}</h5>
-      <div className="min-h-[140px] md:min-h-[120px] lg:min-h-20 xl:min-h-28 2xl:min-h-32 flex flex-col justify-start gap-1 lg:gap-3">
+      <div className="min-h-[140px] md:min-h-[120px] xl:min-h-28 2xl:min-h-32 flex flex-col justify-start gap-1 lg:gap-3">
         {parsedTitle.map((title, index) => {
           return (
             <h2
@@ -92,7 +92,7 @@ export function IndividualProductForProductPage({
       <h2
         className={clsx(
           literata.className,
-          "text-[20px] mt-6 mb-4 uppercase text-center"
+          "xl:min-h-24 2xl:min-h-12 text-[20px] mt-6 mb-4 uppercase text-center"
         )}
       >
         {parsedTitle}

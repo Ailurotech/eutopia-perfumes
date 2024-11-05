@@ -30,16 +30,18 @@ export function DetailedProduct({
     <div
       className={clsx(
         poppins.className,
-        "flex flex-col gap-10 xl:gap-10 xl:grid xl:grid-cols-[50%_1fr]"
+        "grid-rows-2 gap-10 grid xl:grid-cols-2 xl:grid-rows-none"
       )}
     >
-      <Image src={image} alt="perfume" width={800} height={800} />
-      <div className="xl:p-10 flex flex-col gap-[26px] 2xl:gap-8">
+      <div className="relative">
+        <Image src={image} alt="perfume" fill className="object-contain" />
+      </div>
+      <div className="2xl:p-5 flex flex-col gap-[26px] 2xl:gap-8">
         <h1 className="text-[32px] 2xl:text-[40px] tracking-[0.4rem]">
           PERFUME
         </h1>
         <div className="space-y-3">
-          <h1 className={clsx(libreBodoni.className, "text-3xl 2xl:text-4xl ")}>
+          <h1 className={clsx(libreBodoni.className, "text-3xl 2xl:text-4xl")}>
             {title}
           </h1>
           <div className="space-y-1">
