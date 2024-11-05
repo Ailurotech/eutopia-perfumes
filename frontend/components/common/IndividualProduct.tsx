@@ -26,9 +26,11 @@ export function IndividualProductForShoppingPage({
 }: IndividualProductProps) {
   const router = useRouter();
   const parsedTitle = title.split("|").slice(0, 2);
+
   function clickHandler(id: number) {
     router.push(`/product/${id}`);
   }
+
   return (
     <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between">
       <div className="w-full aspect-[23/30] relative rounded-xl">

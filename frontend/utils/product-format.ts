@@ -1,6 +1,5 @@
 import { ProductPageContent, ProductType } from "@/type";
 
-//todo fix type
 export function productFormat<T extends ProductPageContent | ProductType>(
   products: T[],
   sku?: number
@@ -14,17 +13,20 @@ export function productFormat<T extends ProductPageContent | ProductType>(
 
 function addWeightByTitle(product: ProductPageContent | ProductType) {
   const sizeRegex = /\d+ml/g;
-  const weight: string[] | null = product.title.match(sizeRegex);
+  const weight = product.title.match(sizeRegex);
   if (weight === null) {
     return {
       ...product,
       weight: null,
+      weightOfOz: null,
     };
   }
+
+  const parsedWeight = weight.length > 1 ? weight.join("&") : weight[0];
   return {
     ...product,
-    weight: weight.length > 1 ? weight.join("&") : weight[0],
-    weightOfOz: weight.length > 1 ? weight.join("&") : weight[0],
+    weight: parsedWeight,
+    weightOfOz: parsedWeight,
   };
 }
 
@@ -46,4 +48,9 @@ export function parseWeight(weight: string) {
 function convertMLToOz(weight: string) {
   const mlToOz = 0.033814;
   return (parseInt(weight) * mlToOz).toFixed(2);
+}
+
+export function descriptionFormat(description: string) {
+  const descriptionReg = /<\/?p>/g;
+  return description.replace(descriptionReg, "");
 }

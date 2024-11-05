@@ -2,6 +2,7 @@ import { ProductPageContent, RecommendedProducts } from "@/type";
 import { Description } from "./components/Description";
 import { DetailedProduct } from "./components/DetailedProduct";
 import { ProductsCarousel } from "../common/ProductsCarousel";
+import { descriptionFormat } from "@/utils";
 
 interface ProductPageProps {
   productPageContent: ProductPageContent;
@@ -13,8 +14,7 @@ export function ProductPage({
   recommendedProducts,
 }: ProductPageProps) {
   const { description, ...detailedProductContent } = productPageContent;
-  const descriptionReg = /<\/?p>/g;
-  const parsedDescription = description.replace(descriptionReg, "");
+  const parsedDescription = descriptionFormat(description);
   const category = productPageContent.tag;
   return (
     <section className="px-16 lg:px-32 text-default space-y-20">

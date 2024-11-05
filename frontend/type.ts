@@ -4,7 +4,7 @@ import {
   Size,
 } from "./components/shopping-page/utils/filters";
 
-export interface ProductPageContent {
+interface BasicProductType {
   image: string;
   description: string;
   maxPrice: number;
@@ -14,8 +14,11 @@ export interface ProductPageContent {
   title: string;
   weight: null | Size;
   sku: number;
-  stars: number;
 }
+
+export type ProductPageContent = BasicProductType & {
+  stars: number;
+};
 
 export interface RecommendedProducts {
   title: string;
@@ -31,18 +34,9 @@ export interface VideoType {
   video: string;
 }
 
-export interface ProductType {
-  image: string;
-  description: string;
-  maxPrice: number;
-  tag: string;
-  productType: PerfumeType;
-  inspiredBy: InspiredBy;
-  title: string;
-  weight: Size;
-  sku: number;
+export type ProductType = BasicProductType & {
   id: number;
-}
+};
 
 export interface ShoppingPageProps {
   video: VideoType;
