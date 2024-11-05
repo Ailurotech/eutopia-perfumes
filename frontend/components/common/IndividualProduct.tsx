@@ -6,11 +6,11 @@ import { useRouter } from "next/navigation";
 interface IndividualProductProps {
   image: string | StaticImageData;
   category: string;
-  name: string;
+  title: string;
   price: number;
   isHovered?: boolean;
   themeColor?: string;
-  id: number;
+  id?: number;
 }
 
 const literata = Literata({ weight: "700", subsets: ["latin"] });
@@ -18,14 +18,14 @@ const literata = Literata({ weight: "700", subsets: ["latin"] });
 export function IndividualProductForShoppingPage({
   image,
   category,
-  name,
+  title,
   price,
   id,
   isHovered = false,
   themeColor,
 }: IndividualProductProps) {
   const router = useRouter();
-  const parsedName = name.split("|").slice(0, 2);
+  const parsedTitle = title.split("|").slice(0, 2);
   function clickHandler(id: number) {
     router.push(`/product/${id}`);
   }
@@ -34,7 +34,7 @@ export function IndividualProductForShoppingPage({
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image
           src={image}
-          alt={name}
+          alt={title}
           className="object-contain"
           fill
           onClick={() => clickHandler(id)}
@@ -53,7 +53,7 @@ export function IndividualProductForShoppingPage({
       </div>
       <h5 className="capitalize text-xs xl:text-lg">{category}</h5>
       <div className="min-h-[140px] md:min-h-[120px] lg:min-h-20 xl:min-h-28 2xl:min-h-32 flex flex-col justify-start gap-1 lg:gap-3">
-        {parsedName.map((name, index) => {
+        {parsedTitle.map((title, index) => {
           return (
             <h2
               key={index}
@@ -64,7 +64,7 @@ export function IndividualProductForShoppingPage({
                 index != 0 && "text-[10px] xl:text-xs 2xl:text-sm"
               )}
             >
-              {name}
+              {title}
             </h2>
           );
         })}
@@ -77,19 +77,23 @@ export function IndividualProductForShoppingPage({
 export function IndividualProductForProductPage({
   image,
   category,
-  name,
+  title,
   price,
 }: IndividualProductProps) {
+  const parsedTitle = title.split("|").slice(0, 1);
   return (
     <div className="flex flex-col items-center">
       <div className="h-64 aspect-[23/30] relative">
-        <Image src={image} alt={name} className="object-contain" fill />
+        <Image src={image} alt={title} className="object-contain" fill />
       </div>
       <h5 className="capitalize">{category}</h5>
       <h2
-        className={clsx(literata.className, "text-[20px] mt-6 mb-4 uppercase")}
+        className={clsx(
+          literata.className,
+          "text-[20px] mt-6 mb-4 uppercase text-center"
+        )}
       >
-        {name}
+        {parsedTitle}
       </h2>
       <h2 className="text-[26px]">${price}</h2>
     </div>

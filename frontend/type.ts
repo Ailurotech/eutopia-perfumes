@@ -18,7 +18,7 @@ export interface ProductPageContent {
 }
 
 export interface RecommendedProducts {
-  name: string;
+  title: string;
   image: string;
   price: number;
 }

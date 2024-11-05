@@ -20,12 +20,12 @@ export function skuQuery(id: number) {
   `;
 }
 
-export function recommendedProductQuery(slug: string, category: string) {
+export function recommendedProductQuery(tag: string) {
   return `
-        *[_type == "perfume" && slug.current != "${slug}" && category == "${category}"]{
-            name,
-            "image": image.asset -> url,
-            price
+        *[_type == "product" && store.tags == "${tag}"]{
+            "title":store.title,
+            "image":store.previewImageUrl,
+            "price":store.priceRange.maxVariantPrice,
             }[0...10]
         `;
 }
