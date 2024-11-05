@@ -1,8 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import { Literata } from "next/font/google";
 import clsx from "clsx";
-import src from "@emotion/styled";
-import { div, h5, h2 } from "framer-motion/client";
+import { useRouter } from "next/navigation";
 
 interface IndividualProductProps {
   image: string | StaticImageData;
@@ -11,6 +10,7 @@ interface IndividualProductProps {
   price: number;
   isHovered?: boolean;
   themeColor?: string;
+  id: number;
 }
 
 const literata = Literata({ weight: "700", subsets: ["latin"] });
@@ -20,14 +20,25 @@ export function IndividualProductForShoppingPage({
   category,
   name,
   price,
+  id,
   isHovered = false,
   themeColor,
 }: IndividualProductProps) {
+  const router = useRouter();
   const parsedName = name.split("|").slice(0, 2);
+  function clickHandler(id: number) {
+    router.push(`/product/${id}`);
+  }
   return (
     <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between">
       <div className="w-full aspect-[23/30] relative rounded-xl">
-        <Image src={image} alt={name} className="object-contain" fill />
+        <Image
+          src={image}
+          alt={name}
+          className="object-contain"
+          fill
+          onClick={() => clickHandler(id)}
+        />
         {isHovered && (
           <span
             className={clsx(

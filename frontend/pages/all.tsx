@@ -1,9 +1,6 @@
 import { NavigationRoute } from "@/components/route";
 import { ShoppingPageLayout } from "@/components/shopping-page/ShoppingPageLayout";
-import { sanityClient } from "@/lib/sanityClient";
-import { shoppingPageQuery, shoppingVideoQuery } from "@/query";
 import { ShoppingPageProps } from "@/type";
-import { productFormat } from "@/utils";
 import { productPageGetData } from "@/utils/product-page-get-data";
 import { GetStaticProps } from "next";
 

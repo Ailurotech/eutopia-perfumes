@@ -1,18 +1,23 @@
-export function productPageQuery(slug: string) {
+export function productPageQuery(id: number) {
   return `
-      *[_type == "perfume" && slug.current == "${slug}"]{
-            volumeOfMl,
-            name,
-            "slug": slug.current,
-            "image": image.asset->url,
-            description,
-            volumeOfOz,
-            price,
-            category,
-            tag,
-            stars
+      *[_type == "product" && store.id == ${id}]{
+            "image":store.previewImageUrl,
+            "maxPrice":store.priceRange.maxVariantPrice,
+            "title":store.title,
+            "tag":store.tags,
+            "productType":store.options[0].values[0],
+            "inspiredBy":store.options[1].values[0],
+            "description": store.descriptionHtml,
             }
         `;
+}
+
+export function skuQuery(id: number) {
+  return `
+      *[_type == "productVariant" && store.productId == ${id}]{
+        "sku": store.sku
+      }
+  `;
 }
 
 export function recommendedProductQuery(slug: string, category: string) {

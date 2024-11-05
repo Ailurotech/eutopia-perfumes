@@ -13,7 +13,7 @@ export function ProductPage({
   recommendedProducts,
 }: ProductPageProps) {
   const { description, ...detailedProductContent } = productPageContent;
-  const category = productPageContent.category;
+  const category = productPageContent.tag;
   return (
     <section className="px-16 lg:px-32 text-default space-y-20">
       <DetailedProduct detailedProductContent={detailedProductContent} />

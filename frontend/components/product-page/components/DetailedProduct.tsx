@@ -9,6 +9,7 @@ import { Button } from "@chakra-ui/react";
 import { Icon } from "@/components/common/Icon";
 import { useState } from "react";
 import { ProductPageContent } from "@/type";
+import { parseWeight } from "@/utils";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
@@ -20,18 +21,13 @@ interface DetailedProductProps {
 export function DetailedProduct({
   detailedProductContent,
 }: DetailedProductProps) {
-  const {
-    name,
-    slug,
-    price,
-    image,
-    volumeOfMl,
-    volumeOfOz,
-    category,
-    tag,
-    stars,
-  } = detailedProductContent;
+  const { title, maxPrice, image, tag, stars, weight, productType, sku } =
+    detailedProductContent;
   const [quantity, setQuantity] = useState(1);
+  const pathName = tag.includes(" ")
+    ? tag.toLowerCase().replace(" ", "-")
+    : tag.toLowerCase();
+  const weightOfOz = parseWeight(weight);
   return (
     <div
       className={clsx(
@@ -46,21 +42,21 @@ export function DetailedProduct({
         </h1>
         <div className="space-y-3">
           <h1 className={clsx(libreBodoni.className, "text-3xl 2xl:text-4xl ")}>
-            {name}
+            {title}
           </h1>
           <div className="space-y-1">
             <span className="flex gap-2">
-              <h3>SKU:{slug}</h3>
+              <h3>SKU:{sku}</h3>
               <h3>
                 Category:
-                <Link href={`/${category}`} className="underline capitalize">
-                  {category}
+                <Link href={`/${pathName}`} className="underline capitalize">
+                  {tag}
                 </Link>
               </h3>
               <h3>
                 Tag:
-                <Link href={`/${category}`} className="underline">
-                  {tag}
+                <Link href={`/${pathName}`} className="underline">
+                  {productType}
                 </Link>
               </h3>
             </span>
@@ -72,9 +68,7 @@ export function DetailedProduct({
             </Link>
           </span>
           <div className="space-y-1">
-            <h3 className="text-2xl font-semibold">
-              {volumeOfMl}ml / {volumeOfOz}oz
-            </h3>
+            <h3 className="text-2xl font-semibold">{`${weight}/${weightOfOz}`}</h3>
             <span className="text-xl">
               {"This item has\n"}
               <Link href="/product" className="underline">
@@ -89,7 +83,7 @@ export function DetailedProduct({
             </Button>
           </div>
           <div className="text-[32px] font-black">
-            ${quantity ? (quantity * price).toFixed(2) : 0}
+            ${quantity ? (quantity * maxPrice).toFixed(2) : 0}
           </div>
         </div>
         <div className="space-y-3">

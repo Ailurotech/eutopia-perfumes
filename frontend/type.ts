@@ -5,15 +5,15 @@ import {
 } from "./components/shopping-page/utils/filters";
 
 export interface ProductPageContent {
-  volumeOfMl: number;
-  name: string;
-  slug: string;
   image: string;
   description: string;
-  volumeOfOz: number;
-  price: number;
-  category: string;
+  maxPrice: number;
   tag: string;
+  productType: string;
+  inspiredBy: string;
+  title: string;
+  weight: null | Size;
+  sku: number;
   stars: number;
 }
 
@@ -32,15 +32,16 @@ export interface VideoType {
 }
 
 export interface ProductType {
-  title: string;
+  image: string;
   description: string;
   maxPrice: number;
-  minPrice: number;
-  image: string;
   tag: string;
   productType: PerfumeType;
-  weight: Size;
   inspiredBy: InspiredBy;
+  title: string;
+  weight: Size;
+  sku: number;
+  id: number;
 }
 
 export interface ShoppingPageProps {

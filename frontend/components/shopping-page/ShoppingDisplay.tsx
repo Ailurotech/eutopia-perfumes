@@ -41,7 +41,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
       ? setFilteredProducts(filterProcessor(products, selectedFilters))
       : setFilteredProducts(products);
   }, [selectedFilters, products]);
-
+  console.log("222", products);
   return (
     <div
       className={clsx(
@@ -88,6 +88,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
             name={product.title}
             category={product.tag}
             price={product.maxPrice}
+            id={product.id}
             isHovered={true}
             themeColor={shoppingDisplayVariants({ variant })}
           />
