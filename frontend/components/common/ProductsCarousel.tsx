@@ -79,7 +79,7 @@ export function ProductsCarousel({
           {title}
         </h1>
         <Link
-          href="/product"
+          href="/all"
           className={clsx(poppins.className, "underline text-[35px]")}
         >
           Shop Now

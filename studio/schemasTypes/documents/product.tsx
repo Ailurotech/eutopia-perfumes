@@ -50,6 +50,19 @@ export const productType = defineType({
       group: 'editorial',
     }),
     defineField({
+      name: 'stars',
+      type: 'number',
+      group: 'editorial',
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (value === undefined) return true
+          if (value >= 0 && value <= 5 && value * 2 === Math.floor(value * 2)) {
+            return true
+          }
+          return 'The value must be a number between 0 and 5, in increments of 0.5'
+        }),
+    }),
+    defineField({
       name: 'store',
       type: 'shopifyProduct',
       description: 'Product data from Shopify (read-only)',

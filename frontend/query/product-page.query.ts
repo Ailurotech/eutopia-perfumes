@@ -8,6 +8,7 @@ export function productPageQuery(id: number) {
             "productType":store.options[0].values[0],
             "inspiredBy":store.options[1].values[0],
             "description": store.descriptionHtml,
+            stars
             }
         `;
 }
@@ -22,7 +23,7 @@ export function skuQuery(id: number) {
 
 export function recommendedProductQuery(tag: string) {
   return `
-        *[_type == "product" && store.tags == "${tag}"]{
+        *[_type == "product" && store.status == "active" && store.isDeleted == false && store.tags == "${tag}"]{
             "title":store.title,
             "image":store.previewImageUrl,
             "price":store.priceRange.maxVariantPrice,
