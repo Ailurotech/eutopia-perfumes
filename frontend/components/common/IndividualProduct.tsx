@@ -23,8 +23,9 @@ export function IndividualProductForShoppingPage({
   isHovered = false,
   themeColor,
 }: IndividualProductProps) {
+  const parsedName = name.split("|").slice(0, 2);
   return (
-    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4">
+    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between">
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image src={image} alt={name} className="object-contain" fill />
         {isHovered && (
@@ -40,14 +41,23 @@ export function IndividualProductForShoppingPage({
         )}
       </div>
       <h5 className="capitalize text-xs xl:text-lg">{category}</h5>
-      <h2
-        className={clsx(
-          literata.className,
-          "text-[14px] xl:text-base 2xl:text-xl uppercase text-center"
-        )}
-      >
-        {name}
-      </h2>
+      <div className="min-h-[140px] md:min-h-[120px] lg:min-h-20 xl:min-h-28 2xl:min-h-32 flex flex-col justify-start gap-1 lg:gap-3">
+        {parsedName.map((name, index) => {
+          return (
+            <h2
+              key={index}
+              className={clsx(
+                literata.className,
+                "uppercase text-center text-pretty",
+                index === 0 && "text-[14px] xl:text-base 2xl:text-xl",
+                index != 0 && "text-[10px] xl:text-xs 2xl:text-sm"
+              )}
+            >
+              {name}
+            </h2>
+          );
+        })}
+      </div>
       <h2 className="text-lg xl:text-[22px] 2xl:text-[30px]">${price}</h2>
     </div>
   );

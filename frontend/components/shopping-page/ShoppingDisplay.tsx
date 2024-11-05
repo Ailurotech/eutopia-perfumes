@@ -51,7 +51,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
     >
       <div
         className={clsx(
-          "grid grid-cols-4 grid-rows-[3%_5fr]",
+          "grid grid-cols-4 grid-rows-[3%_min(3%,1fr)_5fr]",
           "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-20"
         )}
       >
