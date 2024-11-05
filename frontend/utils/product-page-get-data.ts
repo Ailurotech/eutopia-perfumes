@@ -2,25 +2,11 @@ import { sanityClient } from "@/lib/sanityClient";
 import { shoppingPageQuery, shoppingVideoQuery } from "@/query";
 import { PageType } from "@/type";
 import { productFormat } from "./product-format";
+import { convertPathToPageName } from "./page-path-name-convert";
 
 export async function productPageGetData(page: PageType) {
   const videoQuery = shoppingVideoQuery(page);
-  let pageName = "";
-  switch (page) {
-    case "all":
-      break;
-    case "for-him":
-      pageName = "For Him";
-      break;
-    case "for-her":
-      pageName = "For Her";
-      break;
-    case "neutral":
-      pageName = "Neutral";
-      break;
-    default:
-      throw new Error("Invalid page type");
-  }
+  const pageName = convertPathToPageName(page);
   const pageQuery = shoppingPageQuery(page === "all" ? "" : pageName);
   let video = {};
   let products = [];

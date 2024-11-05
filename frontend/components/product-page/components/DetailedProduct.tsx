@@ -2,7 +2,6 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { Libre_Bodoni, Poppins } from "next/font/google";
-import { NavigationRoute } from "@/components/route";
 import { StarRating } from "./StarRating";
 import { NumberAdder } from "./NumberAdder";
 import { Button } from "@chakra-ui/react";
@@ -10,6 +9,7 @@ import { Icon } from "@/components/common/Icon";
 import { useState } from "react";
 import { ProductPageContent } from "@/type";
 import { parseWeight } from "@/utils";
+import { covertPageToPathName } from "@/utils/page-path-name-convert";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
@@ -24,9 +24,7 @@ export function DetailedProduct({
   const { title, maxPrice, image, tag, stars, weight, productType, sku } =
     detailedProductContent;
   const [quantity, setQuantity] = useState(1);
-  const pathName = tag.includes(" ")
-    ? tag.toLowerCase().replace(" ", "-")
-    : tag.toLowerCase();
+  const pathName = covertPageToPathName(tag);
   const weightOfOz = parseWeight(weight);
   return (
     <div
