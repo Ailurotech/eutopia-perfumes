@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 interface IndividualProductProps {
   image: string | StaticImageData;
   category: string;
-  title: string;
+  title: string | null;
   price: number;
   isHovered?: boolean;
   themeColor?: string;
@@ -14,6 +14,7 @@ interface IndividualProductProps {
 }
 
 const literata = Literata({ weight: "700", subsets: ["latin"] });
+const defaultTitle = ["No title is available"];
 
 export function IndividualProductForShoppingPage({
   image,
@@ -25,7 +26,8 @@ export function IndividualProductForShoppingPage({
   themeColor,
 }: IndividualProductProps) {
   const router = useRouter();
-  const parsedTitle = title.split("|").slice(0, 2);
+  const parsedTitle =
+    title === null ? defaultTitle : title.split("|").slice(0, 2);
 
   function clickHandler(id: number) {
     router.push(`/product/${id}`);
@@ -82,7 +84,8 @@ export function IndividualProductForProductPage({
   title,
   price,
 }: IndividualProductProps) {
-  const parsedTitle = title.split("|").slice(0, 1);
+  const parsedTitle =
+    title === null ? defaultTitle : title.split("|").slice(0, 1);
   return (
     <div className="flex flex-col items-center">
       <div className="h-64 aspect-[23/30] relative">
