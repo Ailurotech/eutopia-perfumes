@@ -3,22 +3,52 @@ import { ProductPageContent, ProductType } from "@/type";
 export function productFormat<T extends ProductPageContent | ProductType>(
   products: T[],
   sku?: number
-) {
-  let res = products.map((product) => addWeightByTitle(product));
+): T[] {
+  let res = setDefaultValues(products);
+  res = products.map((product) => addWeightByTitle(product) as T);
   if (sku) {
     res.map((product) => (product.sku = sku));
   }
   return res;
 }
 
+function setDefaultValues<T extends ProductPageContent | ProductType>(
+  products: T[]
+): T[] {
+  const res = products.map((product) => {
+    const defaultProductValues = {
+      image: product.image ?? "type-default-image",
+      description: product.description ?? "Type: No description available",
+      maxPrice: product.maxPrice ?? 0,
+      tag: product.tag ?? "type-default-tag",
+      productType: product.productType ?? "type-default-productType",
+      inspiredBy: product.inspiredBy ?? "type-default-inspiredBy",
+      title: product.title ?? "Type Untitled",
+    };
+    if ("stars" in product) {
+      return {
+        ...product,
+        ...defaultProductValues,
+        stars: product.stars ?? 0,
+      };
+    }
+    return {
+      ...product,
+      ...defaultProductValues,
+    };
+  });
+  return res;
+}
+
 function addWeightByTitle(product: ProductPageContent | ProductType) {
   const sizeRegex = /\d+ml/g;
+  const defaultWeight = "no weight available";
   const weight = product.title.match(sizeRegex);
   if (weight === null) {
     return {
       ...product,
-      weight: null,
-      weightOfOz: null,
+      weight: defaultWeight,
+      weightOfOz: defaultWeight,
     };
   }
 

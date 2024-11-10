@@ -85,7 +85,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
             key={index}
             image={product.image}
             title={product.title}
-            category={product.tag}
+            tag={product.tag}
             price={product.maxPrice}
             id={product.id}
             isHovered={true}

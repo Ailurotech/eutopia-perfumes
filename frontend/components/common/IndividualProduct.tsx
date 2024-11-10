@@ -2,23 +2,22 @@ import Image, { StaticImageData } from "next/image";
 import { Literata } from "next/font/google";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
-
 interface IndividualProductProps {
-  image: string | StaticImageData;
-  category: string;
-  title: string | null;
-  price: number | null;
+  image: string;
+  tag: string;
+  title: string;
+  price: number;
   isHovered?: boolean;
   themeColor?: string;
   id?: number;
 }
 
 const literata = Literata({ weight: "700", subsets: ["latin"] });
-const defaultTitle = ["No title is available"];
+const splitOperator = "|";
 
 export function IndividualProductForShoppingPage({
   image,
-  category,
+  tag,
   title,
   price,
   id,
@@ -26,9 +25,9 @@ export function IndividualProductForShoppingPage({
   themeColor,
 }: IndividualProductProps) {
   const router = useRouter();
-  const parsedTitle =
-    title === null ? defaultTitle : title.split("|").slice(0, 2);
-  const parsedPrice = price === null ? 0 : price;
+  const parsedTitle = title.includes(splitOperator)
+    ? title.split(splitOperator).slice(0, 2)
+    : [title];
 
   function clickHandler(id: number) {
     router.push(`/product/${id}`);
@@ -56,7 +55,7 @@ export function IndividualProductForShoppingPage({
           </span>
         )}
       </div>
-      <h5 className="capitalize text-xs xl:text-lg">{category}</h5>
+      <h5 className="capitalize text-xs xl:text-lg">{tag}</h5>
       <div className="min-h-[140px] md:min-h-[120px] xl:min-h-28 2xl:min-h-32 flex flex-col justify-start gap-1 lg:gap-3">
         {parsedTitle.map((title, index) => {
           return (
@@ -74,27 +73,27 @@ export function IndividualProductForShoppingPage({
           );
         })}
       </div>
-      <h2 className="text-lg xl:text-[22px] 2xl:text-[30px]">${parsedPrice}</h2>
+      <h2 className="text-lg xl:text-[22px] 2xl:text-[30px]">${price}</h2>
     </div>
   );
 }
 
 export function IndividualProductForProductPage({
   image,
-  category,
+  tag,
   title,
   price,
 }: IndividualProductProps) {
-  const parsedTitle =
-    title === null ? defaultTitle : title.split("|").slice(0, 1);
-  const parsedPrice = price === null ? 0 : price;
+  const parsedTitle = title.includes(splitOperator)
+    ? title.split(splitOperator).slice(0, 1)
+    : [title];
 
   return (
     <div className="flex flex-col items-center">
       <div className="h-64 aspect-[23/30] relative">
         <Image src={image} alt={title} className="object-contain" fill />
       </div>
-      <h5 className="capitalize">{category}</h5>
+      <h5 className="capitalize">{tag}</h5>
       <h2
         className={clsx(
           literata.className,
@@ -103,7 +102,7 @@ export function IndividualProductForProductPage({
       >
         {parsedTitle}
       </h2>
-      <h2 className="text-[26px]">${parsedPrice}</h2>
+      <h2 className="text-[26px]">${price}</h2>
     </div>
   );
 }

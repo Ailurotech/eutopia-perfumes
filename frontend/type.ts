@@ -12,7 +12,8 @@ interface BasicProductType {
   productType: string;
   inspiredBy: string;
   title: string;
-  weight: null | Size;
+  weight: Size;
+  weightOfOz: string;
   sku: number;
 }
 

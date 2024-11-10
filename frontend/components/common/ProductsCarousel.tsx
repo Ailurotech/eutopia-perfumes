@@ -95,7 +95,7 @@ export function ProductsCarousel({
               <IndividualProductForProductPage
                 key={index}
                 image={product.image}
-                category={category}
+                tag={category}
                 title={product.title}
                 price={product.price}
               />
