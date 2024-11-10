@@ -7,7 +7,7 @@ interface IndividualProductProps {
   image: string | StaticImageData;
   category: string;
   title: string | null;
-  price: number;
+  price: number | null;
   isHovered?: boolean;
   themeColor?: string;
   id?: number;
@@ -28,6 +28,7 @@ export function IndividualProductForShoppingPage({
   const router = useRouter();
   const parsedTitle =
     title === null ? defaultTitle : title.split("|").slice(0, 2);
+  const parsedPrice = price === null ? 0 : price;
 
   function clickHandler(id: number) {
     router.push(`/product/${id}`);
@@ -73,7 +74,7 @@ export function IndividualProductForShoppingPage({
           );
         })}
       </div>
-      <h2 className="text-lg xl:text-[22px] 2xl:text-[30px]">${price}</h2>
+      <h2 className="text-lg xl:text-[22px] 2xl:text-[30px]">${parsedPrice}</h2>
     </div>
   );
 }
@@ -86,6 +87,8 @@ export function IndividualProductForProductPage({
 }: IndividualProductProps) {
   const parsedTitle =
     title === null ? defaultTitle : title.split("|").slice(0, 1);
+  const parsedPrice = price === null ? 0 : price;
+
   return (
     <div className="flex flex-col items-center">
       <div className="h-64 aspect-[23/30] relative">
@@ -100,7 +103,7 @@ export function IndividualProductForProductPage({
       >
         {parsedTitle}
       </h2>
-      <h2 className="text-[26px]">${price}</h2>
+      <h2 className="text-[26px]">${parsedPrice}</h2>
     </div>
   );
 }
