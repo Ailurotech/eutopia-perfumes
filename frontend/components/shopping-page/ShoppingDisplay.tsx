@@ -4,8 +4,8 @@ import { IndividualProductForShoppingPage } from "../common/IndividualProduct";
 import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ProductType } from "@/type";
-import { filterProcessor, filterLists, SelectedFilters } from "./utils/filters";
+import { PageSettingType, ProductType, SelectedFilters } from "@/type";
+import { useFilter } from "@/hooks/usefilter";
 import { usePagination } from "@/hooks/usePagination";
 import { useEffect, useState } from "react";
 
@@ -25,9 +25,15 @@ export const shoppingDisplayVariants = cva("", {
 
 type ShoppingDisplayProps = {
   products: ProductType[];
+  pageSetting: PageSettingType;
 } & ShoppingDisplayVariants;
 
-export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
+export function ShoppingDisplay({
+  variant,
+  products,
+  pageSetting,
+}: ShoppingDisplayProps) {
+  const { filterProcessor, filterLists } = useFilter(pageSetting);
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>([]);
   const [filteredProducts, setFilteredProducts] =
     useState<ProductType[]>(products);

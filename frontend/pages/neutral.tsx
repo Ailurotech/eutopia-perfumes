@@ -4,23 +4,29 @@ import { ShoppingPageProps } from "@/type";
 import { GetStaticProps } from "next";
 import { productPageGetData } from "@/utils/product-page-get-data";
 
-export default function Page({ video, products }: ShoppingPageProps) {
+export default function Page({
+  video,
+  products,
+  pageSetting,
+}: ShoppingPageProps) {
   return (
     <ShoppingPageLayout
       variant="neutral"
       video={video}
       linkPath={NavigationRoute.Neutral.Path}
       products={products}
+      pageSetting={pageSetting}
     />
   );
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const { video, products } = await productPageGetData("neutral");
+  const { video, products, pageSetting } = await productPageGetData("neutral");
 
   return {
     props: {
       video,
       products,
+      pageSetting,
     },
   };
 };

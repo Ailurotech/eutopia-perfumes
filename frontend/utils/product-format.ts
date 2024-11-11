@@ -5,7 +5,7 @@ export function productFormat<T extends ProductPageContent | ProductType>(
   sku?: number
 ): T[] {
   let res = setDefaultValues(products);
-  res = products.map((product) => addWeightByTitle(product) as T);
+  res = res.map((product) => addWeightByTitle(product) as T);
   if (sku) {
     res.map((product) => (product.sku = sku));
   }
@@ -17,13 +17,13 @@ function setDefaultValues<T extends ProductPageContent | ProductType>(
 ): T[] {
   const res = products.map((product) => {
     const defaultProductValues = {
-      image: product.image ?? "type-default-image",
-      description: product.description ?? "Type: No description available",
+      image: product.image ?? "default",
+      description: product.description ?? "No description available",
       maxPrice: product.maxPrice ?? 0,
-      tag: product.tag ?? "type-default-tag",
-      productType: product.productType ?? "type-default-productType",
-      inspiredBy: product.inspiredBy ?? "type-default-inspiredBy",
-      title: product.title ?? "Type Untitled",
+      tag: product.tag ?? "default",
+      productType: product.productType ?? "default",
+      inspiredBy: product.inspiredBy ?? "default",
+      title: product.title ?? "Untitled",
     };
     if ("stars" in product) {
       return {
