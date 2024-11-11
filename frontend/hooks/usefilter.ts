@@ -62,14 +62,11 @@ export function useFilter(pageSetting: PageSettingType) {
       const lowerCaseFilterLists = filterItem.filterLists.map((list) =>
         toLowerCaseFormat(list)
       );
-      console.log("abc", lowerCaseFilterLists);
       switch (filterItem.title) {
-        case "Inspired by": {
-          console.log(product.inspiredBy.toLocaleLowerCase());
+        case "Inspired by":
           return lowerCaseFilterLists.includes(
             toLowerCaseFormat(product.inspiredBy)
           );
-        }
 
         case "Perfume Type":
           return lowerCaseFilterLists.includes(

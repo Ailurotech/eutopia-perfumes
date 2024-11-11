@@ -43,10 +43,15 @@ export function ShoppingDisplay({
     });
 
   useEffect(() => {
-    selectedFilters
+    selectedFilters.length > 0
       ? setFilteredProducts(filterProcessor(products, selectedFilters))
       : setFilteredProducts(products);
   }, [selectedFilters, products]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredProducts, setCurrentPage]);
+
   return (
     <div
       className={clsx(
@@ -86,6 +91,11 @@ export function ShoppingDisplay({
             )}
           </div>
         </div>
+        {!displayProducts.length && (
+          <div className="col-span-4 flex justify-center">
+            <h1 className="text-3xl font-black">No products found</h1>
+          </div>
+        )}
         {displayProducts.map((product, index) => (
           <IndividualProductForShoppingPage
             key={index}
