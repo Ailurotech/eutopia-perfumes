@@ -39,20 +39,6 @@ export const productType = defineType({
       options: {field: 'store.slug.current'},
     }),
     defineField({
-      name: 'weightOZ',
-      title: 'Weight(oz)',
-      type: 'number',
-      group: 'editorial',
-      validation: (Rule) => Rule.min(0).error('Weight must be a positive number'),
-    }),
-    defineField({
-      name: 'weightML',
-      title: 'Weight(ml)',
-      type: 'number',
-      group: 'editorial',
-      validation: (Rule) => Rule.min(0).error('Weight must be a positive number'),
-    }),
-    defineField({
       name: 'colorTheme',
       type: 'reference',
       to: [{type: 'colorTheme'}],
@@ -62,6 +48,19 @@ export const productType = defineType({
       name: 'body',
       type: 'portableText',
       group: 'editorial',
+    }),
+    defineField({
+      name: 'stars',
+      type: 'number',
+      group: 'editorial',
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          if (value === undefined) return true
+          if (value >= 0 && value <= 5 && value * 2 === Math.floor(value * 2)) {
+            return true
+          }
+          return 'The value must be a number between 0 and 5, in increments of 0.5'
+        }),
     }),
     defineField({
       name: 'store',

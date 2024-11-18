@@ -9,8 +9,8 @@ import {
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
 import { Poppins } from "next/font/google";
-import { FilterLists, FilterListTitle, SelectedFilters } from "./utils/filters";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { FilterLists, FilterListTitle, SelectedFilters } from "@/type";
 
 const poppins = Poppins({
   weight: "400",
@@ -19,7 +19,7 @@ const poppins = Poppins({
 
 interface DropdownMenuProps {
   menuTitle: FilterListTitle;
-  menuItems: readonly FilterLists[];
+  menuItems: FilterLists;
   setSelectedFilters: Dispatch<SetStateAction<SelectedFilters[]>>;
   selectedFilters: SelectedFilters[];
 }
@@ -30,16 +30,19 @@ export function DropdownMenu({
   setSelectedFilters,
   selectedFilters,
 }: DropdownMenuProps) {
-  const [value, setValue] = useState<FilterLists[]>([]);
+  const [value, setValue] = useState<FilterLists>([]);
 
   useEffect(() => {
     const selectedValues = selectedFilters?.find(
       (filter) => filter.title === menuTitle
     );
+    if (selectedValues?.filterLists === undefined) {
+      return setValue([]);
+    }
     setValue(selectedValues?.filterLists);
   }, [selectedFilters, menuTitle]);
 
-  function onChangeHandler(e: FilterLists[]) {
+  function onChangeHandler(e: FilterLists) {
     if (e.length === 0) {
       setSelectedFilters((prev) => {
         return prev.filter((filter) => filter.title !== menuTitle);
@@ -78,7 +81,7 @@ export function DropdownMenu({
         {menuTitle != FilterListTitle.SortPrice && (
           <MenuOptionGroup
             type="checkbox"
-            onChange={(value) => onChangeHandler(value as FilterLists[])}
+            onChange={(value) => onChangeHandler(value as FilterLists)}
             value={value}
           >
             {menuItems.map((item, index) => (
@@ -92,7 +95,7 @@ export function DropdownMenu({
           <MenuOptionGroup
             onChange={(value) => {
               const data = [value];
-              onChangeHandler(data as FilterLists[]);
+              onChangeHandler(data as FilterLists);
             }}
             type="radio"
             value={value ? value[0] : ""}

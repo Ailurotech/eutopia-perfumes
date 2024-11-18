@@ -103,11 +103,11 @@ import {settingsType} from './singletons/settingsType'
 
 const singletons = [homeType, settingsType]
 
-import perfume from './customized/perfume'
 import richText from './customized/richText'
 import videos from './customized/videos'
+import pageSettings from './customized/pageSettings'
 
-const customized = [perfume, richText, videos]
+const customized = [pageSettings, richText, videos]
 
 export const schemaTypes = [
   ...annotations,

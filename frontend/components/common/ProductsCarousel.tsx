@@ -79,7 +79,7 @@ export function ProductsCarousel({
           {title}
         </h1>
         <Link
-          href="/product"
+          href="/all"
           className={clsx(poppins.className, "underline text-[35px]")}
         >
           Shop Now
@@ -89,14 +89,14 @@ export function ProductsCarousel({
         <button onClick={previous}>
           <Icon name="back" className="text-3xl" />
         </button>
-        <div className="space-x-4 w-full max-w-[28rem] md:max-w-[3rem] lg:max-w-[45rem] xl:max-w-[42rem] 2xl:max-w-[55rem] min-[1600px]:max-w-[70rem]">
+        <div className="space-x-4 w-full max-w-[28rem] md:max-w-[36rem] lg:max-w-[45rem] xl:max-w-[42rem] 2xl:max-w-[55rem] min-[1600px]:max-w-[70rem]">
           <Slider ref={sliderRef} {...settings}>
-            {recommendedProducts.map((product) => (
+            {recommendedProducts.map((product, index) => (
               <IndividualProductForProductPage
-                key={product.name}
+                key={index}
                 image={product.image}
-                category={category}
-                name={product.name}
+                tag={category}
+                title={product.title}
                 price={product.price}
               />
             ))}

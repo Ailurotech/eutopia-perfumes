@@ -1,24 +1,22 @@
-import {
-  InspiredBy,
-  PerfumeType,
-  Size,
-} from "./components/shopping-page/utils/filters";
-
-export interface ProductPageContent {
-  volumeOfMl: number;
-  name: string;
-  slug: string;
+interface BasicProductType {
   image: string;
   description: string;
-  volumeOfOz: number;
-  price: number;
-  category: string;
+  maxPrice: number;
   tag: string;
-  stars: number;
+  productType: string;
+  inspiredBy: string;
+  title: string;
+  weight: string;
+  weightOfOz: string;
+  sku: number;
 }
 
+export type ProductPageContent = BasicProductType & {
+  stars: number;
+};
+
 export interface RecommendedProducts {
-  name: string;
+  title: string;
   image: string;
   price: number;
 }
@@ -31,18 +29,38 @@ export interface VideoType {
   video: string;
 }
 
-export interface ProductType {
-  title: string;
-  description: string;
-  maxPrice: number;
-  minPrice: number;
-  image: string;
-  tag: PerfumeType;
-  productType: InspiredBy;
-  weight: Size;
+export type ProductType = BasicProductType & {
+  id: number;
+};
+
+export interface PageSettingType {
+  size: Size;
+  inspiredBy: InspiredBy;
+  perfumeType: PerfumeType;
 }
 
 export interface ShoppingPageProps {
   video: VideoType;
   products: ProductType[];
+  pageSetting: PageSettingType;
 }
+
+export enum FilterListTitle {
+  InspiredBy = "Inspired by",
+  PerfumeType = "Perfume Type",
+  Size = "Size",
+  SortPrice = "Sort by Price",
+}
+
+export type InspiredBy = string[];
+export type PerfumeType = string[];
+export type Size = string[];
+export type SortPrice = string[];
+export type FilterLists = InspiredBy | PerfumeType | Size | SortPrice;
+export type SelectedFilters = {
+  title: FilterListTitle;
+  filterLists: FilterLists;
+};
+
+const pages = ["all", "for-her", "for-him", "neutral"] as const;
+export type PageType = (typeof pages)[number];

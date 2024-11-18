@@ -3,14 +3,16 @@ import { sanityClient } from "@/lib/sanityClient";
 import {
   productPageQuery,
   recommendedProductQuery,
+  skuQuery,
 } from "@/query/product-page.query";
 import { ProductPageContent, RecommendedProducts } from "@/type";
+import { productFormat } from "@/utils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function Product() {
   const router = useRouter();
-  const slug = router.query.slug as string;
+  const id = router.query.id as string;
 
   const [productPageContent, setProductPageContent] =
     useState<ProductPageContent>();
@@ -19,21 +21,25 @@ export default function Product() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (slug) {
-      const mainSanityQuery = productPageQuery(slug);
+    if (id) {
+      const parsedId = parseInt(id);
+      const mainSanityQuery = productPageQuery(parsedId);
+      const skuSanityQuery = skuQuery(parsedId);
       const fetchProduct = async () => {
-        const productItem = await sanityClient.fetch(mainSanityQuery);
-        const data = productItem[0];
-        const category = data.category;
-        const secondSanityQuery = recommendedProductQuery(slug, category);
+        const [mainProduct, sku] = await Promise.all([
+          sanityClient.fetch(mainSanityQuery),
+          sanityClient.fetch(skuSanityQuery),
+        ]);
+        const parsedProduct = productFormat(mainProduct, sku[0].sku)[0];
+        const secondSanityQuery = recommendedProductQuery(parsedProduct.tag);
         const recommendedItem = await sanityClient.fetch(secondSanityQuery);
         setRecommendedProducts(recommendedItem);
-        setProductPageContent(data);
+        setProductPageContent(parsedProduct as ProductPageContent);
         setLoading(false);
       };
       fetchProduct();
     }
-  }, [slug]);
+  }, [id]);
 
   if (!loading && productPageContent && recommendedProducts) {
     return (

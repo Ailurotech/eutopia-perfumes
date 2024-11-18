@@ -1,37 +1,31 @@
 import { NavigationRoute } from "@/components/route";
 import { ShoppingPageLayout } from "@/components/shopping-page/ShoppingPageLayout";
-import { sanityClient } from "@/lib/sanityClient";
-import { shoppingVideoQuery } from "@/query";
 import { ShoppingPageProps } from "@/type";
+import { productPageGetData } from "@/utils/product-page-get-data";
 import { GetStaticProps } from "next";
-import mockProducts from "@/components/shopping-page/assets/mockdata.json";
 
-export default function Page({ video, products }: ShoppingPageProps) {
+export default function Page({
+  video,
+  products,
+  pageSetting,
+}: ShoppingPageProps) {
   return (
     <ShoppingPageLayout
       variant="all"
       video={video}
       linkPath={NavigationRoute.All.Path}
       products={products}
+      pageSetting={pageSetting}
     />
   );
 }
 export const getStaticProps: GetStaticProps = async () => {
-  const query = shoppingVideoQuery("all");
-  let video = {};
-
-  try {
-    const data = await sanityClient.fetch(query);
-    video = data[0];
-  } catch (error) {
-    console.error("Error fetching banner items:", error);
-    video = {};
-  }
-
+  const { video, products, pageSetting } = await productPageGetData("all");
   return {
     props: {
       video,
-      products: mockProducts,
+      products,
+      pageSetting,
     },
   };
 };

@@ -4,8 +4,8 @@ import { IndividualProductForShoppingPage } from "../common/IndividualProduct";
 import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ProductType } from "@/type";
-import { filterProcessor, filterLists, SelectedFilters } from "./utils/filters";
+import { PageSettingType, ProductType, SelectedFilters } from "@/type";
+import { useFilter } from "@/hooks/usefilter";
 import { usePagination } from "@/hooks/usePagination";
 import { useEffect, useState } from "react";
 
@@ -25,9 +25,15 @@ export const shoppingDisplayVariants = cva("", {
 
 type ShoppingDisplayProps = {
   products: ProductType[];
+  pageSetting: PageSettingType;
 } & ShoppingDisplayVariants;
 
-export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
+export function ShoppingDisplay({
+  variant,
+  products,
+  pageSetting,
+}: ShoppingDisplayProps) {
+  const { filterProcessor, filterLists } = useFilter(pageSetting);
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>([]);
   const [filteredProducts, setFilteredProducts] =
     useState<ProductType[]>(products);
@@ -37,10 +43,14 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
     });
 
   useEffect(() => {
-    selectedFilters
+    selectedFilters.length > 0
       ? setFilteredProducts(filterProcessor(products, selectedFilters))
       : setFilteredProducts(products);
   }, [selectedFilters, products]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filteredProducts, setCurrentPage]);
 
   return (
     <div
@@ -51,7 +61,7 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
     >
       <div
         className={clsx(
-          "grid grid-cols-4 grid-rows-[3%_5fr]",
+          "grid grid-cols-4 grid-rows-[3%_min(3%,1fr)_5fr]",
           "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-20"
         )}
       >
@@ -81,13 +91,19 @@ export function ShoppingDisplay({ variant, products }: ShoppingDisplayProps) {
             )}
           </div>
         </div>
+        {!displayProducts.length && (
+          <div className="col-span-4 flex justify-center">
+            <h1 className="text-3xl font-black">No products found</h1>
+          </div>
+        )}
         {displayProducts.map((product, index) => (
           <IndividualProductForShoppingPage
             key={index}
             image={product.image}
-            name={product.title}
-            category={product.tag}
+            title={product.title}
+            tag={product.tag}
             price={product.maxPrice}
+            id={product.id}
             isHovered={true}
             themeColor={shoppingDisplayVariants({ variant })}
           />
