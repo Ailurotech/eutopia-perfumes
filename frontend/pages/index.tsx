@@ -1,8 +1,11 @@
 import { Inter } from "next/font/google";
+import ProductCard from "../components/ProductCard";
 import HomeBanner from "../components/homepage/HomeBanner";
 import { GetStaticProps } from "next";
 import { sanityClient } from "@/lib/sanityClient";
 import { VideoType } from "@/type";
+import Footer from "@/components/footer/footer";
+
 const inter = Inter({ subsets: ["latin"] });
 interface HomeProps {
   videos: VideoType[];
@@ -11,9 +14,10 @@ interface HomeProps {
 export default function Home({ videos }: HomeProps) {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`flex min-h-screen flex-col items-center justify-between  ${inter.className}`}
     >
       <HomeBanner videos={videos} />
+      <Footer />
     </main>
   );
 }

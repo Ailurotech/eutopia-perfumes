@@ -95,6 +95,56 @@ const Site = {
   ),
 };
 
+const AboutUs = {
+  Path: "/about-us",
+  Name: "About Us",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={AboutUs.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
+const StoreLocation = {
+  Path: "/store-location",
+  Name: "Store Location",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={StoreLocation.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
+const Privacy = {
+  Path: "/privacy",
+  Name: "Privacy",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={Privacy.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
+const FAQ = {
+  Path: "/faq",
+  Name: "FAQ",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={FAQ.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
+const FRR = {
+  Path: "/frr",
+  Name: "FRR",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={FRR.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
 export const RoutRoute = {
   Rout,
 };
@@ -110,4 +160,13 @@ export const NavigationRoute = {
   Site,
 };
 
+export const FooterRoute = {
+  AboutUs,
+  StoreLocation,
+  Privacy,
+  FAQ,
+  FRR,
+};
+
 export type NavigationMenuTypes = typeof NavigationRoute;
+export type FooterMenuTypes = typeof FooterRoute;
