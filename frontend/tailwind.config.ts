@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        playfair: ['"Playfair Display"', "serif"],
+        merriweather: ['"Merriweather"', "serif"],
+      },
       colors: {
         default: "#808274",
         all: "#FFFFFF",
@@ -19,6 +23,8 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-bg-shop-now":
+          "linear-gradient(180deg, #ffffff 75%, #f6f5f5 50%)",
       },
     },
   },
