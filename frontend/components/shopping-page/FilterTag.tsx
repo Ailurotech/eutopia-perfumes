@@ -1,8 +1,8 @@
-import { Button } from "@chakra-ui/button";
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
 import { Dispatch, SetStateAction } from "react";
 import { SelectedFilters } from "@/type";
+import { Button } from "@chakra-ui/react/button";
 
 interface FilterTagProps {
   filter: string;

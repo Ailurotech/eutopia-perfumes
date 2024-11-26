@@ -1,9 +1,11 @@
 import { Inter } from "next/font/google";
+import ProductCard from "../components/ProductCard";
 import HomeBanner from "../components/homepage/HomeBanner";
 import { GetStaticProps } from "next";
 import { sanityClient } from "@/lib/sanityClient";
 import { VideoType } from "@/type";
 import JoinOurFamilyPage from "@/components/homepage/JoinOurFamily";
+import Footer from "@/components/footer/footer";
 const inter = Inter({ subsets: ["latin"] });
 interface HomeProps {
   videos: VideoType[];
@@ -16,6 +18,8 @@ export default function Home({ videos }: HomeProps) {
     >
       <HomeBanner videos={videos} />
       <JoinOurFamilyPage />
+      <Footer />
+
     </main>
   );
 }
