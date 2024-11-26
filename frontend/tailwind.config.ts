@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "footer-gray": "#f6f5f5", // 自定义颜色
         default: "#808274",
         all: "#FFFFFF",
         forHim: "#ECF2F5",
@@ -19,6 +20,11 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+        literata: ["Literata", "serif"],
+        rokkitt: ["Rokkitt", "serif"],
       },
     },
   },
