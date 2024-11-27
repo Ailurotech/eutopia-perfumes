@@ -1,8 +1,8 @@
 import React from "react";
 import { Potta_One } from "next/font/google";
 import Link from "next/link";
-import { HomeBannerItems } from "../../types";
-import { Icon } from "./common/Icon";
+import { HomeBannerItems } from "../../type";
+import { Icon } from "../common/Icon";
 import {
   Box,
   IconButton,
@@ -42,8 +42,8 @@ const HomeBanner = ({ bannerItems }: HomeBannerProps) => {
 
 
   return (
-    <div className="bg-[#F5E1C9] w-screen md:h-[80vh] flex items-center justify-center relative">
-      <Box className="h-[300px] md:h-[600px] w-[90%] md:w-[70%] overflow-hidden p-2">
+    <div className="bg-[#F5E1C9] w-screen md:h-[90vh] flex items-center justify-center relative">
+      <Box className="h-[300px] md:h-[600px] w-[90%] md:w-[70%] overflow-hidden p-4">
         <link
           rel="stylesheet"
           type="text/css"

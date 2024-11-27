@@ -64,3 +64,11 @@ export type SelectedFilters = {
 
 const pages = ["all", "for-her", "for-him", "neutral"] as const;
 export type PageType = (typeof pages)[number];
+
+export interface HomeBannerItems {
+  _id: string;
+  title: string;
+  description: string;
+  slug: string;
+  video: string;
+}
