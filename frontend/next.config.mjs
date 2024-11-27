@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,  
-  output:'export',
+  reactStrictMode: true,
   images: {
-    domains: ['s2.loli.net', 'cdn.sanity.io'], 
-    unoptimized:true
+    domains: ["cdn.sanity.io"],
+    unoptimized: true,
   },
+  output: "export",
 };
 
 export default nextConfig;
