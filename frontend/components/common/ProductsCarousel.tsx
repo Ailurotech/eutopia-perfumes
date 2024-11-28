@@ -85,11 +85,11 @@ export function ProductsCarousel({
           Shop Now
         </Link>
       </div>
-      <div className="relative flex items-center">
+      <div className="relative flex items-center justify-center">
         <button onClick={previous}>
           <Icon name="back" className="text-3xl" />
         </button>
-        <div className="space-x-4 w-full max-w-[28rem] md:max-w-[36rem] lg:max-w-[45rem] xl:max-w-[42rem] 2xl:max-w-[55rem] min-[1600px]:max-w-[70rem]">
+        <div className="h-full space-x-4 w-full max-w-[28rem] md:max-w-[36rem] lg:max-w-[45rem] xl:max-w-[42rem] 2xl:max-w-[55rem] min-[1600px]:max-w-[70rem]">
           <Slider ref={sliderRef} {...settings}>
             {recommendedProducts.map((product, index) => (
               <IndividualProductForProductPage
