@@ -8,9 +8,9 @@ import { DropdownMenu } from "./components/DropdownMenu";
 
 export function ReviewSection() {
   return (
-    <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default space-y-10">
-      <div className="grid grid-cols-3 grid-rows-[auto_auto_auto_auto] gap-y-10">
-        <h1 className="uppercase text-5xl col-span-3 justify-self-center self-center font-black mb-8">
+    <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default space-y-3 lg:space-y-10">
+      <div className="flex flex-col gap-12 justify-center items-center lg:grid lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto] lg:gap-y-10">
+        <h1 className="uppercase text-5xl col-span-3 justify-self-center self-center font-black lg:mb-8">
           REVIEWS
         </h1>
         <SummaryHighLight>
@@ -31,7 +31,7 @@ export function ReviewSection() {
           </div>
         </div>
       </div>
-      <div className="flex justify-between gap-10 shrink grow-0">
+      <div className="flex flex-col lg:flex-row justify-between gap-10 shrink grow-0">
         <ReviewCard name="MOST LIKED POSITIVE" />
         <ReviewCard name="MOST LIKED NEGATIVE" />
       </div>
