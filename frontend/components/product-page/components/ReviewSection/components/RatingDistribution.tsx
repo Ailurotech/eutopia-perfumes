@@ -33,7 +33,7 @@ const finalData = ratingDistributionData.map((data) => {
 
 export function RatingDistribution() {
   return (
-    <div className="flex flex-col justify-between items-center">
+    <div className="flex flex-col justify-center items-center">
       <h2>RATINGS DISTRIBUTION</h2>
       {finalData.map((data, index) => {
         return <RatingDisplay key={index} {...data} />;

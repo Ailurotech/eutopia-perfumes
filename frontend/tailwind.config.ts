@@ -11,6 +11,9 @@ const config: Config = {
       fontFamily: {
         playfair: ['"Playfair Display"', "serif"],
         merriweather: ['"Merriweather"', "serif"],
+        poppins: ["Poppins", "sans-serif"],
+        literata: ["Literata", "serif"],
+        rokkitt: ["Rokkitt", "serif"],
       },
       colors: {
         "footer-gray": "#f6f5f5", // 自定义颜色
@@ -26,11 +29,6 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-bg-shop-now":
           "linear-gradient(180deg, #ffffff 75%, #f6f5f5 50%)",
-      },
-      fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-        literata: ["Literata", "serif"],
-        rokkitt: ["Rokkitt", "serif"],
       },
     },
   },

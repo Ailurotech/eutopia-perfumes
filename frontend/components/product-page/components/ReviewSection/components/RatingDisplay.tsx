@@ -22,7 +22,7 @@ export function RatingDisplay({
           width: "200px",
           height: "14px",
           "& > div": {
-            background: "#000000",
+            background: "#808274",
           },
         }}
       />
