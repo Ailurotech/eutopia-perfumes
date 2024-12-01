@@ -19,7 +19,7 @@ export function ProductPage({
   const category = productPageContent.tag;
   return (
     <>
-      <section className="text-default space-y-10">
+      <section className="text-default mb-20">
         <div className="px-16 xl:pr-24">
           <DetailedProduct detailedProductContent={detailedProductContent} />
         </div>

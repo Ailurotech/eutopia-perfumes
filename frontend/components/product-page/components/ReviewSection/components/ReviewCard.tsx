@@ -28,7 +28,7 @@ export function ReviewCard({ name }: IReviewCardProps) {
   const [spanReview, setSpanReview] = useState<boolean>();
   return (
     <div className="bg-white p-6 rounded-md space-y-2">
-      <h2 className="font-black">{name}REVIEW</h2>
+      <h2 className="font-black">{name} REVIEW</h2>
       <div>
         <div className="float-right mb-5">
           <StarRating starNum={4.7} />

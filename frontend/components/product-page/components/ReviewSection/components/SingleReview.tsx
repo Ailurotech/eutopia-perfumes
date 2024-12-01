@@ -52,7 +52,7 @@ export function SingleReview() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 grid-row-3 md:grid-cols-3 md:grid-rows-2 items-center lg:flex lg:flex-col justify-start min-w-[155px]">
+        <div className="grid grid-cols-2 grid-row-3 md:grid-cols-3 md:grid-rows-2 items-center lg:items-start lg:flex lg:flex-col justify-start min-w-[155px]">
           <p className="space-x-2">
             <span className="font-bold">Posted</span>
             <span>1 month ago</span>

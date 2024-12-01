@@ -13,15 +13,13 @@ export function ReviewSection() {
         <h1 className="uppercase text-5xl col-span-3 justify-self-center self-center font-black lg:mb-8">
           REVIEWS
         </h1>
-        <SummaryHighLight>
-          <h2 className="text-[50px] font-extrabold">4.7</h2>
-          <p>1714 Reviews</p>
+        <SummaryHighLight highlight="4.7" description="1714 Reviews">
           <StarRating starNum={4.7} />
         </SummaryHighLight>
-        <SummaryHighLight>
-          <h2 className="text-[50px] font-extrabold">100%</h2>
-          <p className="text-center">WORLD RECOMMENDED THIS TO A FRIEND</p>
-        </SummaryHighLight>
+        <SummaryHighLight
+          highlight="100%"
+          description="WORLD RECOMMENDED THIS TO A FRIEND"
+        />
         <RatingDistribution />
         <div className="row-start-3 col-span-3 self-center mt-4">
           <div className="flex justify-center gap-8">
