@@ -2,7 +2,7 @@ import {TagIcon} from '@sanity/icons'
 import pluralize from 'pluralize-esm'
 import ProductHiddenInput from '../../components/inputs/ProductHidden'
 import ShopifyDocumentStatus from '../../components/media/ShopifyDocumentStatus'
-import {defineField, defineType, validation} from 'sanity'
+import {defineField, defineType} from 'sanity'
 import {getPriceRange} from '../../utils/getPriceRange'
 import {GROUPS} from '../../constants'
 
@@ -50,17 +50,11 @@ export const productType = defineType({
       group: 'editorial',
     }),
     defineField({
-      name: 'stars',
-      type: 'number',
+      name: 'comments',
+      type: 'array',
+      description: 'customer comments',
       group: 'editorial',
-      validation: (Rule) =>
-        Rule.custom((value) => {
-          if (value === undefined) return true
-          if (value >= 0 && value <= 5 && value * 2 === Math.floor(value * 2)) {
-            return true
-          }
-          return 'The value must be a number between 0 and 5, in increments of 0.5'
-        }),
+      of: [{type: 'customerComments'}],
     }),
     defineField({
       name: 'store',

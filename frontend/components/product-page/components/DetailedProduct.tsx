@@ -15,13 +15,13 @@ const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
 
 interface DetailedProductProps {
-  detailedProductContent: Omit<ProductPageContent, "description">;
+  detailedProductContent: Omit<ProductPageContent, "description" | "comments">;
 }
 
 export function DetailedProduct({
   detailedProductContent,
 }: DetailedProductProps) {
-  const { title, maxPrice, image, tag, stars, weight, productType, sku } =
+  const { title, maxPrice, image, tag, avgStar, weight, productType, sku } =
     detailedProductContent;
   const [quantity, setQuantity] = useState(1);
   const pathName = covertPageToPathName(tag);
@@ -62,7 +62,7 @@ export function DetailedProduct({
             </span>
           </div>
           <span className="flex gap-3">
-            <StarRating starNum={stars} />
+            <StarRating starNum={avgStar} />
             <Link href="/product" className="underline text-lg 2xl:text-xl">
               Read Review
             </Link>

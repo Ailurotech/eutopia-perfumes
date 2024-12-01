@@ -1,5 +1,5 @@
 interface ISummaryHighLightProps {
-  highlight: string;
+  highlight: number | string;
   description: string;
   children?: React.ReactNode;
 }

@@ -11,9 +11,23 @@ interface BasicProductType {
   sku: number;
 }
 
-export type ProductPageContent = BasicProductType & {
-  stars: number;
+export type TCommentType = {
+  createdAt: string;
+  isVerified: boolean;
+  reviewedAt: string;
+  comment: string;
+  commenter: string;
+  starRating: number;
+  title: string;
+  commentFrom: string;
 };
+
+export type TProductPageExtraContent = {
+  comments: TCommentType[];
+  avgStar: number;
+};
+
+export type ProductPageContent = BasicProductType & TProductPageExtraContent;
 
 export interface RecommendedProducts {
   title: string;
@@ -64,3 +78,19 @@ export type SelectedFilters = {
 
 const pages = ["all", "for-her", "for-him", "neutral"] as const;
 export type PageType = (typeof pages)[number];
+
+export enum ERatingOption {
+  OneStar = "1 star",
+  TwoStar = "2 stars",
+  ThreeStar = "3 stars",
+  FourStar = "4 stars",
+  FiveStar = "5 stars",
+}
+type TRating = (typeof ERatingOption)[keyof typeof ERatingOption];
+type TRatingProps = {
+  starAmount: number;
+  starValue: number;
+};
+export type TRatingDistribution = {
+  [key in TRating]: TRatingProps;
+};

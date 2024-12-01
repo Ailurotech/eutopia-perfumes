@@ -14,7 +14,8 @@ export function ProductPage({
   productPageContent,
   recommendedProducts,
 }: ProductPageProps) {
-  const { description, ...detailedProductContent } = productPageContent;
+  const { description, comments, ...detailedProductContent } =
+    productPageContent;
   const parsedDescription = descriptionFormat(description);
   const category = productPageContent.tag;
   return (
@@ -37,7 +38,10 @@ export function ProductPage({
           />
         </div>
       </section>
-      <ReviewSection />
+      <ReviewSection
+        comments={comments}
+        avgStar={detailedProductContent.avgStar}
+      />
     </>
   );
 }
