@@ -7,28 +7,7 @@ function calPercentage(rate: number, total: number) {
 export function ratingDistributionFormat(
   comments: TCommentType[]
 ): TRatingDistribution {
-  const res = {
-    [ERatingOption.OneStar]: {
-      starAmount: 0,
-      starValue: 0,
-    },
-    [ERatingOption.TwoStar]: {
-      starAmount: 0,
-      starValue: 0,
-    },
-    [ERatingOption.ThreeStar]: {
-      starAmount: 0,
-      starValue: 0,
-    },
-    [ERatingOption.FiveStar]: {
-      starAmount: 0,
-      starValue: 0,
-    },
-    [ERatingOption.FourStar]: {
-      starAmount: 0,
-      starValue: 0,
-    },
-  };
+  const res = {} as TRatingDistribution;
   const totalComments = comments.length;
   const totalRating = Object.keys(ERatingOption).length;
   const ratingSummary = comments.reduce((acc, comment) => {

@@ -5,18 +5,24 @@ import { ReviewCard } from "./components/ReviewCard";
 import { SingleReview } from "./components/SingleReview";
 import { SummaryHighLight } from "./components/SummaryHighLight";
 import { DropdownMenu } from "./components/DropdownMenu";
-import { TProductPageExtraContent } from "@/type";
+import { EReviewFilterOption, TProductPageExtraContent } from "@/type";
 import { ratingDistributionFormat } from "@/utils/rating-distribution-format";
 import { useEffect, useState } from "react";
 
 export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
   const totalReviews = comments.length;
+  const sortedComments = comments.sort((a, b) => b.starRating - a.starRating);
   const ratingDistribution = ratingDistributionFormat(comments);
-  const [displayComments, setDisplayComments] = useState(comments);
+  const filters = [
+    EReviewFilterOption.MOST_RECENT,
+    EReviewFilterOption.MOST_OLDEST,
+  ];
   const TOTAL_DISPLAY_COMMENTS = 5;
+  const [displayComments, setDisplayComments] = useState(comments);
+
   return (
-    <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default space-y-3 lg:space-y-10">
-      <div className="flex flex-col gap-12 justify-center items-center lg:grid lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto] lg:gap-y-10">
+    <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default">
+      <div className="flex flex-col gap-8 justify-center items-center lg:grid lg:grid-cols-3 lg:grid-rows-[auto_auto] lg:gap-y-10">
         <h1 className="uppercase text-5xl col-span-3 justify-self-center self-center font-black lg:mb-8">
           REVIEWS
         </h1>
@@ -31,22 +37,24 @@ export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
           description="WORLD RECOMMENDED THIS TO A FRIEND"
         />
         <RatingDistribution ratingDistribution={ratingDistribution} />
-        <div className="row-start-3 col-span-3 self-center mt-4">
-          <div className="flex justify-center gap-8">
-            <Metrics name="Longevity" starNum={avgStar} />
-            <Metrics name="Quality" starNum={avgStar} />
-            <Metrics name="Value" starNum={avgStar} />
-          </div>
-        </div>
       </div>
-      <div className="flex flex-col lg:flex-row justify-between gap-10 shrink grow-0">
-        <ReviewCard name="MOST LIKED POSITIVE" />
-        <ReviewCard name="MOST LIKED NEGATIVE" />
+      <div className="my-10 lg:my-16 flex justify-center gap-8 items-center w-full">
+        <Metrics name="Longevity" starNum={avgStar} />
+        <Metrics name="Quality" starNum={avgStar} />
+        <Metrics name="Value" starNum={avgStar} />
       </div>
-      <div className="flex flex-col items-end gap-4">
+      <div className="flex flex-col lg:flex-row justify-between gap-10">
+        <ReviewCard name="MOST LIKED POSITIVE" comment={sortedComments[0]} />
+        <ReviewCard
+          name="MOST LIKED NEGATIVE"
+          comment={sortedComments[sortedComments.length - 1]}
+        />
+      </div>
+      <div className="flex flex-col items-end gap-4 my-6">
         <DropdownMenu
           menuTitle="Sort by"
-          menuItems={["Most Recent", "Most Oldest"]}
+          menuItems={filters}
+          setDisplayComments={setDisplayComments}
         />
         <div className="flex flex-col w-full">
           {displayComments

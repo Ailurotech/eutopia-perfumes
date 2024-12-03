@@ -1,50 +1,49 @@
 import { useEffect, useState } from "react";
 import { StarRating } from "../../StarRating";
 import { Icon } from "@/components/common/Icon";
+import { TCommentType } from "@/type";
+import { ReviewExpandButton } from "./ReviewExpandButton";
 
 interface IReviewCardProps {
   name: "MOST LIKED POSITIVE" | "MOST LIKED NEGATIVE";
+  comment: TCommentType;
 }
+const MAX_LENGTH = 350;
 
-const mockData = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dolore,
-          asperiores officia dicta error expedita accusamus molestiae nulla
-          minima dolores ex, facilis commodi non ad repudiandae quo explicabo
-          neque! Ratione! Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Suscipit magni nesciunt aliquid, nisi provident dolorum quis
-          alias quibusdam libero optio hic voluptate vitae odio exercitationem
-          ea! Quaerat, totam laboriosam. Modi! Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dolore,
-          asperiores officia dicta error expedita accusamus molestiae nulla
-          minima dolores ex, facilis commodi non ad repudiandae quo explicabo
-          neque! Ratione!`;
-
-const MAX_LENGTH = 450;
-
-export function ReviewCard({ name }: IReviewCardProps) {
+export function ReviewCard({ name, comment }: IReviewCardProps) {
   useEffect(() => {
-    if (mockData.length > MAX_LENGTH) {
-      setSpanReview(false);
+    if (comment.comment.length > MAX_LENGTH) {
+      setExpandReview(false);
     }
   }, []);
-  const [spanReview, setSpanReview] = useState<boolean>();
+  const [expandReview, setExpandReview] = useState<boolean>(true);
   return (
     <div className="bg-white p-6 rounded-md space-y-2">
       <h2 className="font-black">{name} REVIEW</h2>
       <div>
         <div className="float-right mb-5">
-          <StarRating starNum={4.7} />
+          <StarRating starNum={comment.starRating} />
         </div>
         <p className="max-w-[900px]">
-          {!spanReview ? `${mockData.slice(0, MAX_LENGTH)}...` : mockData}
+          {!expandReview
+            ? `${comment.comment.slice(0, MAX_LENGTH)}...`
+            : comment.comment}
         </p>
       </div>
-      <button
-        className="flex items-center"
-        onClick={() => {
-          setSpanReview(!spanReview);
-        }}
-      >
-        Read complete review <Icon name="arrowDown" />
-      </button>
+      {!expandReview && (
+        <ReviewExpandButton
+          buttonName="Read complete review"
+          expandReview={expandReview}
+          setExpandReview={setExpandReview}
+        />
+      )}
+      {expandReview && (
+        <ReviewExpandButton
+          buttonName="Close review"
+          expandReview={expandReview}
+          setExpandReview={setExpandReview}
+        />
+      )}
     </div>
   );
 }

@@ -8,8 +8,8 @@ import {
 } from "@chakra-ui/react";
 import clsx from "clsx";
 import { Poppins } from "next/font/google";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { FilterLists, FilterListTitle, SelectedFilters } from "@/type";
+import { Dispatch, SetStateAction } from "react";
+import { ERatingOption, EReviewFilterOption, TCommentType } from "@/type";
 import { Icon } from "@/components/common/Icon";
 
 const poppins = Poppins({
@@ -20,18 +20,14 @@ const poppins = Poppins({
 interface DropdownMenuProps {
   menuTitle: string;
   menuItems: string[];
-  setSelectedFilters?: Dispatch<SetStateAction<SelectedFilters[]>>;
-  selectedFilters?: SelectedFilters[];
+  setDisplayComments: Dispatch<SetStateAction<TCommentType[]>>;
 }
 
 export function DropdownMenu({
   menuTitle,
   menuItems,
-  setSelectedFilters,
-  selectedFilters,
+  setDisplayComments,
 }: DropdownMenuProps) {
-  const [value, setValue] = useState<FilterLists>([]);
-
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
@@ -47,7 +43,33 @@ export function DropdownMenu({
         {menuTitle}
       </MenuButton>
       <MenuList>
-        <MenuOptionGroup type="radio">
+        <MenuOptionGroup
+          type="radio"
+          onChange={(value) => {
+            switch (value) {
+              case EReviewFilterOption.MOST_RECENT:
+                setDisplayComments((prev) => [
+                  ...prev.sort(
+                    (a, b) =>
+                      new Date(b.createdAt).getTime() -
+                      new Date(a.createdAt).getTime()
+                  ),
+                ]);
+                break;
+              case EReviewFilterOption.MOST_OLDEST:
+                setDisplayComments((prev) => [
+                  ...prev.sort(
+                    (a, b) =>
+                      new Date(a.createdAt).getTime() -
+                      new Date(b.createdAt).getTime()
+                  ),
+                ]);
+                break;
+              default:
+                break;
+            }
+          }}
+        >
           {menuItems.map((item, index) => (
             <MenuItemOption key={index} value={item}>
               {item}

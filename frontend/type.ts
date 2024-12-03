@@ -94,3 +94,8 @@ type TRatingProps = {
 export type TRatingDistribution = {
   [key in TRating]: TRatingProps;
 };
+
+export enum EReviewFilterOption {
+  MOST_RECENT = "Most Recent",
+  MOST_OLDEST = "Most Oldest",
+}
