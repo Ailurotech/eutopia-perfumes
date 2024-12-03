@@ -9,7 +9,7 @@ import {
 import clsx from "clsx";
 import { Poppins } from "next/font/google";
 import { Dispatch, SetStateAction } from "react";
-import { ERatingOption, EReviewFilterOption, TCommentType } from "@/type";
+import { EReviewFilterOption, TCommentType } from "@/type";
 import { Icon } from "@/components/common/Icon";
 
 const poppins = Poppins({

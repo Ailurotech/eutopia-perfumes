@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { StarRating } from "../../StarRating";
-import { Icon } from "@/components/common/Icon";
 import { TCommentType } from "@/type";
 import { ReviewExpandButton } from "./ReviewExpandButton";
 

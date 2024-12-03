@@ -3,6 +3,7 @@ import { StarRating } from "../../StarRating";
 import { Icon } from "@/components/common/Icon";
 import { TCommentType } from "@/type";
 import { postDateFormat } from "@/utils/post-date-format";
+import { ReviewDetails } from "./ReviewDetails";
 
 interface IReviewCardProps {
   comment: TCommentType;
@@ -59,18 +60,9 @@ export function SingleReview({ comment }: IReviewCardProps) {
           </div>
         </div>
         <div className="grid grid-cols-2 grid-row-3 md:grid-cols-3 md:grid-rows-2 items-center lg:items-start lg:flex lg:flex-col justify-start min-w-[180px]">
-          <p className="space-x-2">
-            <span className="font-bold">Posted</span>
-            <span>{date}</span>
-          </p>
-          <p className="space-x-2">
-            <span className="font-bold">Name</span>
-            <span>{comment.commenter}</span>
-          </p>
-          <p className="space-x-2">
-            <span className="font-bold">From</span>
-            <span>{comment.commentFrom}</span>
-          </p>
+          <ReviewDetails title="Posted" detail={date} />
+          <ReviewDetails title="Name" detail={comment.commenter} />
+          <ReviewDetails title="From" detail={comment.commentFrom} />
           <div className="flex items-center gap-2">
             {isVerified && (
               <>
@@ -79,7 +71,7 @@ export function SingleReview({ comment }: IReviewCardProps) {
               </>
             )}
           </div>
-          <div className="flex md:flex-col gap-2 items-center md:items-start md:gap-0">
+          <div className="flex lg:flex-col gap-2 items-center lg:items-start lg:gap-0">
             <p className="font-bold">Reviewed at</p>
             <p className="text-sm">{comment.reviewedAt}</p>
           </div>

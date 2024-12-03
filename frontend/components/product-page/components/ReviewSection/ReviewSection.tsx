@@ -7,7 +7,7 @@ import { SummaryHighLight } from "./components/SummaryHighLight";
 import { DropdownMenu } from "./components/DropdownMenu";
 import { EReviewFilterOption, TProductPageExtraContent } from "@/type";
 import { ratingDistributionFormat } from "@/utils/rating-distribution-format";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
   const totalReviews = comments.length;
