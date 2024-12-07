@@ -6,6 +6,7 @@ import {collectionGroupType} from './objects/collection/collectionGroupType'
 import {collectionLinksType} from './objects/collection/collectionLinksType'
 import {collectionReferenceType} from './objects/module/collectionReferenceType'
 import {collectionRuleType} from './objects/shopify/collectionRuleType'
+import {customCommentType} from './objects/customProductOption/customComment'
 import {customProductOptionColorObjectType} from './objects/customProductOption/customProductOptionColorObjectType'
 import {customProductOptionColorType} from './objects/customProductOption/customProductOptionColorType'
 import {customProductOptionSizeObjectType} from './objects/customProductOption/customProductOptionSizeObjectType'
@@ -53,6 +54,7 @@ const objects = [
   collectionLinksType,
   collectionReferenceType,
   collectionRuleType,
+  customCommentType,
   customProductOptionColorObjectType,
   customProductOptionColorType,
   customProductOptionSizeObjectType,

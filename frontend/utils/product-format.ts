@@ -25,11 +25,19 @@ function setDefaultValues<T extends ProductPageContent | ProductType>(
       inspiredBy: product.inspiredBy ?? "default",
       title: product.title ?? "Untitled",
     };
-    if ("stars" in product) {
+    if ("comments" in product) {
+      const avgStar =
+        (
+          product.comments.reduce(
+            (acc, comment) => (acc += comment.starRating),
+            0
+          ) / product.comments.length
+        ).toFixed(1) ?? 0;
       return {
         ...product,
         ...defaultProductValues,
-        stars: product.stars ?? 0,
+        stars: product.comments ?? [],
+        avgStar,
       };
     }
     return {

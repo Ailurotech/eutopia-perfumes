@@ -8,7 +8,7 @@ export function productPageQuery(id: number) {
             "productType":store.options[0].values[0],
             "inspiredBy":store.options[1].values[0],
             "description": store.descriptionHtml,
-            stars
+            comments
             }
         `;
 }

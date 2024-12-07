@@ -9,18 +9,12 @@ import {
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const { Button, Drawer, Input, NumberInput, Menu, Checkbox, Radio } =
-    chakraTheme.components;
+  const { Button, ...components } = chakraTheme.components;
 
   const theme = extendBaseTheme({
     components: {
       Button: buttonTheme,
-      Drawer,
-      Input,
-      NumberInput,
-      Menu,
-      Checkbox,
-      Radio,
+      ...components,
     },
   });
   return (

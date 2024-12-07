@@ -1,8 +1,8 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React from "react";
+import { useRouter } from "next/router";
 
 interface ProductCardProps {
-  slug: string; 
+  slug: string;
   image: string;
   title: string;
   description: string;
@@ -10,24 +10,32 @@ interface ProductCardProps {
   onAddToCart: () => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ slug, image, title, description, price, onAddToCart }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  slug,
+  image,
+  title,
+  description,
+  price,
+  onAddToCart,
+}) => {
   const router = useRouter();
 
   return (
     <div className="relative group">
-      <img 
-        className="w-[230px] h-[300px] bg-white rounded-[20px] object-cover cursor-pointer group-hover:opacity-75 transition-opacity" 
-        src={`/images/${image}`}  
-        alt={title} 
-        onClick={() => router.push(`/product/${slug}`)} 
+      <img
+        className="w-[230px] h-[300px] bg-white rounded-[20px] object-cover cursor-pointer group-hover:opacity-75 transition-opacity"
+        src={`/images/${image}`}
+        alt={title}
+        onClick={() => router.push(`/product/${slug}`)}
       />
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-        <button 
+        <button
           onClick={(e) => {
-            e.stopPropagation(); 
+            e.stopPropagation();
             onAddToCart();
-          }} 
-          className="absolute top-[150px] left-[29px] w-[189px] h-[36px] bg-[#E0E0E0] text-[#808274] border-2 border-[#808274] rounded-[10px] p-0 opacity-0 group-hover:opacity-100 flex items-center justify-center">
+          }}
+          className="absolute top-[150px] left-[29px] w-[189px] h-[36px] bg-[#E0E0E0] text-[#808274] border-2 border-[#808274] rounded-[10px] p-0 opacity-0 group-hover:opacity-100 flex items-center justify-center"
+        >
           Add to Cart
         </button>
       </div>
