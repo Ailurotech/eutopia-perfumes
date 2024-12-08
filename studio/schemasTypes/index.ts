@@ -102,8 +102,9 @@ const documents = [collectionType, colorThemeType, pageType, productType, produc
 
 import {homeType} from './singletons/homeType'
 import {settingsType} from './singletons/settingsType'
+import aboutUs from './singletons/aboutUsType'
 
-const singletons = [homeType, settingsType]
+const singletons = [homeType, settingsType, aboutUs]
 
 import richText from './customized/richText'
 import videos from './customized/videos'

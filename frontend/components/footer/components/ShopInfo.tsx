@@ -17,12 +17,12 @@ export function ShopInfo() {
         Home
       </Link>
       <Link
-        href={FooterRoute.AboutUs.Path}
+        href={FooterRoute.Story.Path}
         sx={{
           ...footerTheme.baseStyle?.link,
         }}
       >
-        About Us
+        Story
       </Link>
       <Link
         href={FooterRoute.StoreLocation.Path}

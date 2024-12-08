@@ -7,6 +7,7 @@ import {
   ChakraProvider,
 } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
+import Footer from "@/components/footer/footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   const { Button, ...components } = chakraTheme.components;
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </main>
       </Navigation>
+      <Footer />
     </ChakraProvider>
   );
 }

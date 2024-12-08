@@ -161,7 +161,7 @@ export const NavigationRoute = {
 };
 
 export const FooterRoute = {
-  AboutUs,
+  Story,
   StoreLocation,
   Privacy,
   FAQ,

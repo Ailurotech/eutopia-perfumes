@@ -25,12 +25,10 @@ export default defineType({
       type: 'text',
     }),
     defineField({
-      name: 'videoFile',
-      title: 'Video File',
-      type: 'file',
-      options: {
-        accept: 'video/mp4,video/x-m4v,video/*',
-      },
+      name: 'video',
+      title: 'Video URL',
+      type: 'url',
+      description: 'Enter the URL of the video (e.g., from a CDN or hosting service)',
     }),
   ],
 })

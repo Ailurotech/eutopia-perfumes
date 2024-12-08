@@ -18,8 +18,6 @@ export default function Home({ videos }: HomeProps) {
     >
       <HomeBanner videos={videos} />
       <JoinOurFamilyPage />
-      <Footer />
-
     </main>
   );
 }
