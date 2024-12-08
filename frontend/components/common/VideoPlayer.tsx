@@ -27,19 +27,36 @@ const videoVariants = cva("relative w-full", {
 });
 
 export function VideoPlayer({ video, page, linkPath }: VideoPlayerProps) {
+  if (!video?.video) {
+    return null;
+  }
+
+  const videoUrl = video.video.includes("?")
+    ? `${video.video}&autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&iv_load_policy=3&playlist=${video.video.split("/").pop()}`
+    : `${video.video}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&iv_load_policy=3&playlist=${video.video.split("/").pop()}`;
+
   return (
     <div>
       <div className={videoVariants({ page })}>
-        <video className="w-full h-full object-cover" autoPlay muted loop>
-          <source src={video.video} type="video/mp4" />
-        </video>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl text-center flex flex-col gap-2 md:gap-16">
+        <iframe
+          src={videoUrl}
+          className="w-full h-full object-cover aspect-[4/3] md:aspect-[16/9]"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          frameBorder="0"
+          loading="eager"
+          style={{
+            border: "none",
+            pointerEvents: "none",
+          }}
+        />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-xl text-center flex flex-col gap-2 md:gap-16 pointer-events-none">
           <h1 className={`${pattaOne.className} text-base md:text-3xl`}>
             {video.title}
           </h1>
           <Link
             href={linkPath}
-            className="text-sm md:text-base lg:text-lg underline"
+            className="text-sm md:text-base lg:text-lg underline pointer-events-auto"
           >
             {video.description}
           </Link>

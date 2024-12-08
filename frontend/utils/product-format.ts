@@ -28,10 +28,10 @@ function setDefaultValues<T extends ProductPageContent | ProductType>(
     if ("comments" in product) {
       const avgStar =
         (
-          product.comments.reduce(
+          product.comments?.reduce(
             (acc, comment) => (acc += comment.starRating),
             0
-          ) / product.comments.length
+          ) / product.comments?.length
         ).toFixed(1) ?? 0;
       return {
         ...product,

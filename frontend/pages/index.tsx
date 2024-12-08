@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps = async () => {
       title,
       "slug": slug.current,
       description,
-      "video": videoFile.asset->url
+      video
     }
   `;
 

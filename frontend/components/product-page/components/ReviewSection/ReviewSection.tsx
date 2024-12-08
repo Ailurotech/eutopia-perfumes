@@ -10,8 +10,22 @@ import { ratingDistributionFormat } from "@/utils/rating-distribution-format";
 import { useState } from "react";
 
 export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
-  const totalReviews = comments.length;
-  const sortedComments = comments.sort((a, b) => b.starRating - a.starRating);
+  if (!comments || comments.length === 0) {
+    return (
+      <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default">
+        <div className="flex flex-col items-center justify-center min-h-[200px]">
+          <h1 className="uppercase text-5xl font-black mb-4">REVIEWS</h1>
+          <p className="text-lg text-gray-600">
+            There are no reviews at the moment.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  const sortedComments = [...comments].sort(
+    (a, b) => b.starRating - a.starRating
+  );
   const ratingDistribution = ratingDistributionFormat(comments);
   const filters = [
     EReviewFilterOption.MOST_RECENT,
@@ -28,7 +42,7 @@ export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
         </h1>
         <SummaryHighLight
           highlight={avgStar}
-          description={`${totalReviews} Reviews`}
+          description={`${comments.length} Reviews`}
         >
           <StarRating starNum={avgStar} />
         </SummaryHighLight>
