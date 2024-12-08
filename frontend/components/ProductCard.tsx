@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 interface ProductCardProps {
   slug: string;
@@ -22,10 +23,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className="relative group">
-      <img
-        className="w-[230px] h-[300px] bg-white rounded-[20px] object-cover cursor-pointer group-hover:opacity-75 transition-opacity"
-        src={`/images/${image}`}
+      <Image
+        src={image}
         alt={title}
+        width={500}
+        height={500}
+        className="w-full h-full object-cover"
+        priority={false}
+        quality={75}
         onClick={() => router.push(`/product/${slug}`)}
       />
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">

@@ -7,7 +7,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { PageSettingType, ProductType, SelectedFilters } from "@/type";
 import { useFilter } from "@/hooks/usefilter";
 import { usePagination } from "@/hooks/usePagination";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 export type ShoppingDisplayVariants = VariantProps<
   typeof shoppingDisplayVariants
@@ -33,7 +33,7 @@ export function ShoppingDisplay({
   products,
   pageSetting,
 }: ShoppingDisplayProps) {
-  const { filterProcessor, filterLists } = useFilter(pageSetting);
+  const { filterLists } = useFilter(pageSetting);
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>([]);
   const [filteredProducts, setFilteredProducts] =
     useState<ProductType[]>(products);
@@ -42,15 +42,34 @@ export function ShoppingDisplay({
       filteredProducts,
     });
 
+  const filterProcessor = useCallback(
+    () => {
+      // Your filter logic here
+    },
+    [
+      /* dependencies */
+    ]
+  );
+
   useEffect(() => {
-    selectedFilters.length > 0
-      ? setFilteredProducts(filterProcessor(products, selectedFilters))
-      : setFilteredProducts(products);
-  }, [selectedFilters, products]);
+    filterProcessor();
+  }, [filterProcessor]);
+
+  useEffect(() => {
+    if (selectedFilters.length > 0) {
+      const filtered = filterProcessor();
+      setFilteredProducts((filtered as unknown as ProductType[]) ?? products);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [selectedFilters, products, filterProcessor]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [filteredProducts, setCurrentPage]);
+  useEffect(() => {
+    filterProcessor();
+  }, [filterProcessor, products, selectedFilters]);
 
   return (
     <div

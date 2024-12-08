@@ -10,11 +10,12 @@ interface IReviewCardProps {
 const MAX_LENGTH = 350;
 
 export function ReviewCard({ name, comment }: IReviewCardProps) {
+  const [isLongComment, setIsLongComment] = useState<boolean>(false);
   useEffect(() => {
-    if (comment.comment.length > MAX_LENGTH) {
-      setExpandReview(false);
+    if (comment?.comment) {
+      setIsLongComment(comment.comment.length > MAX_LENGTH);
     }
-  }, []);
+  }, [comment?.comment]);
   const [expandReview, setExpandReview] = useState<boolean>(true);
   return (
     <div className="bg-white p-6 rounded-md space-y-2">
@@ -45,4 +46,7 @@ export function ReviewCard({ name, comment }: IReviewCardProps) {
       )}
     </div>
   );
+}
+function setIsLongComment(arg0: boolean) {
+  throw new Error("Function not implemented.");
 }

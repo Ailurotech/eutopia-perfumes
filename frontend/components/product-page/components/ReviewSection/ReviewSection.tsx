@@ -7,9 +7,17 @@ import { SummaryHighLight } from "./components/SummaryHighLight";
 import { DropdownMenu } from "./components/DropdownMenu";
 import { EReviewFilterOption, TProductPageExtraContent } from "@/type";
 import { ratingDistributionFormat } from "@/utils/rating-distribution-format";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
+  const [displayComments, setDisplayComments] = useState([]);
+
+  useEffect(() => {
+    if (comments) {
+      setDisplayComments(comments);
+    }
+  }, [comments]);
+
   if (!comments || comments.length === 0) {
     return (
       <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default">
@@ -32,7 +40,6 @@ export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
     EReviewFilterOption.MOST_OLDEST,
   ];
   const TOTAL_DISPLAY_COMMENTS = 5;
-  const [displayComments, setDisplayComments] = useState(comments);
 
   return (
     <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default">
