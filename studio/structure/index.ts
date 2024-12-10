@@ -7,6 +7,7 @@ import pages from './pageStructure'
 import products from './productStructure'
 import settings from './settingStructure'
 import aboutUs from './aboutUsStructure'
+import wysiwygPages from './wysiwygPageStructure'
 
 /**
  * Structure overrides
@@ -48,6 +49,7 @@ export const structure: StructureResolver = (S, context: ConfigContext) =>
     .items([
       home(S, context),
       pages(S, context),
+      wysiwygPages(S, context),
       aboutUs(S, context),
       S.divider(),
       collections(S, context),

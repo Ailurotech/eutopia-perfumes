@@ -97,8 +97,9 @@ import {colorThemeType} from './documents/colorTheme'
 import {pageType} from './documents/page'
 import {productType} from './documents/product'
 import {productVariantType} from './documents/productVariant'
+import {wysiwygPageType} from './documents/wysiwygPage'
 
-const documents = [collectionType, colorThemeType, pageType, productType, productVariantType]
+const documents = [collectionType, colorThemeType, pageType, productType, productVariantType, wysiwygPageType]
 
 import {homeType} from './singletons/homeType'
 import {settingsType} from './singletons/settingsType'
@@ -118,5 +119,5 @@ export const schemaTypes = [
   ...objects,
   ...blocks,
   ...documents,
-  ...customized,
+  ...customized
 ]

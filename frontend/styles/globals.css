@@ -3,3 +3,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Add these styles to handle image positioning */
+.prose figure {
+  /* Clear floats after floating images */
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+/* Ensure text wraps around floated images */
+.prose p {
+  overflow: hidden;
+}
