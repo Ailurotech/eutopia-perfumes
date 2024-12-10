@@ -29,6 +29,7 @@ type NavigationMenuProps = {
   iconPosition?: "left" | "right";
   iconName?: Icon;
   direction: "vertical" | "horizontal";
+  href?: string;
 } & NavigationMenuVariants;
 
 export function NavigationMenu({
@@ -36,14 +37,15 @@ export function NavigationMenu({
   iconPosition,
   iconName,
   direction,
+  href,
 }: NavigationMenuProps) {
   const NavigationButton = (
-    <button>
+    <Link href={href || "#"}>
       <Icon
         name={iconName!}
         className="md:text-[20px] lg:text-[30px] xl:text-[40px]"
       />
-    </button>
+    </Link>
   );
 
   return (

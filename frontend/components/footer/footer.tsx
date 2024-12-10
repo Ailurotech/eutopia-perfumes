@@ -7,14 +7,14 @@ import { LogoAndPartners } from "./components/LogoAndPartners";
 
 const Footer = () => {
   return (
-    <div className="w-full bg-footer-gray p-4 flex flex-col lg:flex-row justify-between">
+    <footer className="w-full bg-footer-gray p-4 flex flex-col lg:flex-row justify-between">
       <div className="flex-1 flex justify-center text-center mt-[calc(10%)] order-1 lg:order-none">
         <Categories />
         <ShopInfo />
       </div>
       <LogoAndPartners />
       <Support />
-    </div>
+    </footer>
   );
 };
 
