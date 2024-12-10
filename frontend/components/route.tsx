@@ -155,16 +155,6 @@ const FRR = {
   ),
 };
 
-const Cart = {
-  Path: "/cart",
-  Name: "Cart",
-  Link: ({ children, className }: LinkProps) => (
-    <Link href={Cart.Path} className={className}>
-      {children}
-    </Link>
-  ),
-};
-
 export const RoutRoute = {
   Rout,
 };
@@ -187,10 +177,6 @@ export const FooterRoute = {
   FAQ,
   FRR,
   Terms,
-};
-
-export const NavigationExtraRoute = {
-  Cart,
 };
 
 export type NavigationMenuTypes = typeof NavigationRoute;

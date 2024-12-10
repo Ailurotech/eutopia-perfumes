@@ -1,4 +1,4 @@
-import { NavigationExtraRoute, NavigationRoute, RoutRoute } from "../../route";
+import { NavigationRoute, RoutRoute } from "../../route";
 import { NavigationMenu } from "./NavigationMenu";
 import { Playfair_Display } from "next/font/google";
 import clsx from "clsx";
@@ -46,7 +46,6 @@ export default function Navigation() {
             iconName="shoppingBag"
             iconPosition="right"
             direction="horizontal"
-            href={NavigationExtraRoute.Cart.Path}
           />
         </nav>
       </header>
