@@ -125,6 +125,16 @@ const Privacy = {
   ),
 };
 
+const Terms = {
+  Path: "/terms",
+  Name: "Terms",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={Terms.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
 const FAQ = {
   Path: "/faq",
   Name: "FAQ",
@@ -166,6 +176,7 @@ export const FooterRoute = {
   Privacy,
   FAQ,
   FRR,
+  Terms,
 };
 
 export type NavigationMenuTypes = typeof NavigationRoute;

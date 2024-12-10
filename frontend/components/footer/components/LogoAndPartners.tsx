@@ -19,7 +19,7 @@ export function LogoAndPartners() {
         </Link>
         <Text sx={footerTheme.baseStyle?.text}>|</Text>
         <Link
-          href={FooterRoute.Privacy.Path}
+          href={FooterRoute.Terms.Path}
           sx={{
             ...footerTheme.baseStyle?.link,
           }}

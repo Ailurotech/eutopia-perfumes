@@ -32,8 +32,8 @@ export function VideoPlayer({ video, page, linkPath }: VideoPlayerProps) {
   }
 
   const videoUrl = video.video.includes("?")
-    ? `${video.video}&autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&iv_load_policy=3&playlist=${video.video.split("/").pop()}`
-    : `${video.video}?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&iv_load_policy=3&playlist=${video.video.split("/").pop()}`;
+    ? `${video.video}&autoplay=1&controls=0&mute=1&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&iv_load_policy=3&playlist=${video.video.split("/").pop()}`
+    : `${video.video}?autoplay=1&mute=1controls=0&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&iv_load_policy=3&playlist=${video.video.split("/").pop()}`;
 
   return (
     <div>
