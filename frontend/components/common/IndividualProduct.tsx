@@ -34,7 +34,7 @@ export function IndividualProductForShoppingPage({
   }
 
   return (
-    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between">
+    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between cursor-pointer">
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image
           src={image}
