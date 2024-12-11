@@ -30,11 +30,6 @@ const config: Config = {
         "gradient-bg-shop-now":
           "linear-gradient(180deg, #ffffff 75%, #f6f5f5 50%)",
       },
-      fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        literata: ['Literata', 'serif'],
-        rokkitt: ['Rokkitt', 'serif'],
-      },
     },
   },
   plugins: [],

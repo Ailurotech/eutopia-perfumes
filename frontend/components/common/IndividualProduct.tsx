@@ -7,7 +7,7 @@ import {
   ISingleProductForLocalStorage,
   ProductType,
 } from "@/type";
-import { storeProductToLocal } from "@/utils/stor-product-to-local";
+import { storeProductToLocal } from "@/utils/local-storage-for-product";
 interface IndividualProductProps {
   image: string;
   tag: string;
