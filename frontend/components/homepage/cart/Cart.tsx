@@ -81,17 +81,19 @@ export function Cart() {
               <p className="text-sm">{`You have ${totalItems} ${totalItems <= 1 ? "item" : "items"} in your cart`}</p>
             </div>
             <div className="flex flex-col gap-4 w-full">
-              {Object.values(cart).map((item, index) => (
-                <IndividualProductCard
-                  key={index}
-                  item={item}
-                  setCart={setCart}
-                />
-              ))}
+              {totalItems > 0 &&
+                Object.values(cart).map((item, index) => (
+                  <IndividualProductCard
+                    key={index}
+                    item={item}
+                    setCart={setCart}
+                  />
+                ))}
             </div>
             <button
               type="button"
-              className="px-16 py-3 bg-default text-white rounded-lg font-poppins text-sm font-bold"
+              className="px-16 py-3 bg-default text-white rounded-lg font-poppins text-sm font-bold disabled:bg-gray-400 disabled:cursor-not-allowed"
+              disabled={totalItems === 0}
             >
               CHECK OUT
             </button>
