@@ -22,6 +22,10 @@ export function Cart() {
   const [cart, setCart] = useState<ILocalStorage>({});
   const { isOpen, onOpen, onClose } = useDisclosure();
   const totalItems = Object.keys(cart).length;
+  const totalQuantity = Object.values(cart).reduce(
+    (acc, item) => (acc += item.quantity),
+    0
+  );
   useEffect(() => {
     setCart(getProductsFromLocal());
     const handleStorageChange = (e: StorageEvent) => {
@@ -47,12 +51,12 @@ export function Cart() {
           />
           <div
             className={clsx(
-              "w-[15px] h-[15px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px]",
+              "w-[18px] h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[25px] xl:h-[25px]",
               "rounded-full bg-red-400 absolute font-bold text-[8px] lg:text-[10px] xl:text-xs flex justify-center items-center text-white",
-              "top-0 right-0 translate-x-1/4 -translate-y-1/4"
+              "top-0 right-0 lg:translate-x-1/4 lg:-translate-y-1/4 translate-x-1/2 -translate-y-1/2"
             )}
           >
-            {totalItems}
+            {totalQuantity}
           </div>
         </div>
       </button>
