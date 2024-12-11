@@ -33,7 +33,6 @@ export default function Product() {
         const parsedProduct = productFormat(mainProduct, sku[0].sku)[0];
         const secondSanityQuery = recommendedProductQuery(parsedProduct.tag);
         const recommendedItem = await sanityClient.fetch(secondSanityQuery);
-        console.log(parsedProduct);
         setRecommendedProducts(recommendedItem);
         setProductPageContent(parsedProduct as ProductPageContent);
         setLoading(false);
