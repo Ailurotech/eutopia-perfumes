@@ -31,6 +31,15 @@ export function DetailedProduct({
   const [isStoreLocatorOpen, setIsStoreLocatorOpen] = useState(false);
   const [selectedStore, setSelectedStore] = useState("");
   const [locations, setLocations] = useState([]);
+  const [selectedStoreData, setSelectedStoreData] = useState<{
+    locationName: string;
+    address: {
+      street: string;
+      suburb: string;
+      state: string;
+      postcode: string;
+    };
+  } | null>(null);
 
   useEffect(() => {
     // Fetch store locations from Sanity
@@ -45,6 +54,22 @@ export function DetailedProduct({
     };
     fetchLocations();
   }, []);
+
+  const handleStoreSelect = (store: any) => {
+    setSelectedStore(store.locationName);
+    setSelectedStoreData(store);
+  };
+
+  const openGoogleMaps = () => {
+    if (selectedStoreData) {
+      const address = `${selectedStoreData.address.street}, ${selectedStoreData.address.suburb}, ${selectedStoreData.address.state} ${selectedStoreData.address.postcode}`;
+      const encodedAddress = encodeURIComponent(address);
+      window.open(
+        `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
+        "_blank"
+      );
+    }
+  };
 
   return (
     <div
@@ -116,9 +141,19 @@ export function DetailedProduct({
           <div className="bg-[#e4f0f5] py-4 px-8 border-l-4 border-[#79b6cb] grid grid-cols-[50px_1fr] grid-rows-2 items-center max-w-[80%] xl:max-w-full">
             <Icon name="info" className="text-[#79b6cb] text-3xl"></Icon>
             <h5 className="text-xs text-black">
-              {selectedStore
-                ? `Your selected store is: ${selectedStore}`
-                : "We are unable to determine your nearest store"}
+              {selectedStore ? (
+                <>
+                  Your selected store is:{" "}
+                  <span
+                    onClick={openGoogleMaps}
+                    className="underline text-[#0d5257] hover:text-[#0a3f43] cursor-pointer"
+                  >
+                    {selectedStore}
+                  </span>
+                </>
+              ) : (
+                "We are unable to determine your nearest store"
+              )}
             </h5>
             <Icon name="search" className="text-black text-xl font-thin" />
             <h5
@@ -131,7 +166,7 @@ export function DetailedProduct({
           <StoreLocator
             isOpen={isStoreLocatorOpen}
             onClose={() => setIsStoreLocatorOpen(false)}
-            onSelectStore={setSelectedStore}
+            onSelectStore={handleStoreSelect}
             locations={locations}
           />
         </div>

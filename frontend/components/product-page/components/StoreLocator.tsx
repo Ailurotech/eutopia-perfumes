@@ -18,7 +18,7 @@ interface StoreLocation {
 interface StoreLocatorProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectStore: (storeName: string) => void;
+  onSelectStore: (store: StoreLocation) => void;
   locations: StoreLocation[];
 }
 
@@ -96,7 +96,7 @@ export function StoreLocator({
                   key={index}
                   className="border rounded-lg p-4 cursor-pointer hover:bg-gray-50 transition-colors"
                   onClick={() => {
-                    onSelectStore(location.locationName);
+                    onSelectStore(location);
                     onClose();
                   }}
                 >
