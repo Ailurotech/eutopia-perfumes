@@ -1,4 +1,4 @@
-import { ProductPageContent, ProductType } from "@/type";
+import { EDefaultProductProps, ProductPageContent, ProductType } from "@/type";
 
 export function productFormat<T extends ProductPageContent | ProductType>(
   products: T[],
@@ -17,13 +17,13 @@ function setDefaultValues<T extends ProductPageContent | ProductType>(
 ): T[] {
   const res = products.map((product) => {
     const defaultProductValues = {
-      image: product.image ?? "default",
-      description: product.description ?? "No description available",
-      maxPrice: product.maxPrice ?? 0,
-      tag: product.tag ?? "default",
-      productType: product.productType ?? "default",
-      inspiredBy: product.inspiredBy ?? "default",
-      title: product.title ?? "Untitled",
+      image: product.image ?? EDefaultProductProps.DEFAULT,
+      description: product.description ?? EDefaultProductProps.DESCRIPTION,
+      maxPrice: product.maxPrice ?? EDefaultProductProps.MAX_PRICE,
+      tag: product.tag ?? EDefaultProductProps.DEFAULT,
+      productType: product.productType ?? EDefaultProductProps.DEFAULT,
+      inspiredBy: product.inspiredBy ?? EDefaultProductProps.DEFAULT,
+      title: product.title ?? EDefaultProductProps.TITLE,
     };
     if ("comments" in product) {
       const avgStar =
@@ -50,13 +50,12 @@ function setDefaultValues<T extends ProductPageContent | ProductType>(
 
 function addWeightByTitle(product: ProductPageContent | ProductType) {
   const sizeRegex = /\d+ml/g;
-  const defaultWeight = "no weight available";
   const weight = product.title.match(sizeRegex);
   if (weight === null) {
     return {
       ...product,
-      weight: defaultWeight,
-      weightOfOz: defaultWeight,
+      weight: EDefaultProductProps.WEIGHT,
+      weightOfOz: EDefaultProductProps.WEIGHT,
     };
   }
 
@@ -69,6 +68,10 @@ function addWeightByTitle(product: ProductPageContent | ProductType) {
 }
 
 export function parseWeight(weight: string) {
+  if (weight === EDefaultProductProps.WEIGHT) {
+    return weight;
+  }
+
   const concatSymbol = "&";
   const mlSymbol = "ml";
   const ozSymbol = "oz";

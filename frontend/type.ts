@@ -100,3 +100,11 @@ export enum EReviewFilterOption {
   MOST_RECENT = "Most Recent",
   MOST_OLDEST = "Most Oldest",
 }
+
+export enum EDefaultProductProps {
+  DEFAULT = "default",
+  DESCRIPTION = "No description available",
+  MAX_PRICE = 0,
+  TITLE = "Untitled",
+  WEIGHT = "no weight available",
+}

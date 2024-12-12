@@ -7,7 +7,7 @@ import { NumberAdder } from "./NumberAdder";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@/components/common/Icon";
 import { useState, useEffect } from "react";
-import { ProductPageContent } from "@/type";
+import { EDefaultProductProps, ProductPageContent } from "@/type";
 import { parseWeight } from "@/utils";
 import { covertPageToPathName } from "@/utils/page-path-name-convert";
 import { StoreLocator } from "./StoreLocator";
@@ -70,7 +70,6 @@ export function DetailedProduct({
       );
     }
   };
-
   return (
     <div
       className={clsx(
@@ -113,7 +112,11 @@ export function DetailedProduct({
             </Link>
           </span>
           <div className="space-y-1">
-            <h3 className="text-2xl font-semibold">{`${weight}/${weightOfOz}`}</h3>
+            <h3 className="text-2xl font-semibold">
+              {weight === EDefaultProductProps.WEIGHT
+                ? `${weight}`
+                : `${weight}/${weightOfOz}`}
+            </h3>
             <span className="text-xl">
               {"This item has\n"}
               <Link href="/product" className="underline">
