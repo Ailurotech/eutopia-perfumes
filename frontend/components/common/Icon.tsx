@@ -12,13 +12,23 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaRegThumbsDown } from "react-icons/fa";
-import { CheckCircleIcon, IconProps } from "@chakra-ui/icons";
+import { MdOutlineDeleteForever } from "react-icons/md";
+
+import {
+  CheckCircleIcon,
+  IconProps,
+  TriangleUpIcon,
+  TriangleDownIcon,
+} from "@chakra-ui/icons";
 
 const commonIcon = {
   search: IoMdSearch,
   shoppingBag: MdOutlineShoppingBag,
   menu: IoMenu,
   close: IoClose,
+  triangleUp: TriangleUpIcon,
+  triangleDown: TriangleDownIcon,
+  delete: MdOutlineDeleteForever,
 };
 
 const productIcon = {

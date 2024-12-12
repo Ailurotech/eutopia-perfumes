@@ -12,6 +12,7 @@ import { parseWeight } from "@/utils";
 import { covertPageToPathName } from "@/utils/page-path-name-convert";
 import { StoreLocator } from "./StoreLocator";
 import { sanityClient } from "@/lib/sanityClient";
+import { storeProductToLocal } from "@/utils/local-storage-for-product";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
@@ -23,7 +24,7 @@ interface DetailedProductProps {
 export function DetailedProduct({
   detailedProductContent,
 }: DetailedProductProps) {
-  const { title, maxPrice, image, tag, avgStar, weight, productType, sku } =
+  const { title, maxPrice, image, tag, avgStar, weight, productType, sku, id } =
     detailedProductContent;
   const [quantity, setQuantity] = useState(1);
   const pathName = covertPageToPathName(tag);
@@ -123,7 +124,13 @@ export function DetailedProduct({
           </div>
           <div className="flex gap-4">
             <NumberAdder onSetQuantity={setQuantity} />
-            <Button className="bg-default text-white px-24 rounded-xl font-bold text-sm uppercase">
+            <Button
+              className="bg-default text-white px-24 rounded-xl font-bold text-sm uppercase"
+              onClick={() => {
+                console.log("add to cart"),
+                  storeProductToLocal({ id, image, title, maxPrice, quantity });
+              }}
+            >
               Add To Cart
             </Button>
           </div>
