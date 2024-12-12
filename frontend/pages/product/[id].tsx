@@ -7,6 +7,7 @@ import {
 } from "@/query/product-page.query";
 import { ProductPageContent, RecommendedProducts } from "@/type";
 import { productFormat } from "@/utils";
+import { Spinner } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -40,6 +41,20 @@ export default function Product() {
       fetchProduct();
     }
   }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-60">
+        <Spinner
+          thickness="5px"
+          speed="0.6s"
+          emptyColor="gray.200"
+          color="#808274"
+          size="xl"
+        />
+      </div>
+    );
+  }
 
   if (!loading && productPageContent && recommendedProducts) {
     return (

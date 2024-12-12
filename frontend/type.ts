@@ -30,6 +30,7 @@ export type TProductPageExtraContent = {
 export type ProductPageContent = BasicProductType & TProductPageExtraContent;
 
 export interface RecommendedProducts {
+  id: number;
   title: string;
   image: string;
   price: number;

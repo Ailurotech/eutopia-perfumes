@@ -27,6 +27,7 @@ export function recommendedProductQuery(tag: string) {
             "title":store.title,
             "image":store.previewImageUrl,
             "price":store.priceRange.maxVariantPrice,
+            "id":store.id
             }[0...10]
         `;
 }

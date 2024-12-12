@@ -5,7 +5,6 @@ import { sanityClient } from "@/lib/sanityClient";
 import { RecommendedProducts, VideoType } from "@/type";
 import JoinOurFamilyPage from "@/components/homepage/JoinOurFamily";
 import { ProductsCarousel } from "@/components/common/ProductsCarousel";
-import { recommendedProductQuery } from "@/query/product-page.query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -55,7 +54,8 @@ export const getStaticProps: GetStaticProps = async () => {
     *[_type == "product" && store.status == "active" && store.isDeleted == false]{
       "title": store.title,
       "image": store.previewImageUrl,
-      "price": store.priceRange.maxVariantPrice
+      "price": store.priceRange.maxVariantPrice,
+      "id":store.id
     }[0...10]
   `;
 

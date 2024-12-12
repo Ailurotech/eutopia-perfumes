@@ -22,7 +22,7 @@ export default function Navigation({
 
   return (
     <>
-      <header className="fixed top-0 z-10">
+      <header className="sticky top-0 z-10">
         <nav
           className={clsx(
             "w-screen flex h-[70px] lg:h-[100px] xl:h-32 text-default bg-white justify-evenly items-center md:items-end",
