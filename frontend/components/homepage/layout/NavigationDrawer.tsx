@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import { NavigationMenu } from "./NavigationMenu";
 import clsx from "clsx";
-import { NavigationRoute } from "../route";
-import { Icon } from "../common/Icon";
+import { NavigationRoute } from "../../route";
+import { Icon } from "../../common/Icon";
 
 export function NavigationDrawer() {
   const { onOpen, isOpen, onClose } = useDisclosure();
@@ -20,7 +20,7 @@ export function NavigationDrawer() {
       <Button
         onClick={onOpen}
         colorScheme="whiteAlpha"
-        variant="buttonLink"
+        variant="linkButton"
         size="lg"
       >
         <Icon name="menu" />

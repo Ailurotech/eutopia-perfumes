@@ -1,129 +1,86 @@
+import { Inter } from "next/font/google";
+import HomeBanner from "../components/homepage/HomeBanner";
 import { GetStaticProps } from "next";
-import HomePage from "@/components/homepage/HomePage";
 import { sanityClient } from "@/lib/sanityClient";
-import { HomePageContent } from "@/types";
+import { RecommendedProducts, VideoType } from "@/type";
+import JoinOurFamilyPage from "@/components/homepage/JoinOurFamily";
+import { ProductsCarousel } from "@/components/common/ProductsCarousel";
+import { recommendedProductQuery } from "@/query/product-page.query";
 
-interface IndexPageProps {
-  homePageContent: HomePageContent;
+const inter = Inter({ subsets: ["latin"] });
+
+interface HomeProps {
+  videos: VideoType[];
+  bestSellers: RecommendedProducts[];
+  newArrivals: RecommendedProducts[];
 }
 
-export default function Index({ homePageContent }: IndexPageProps) {
-  return <HomePage content={homePageContent} />;
+export default function Home({ videos, bestSellers, newArrivals }: HomeProps) {
+  return (
+    <main
+      className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}
+    >
+      <HomeBanner videos={videos} />
+      <section className="text-default mb-20">
+        <div className="px-16 lg:px-24 flex flex-col gap-14">
+          <ProductsCarousel
+            category="all"
+            title="Best Sellers"
+            recommendedProducts={bestSellers}
+          />
+          <ProductsCarousel
+            category="all"
+            title="New Arrivals"
+            recommendedProducts={newArrivals}
+          />
+        </div>
+      </section>
+      <JoinOurFamilyPage />
+    </main>
+  );
 }
-
-const processSection = (section: any) => ({
-  sectionTitle: section.sectionTitle,
-  subtitle: section.subtitle,
-  image: section.image.asset.url,
-  linkText: section.linkText,
-  linkUrl: section.linkUrl,
-});
 
 export const getStaticProps: GetStaticProps = async () => {
-  const query = `
-  *[_type == "homePage"]{
-    topSellersSection{
-      sectionTitle,
-      products[]->{
-        name,
-        slug,
-        price,
-        categories,
-        image {
-          asset->{
-            _id,
-            url
-          }
-        }
-      }
-    },
-    newArrivalsSection{
-      sectionTitle,
-      products[]->{
-        name,
-        slug,
-        price,
-        categories,
-        image {
-          asset->{
-            _id,
-            url
-          }
-        }
-      }
-    },
-    womenPerfumeSection{
-      sectionTitle,
-      subtitle,
-      image {
-        asset->{
-          _id,
-          url
-        }
-      },
-      linkText,
-      linkUrl
-    },
-    menPerfumeSection{
-      sectionTitle,
-      subtitle,
-      image {
-        asset->{
-          _id,
-          url
-        }
-      },
-      linkText,
-      linkUrl
-    },
-    neutralPerfumeSection{
-      sectionTitle,
-      subtitle,
-      image {
-        asset->{
-          _id,
-          url
-        }
-      },
-      linkText,
-      linkUrl
-    },
-  }
+  const videosQuery = `
+    *[_type == "videos"]{
+      _id,
+      title,
+      "slug": slug.current,
+      description,
+      video
+    }
   `;
 
-  try {
-    const data = await sanityClient.fetch(query);
-    const homePageContent = data[0];
+  const productsQuery = `
+    *[_type == "product" && store.status == "active" && store.isDeleted == false]{
+      "title": store.title,
+      "image": store.previewImageUrl,
+      "price": store.priceRange.maxVariantPrice
+    }[0...10]
+  `;
 
-    return {
-      props: {
-        homePageContent: {
-          topSellers: homePageContent.topSellersSection.products.map(
-            (product: any) => ({
-              ...product,
-              image: product.image.asset.url,
-              categories: product.categories,
-            })
-          ),
-          newArrivals: homePageContent.newArrivalsSection.products.map(
-            (product: any) => ({
-              ...product,
-              image: product.image.asset.url,
-              categories: product.categories,
-            })
-          ),
-          womenPerfume: processSection(homePageContent.womenPerfumeSection),
-          menPerfume: processSection(homePageContent.menPerfumeSection),
-          neutralPerfume: processSection(homePageContent.neutralPerfumeSection),
-        },
-      },
-    };
+  let videos = [];
+  let bestSellers = [];
+  let newArrivals = [];
+
+  try {
+    const [videosResult, productsResult] = await Promise.all([
+      sanityClient.fetch(videosQuery),
+      sanityClient.fetch(productsQuery),
+    ]);
+
+    videos = videosResult;
+    bestSellers = productsResult;
+    newArrivals = [...productsResult].reverse();
   } catch (error) {
-    console.error("Error fetching data:", error);
-    return {
-      props: {
-        homePageContent: {},
-      },
-    };
+    console.error("Error in getStaticProps:", error);
   }
+
+  return {
+    props: {
+      videos,
+      bestSellers: bestSellers || [],
+      newArrivals: newArrivals || [],
+    },
+  };
 };

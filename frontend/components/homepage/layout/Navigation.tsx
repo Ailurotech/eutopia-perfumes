@@ -1,4 +1,4 @@
-import { NavigationRoute, RoutRoute } from "../route";
+import { NavigationRoute, RoutRoute } from "../../route";
 import { NavigationMenu } from "./NavigationMenu";
 import { Playfair_Display } from "next/font/google";
 import clsx from "clsx";
@@ -11,21 +11,17 @@ const playFair = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function Navigation({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Navigation() {
   const { All, ForHer, ForHim, Neutral, ...NavigationMenuRightPart } =
     NavigationRoute;
   const NavigationMenuLeftPart = { All, ForHer, ForHim, Neutral };
 
   return (
     <>
-      <header className="fixed top-0 z-10">
+      <header className="sticky top-0 z-10">
         <nav
           className={clsx(
-            "w-screen flex h-[70px] lg:h-[100px] xl:h-32 text-[#66685A] bg-white justify-evenly items-center md:items-end",
+            "w-screen flex h-[70px] lg:h-[100px] xl:h-32 text-default bg-white justify-evenly items-center md:items-end",
             "py-4 lg:py-6 xl:py-8 lg:gap-10 xl:gap-12 2xl:gap-16"
           )}
         >
@@ -53,7 +49,6 @@ export default function Navigation({
           />
         </nav>
       </header>
-      {children}
     </>
   );
 }
