@@ -20,11 +20,10 @@ export default function App({ Component, pageProps }: AppProps) {
   });
   return (
     <ChakraProvider theme={theme}>
-      <Navigation>
-        <main className="top-[70px] lg:top-[100px] xl:top-32">
-          <Component {...pageProps} />
-        </main>
-      </Navigation>
+      <Navigation />
+      <main>
+        <Component {...pageProps} />
+      </main>
       <Footer />
     </ChakraProvider>
   );

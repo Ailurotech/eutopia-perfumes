@@ -27,7 +27,7 @@ export type TProductPageExtraContent = {
   avgStar: number;
 };
 
-export type ProductPageContent = BasicProductType & TProductPageExtraContent;
+export type ProductPageContent = ProductType & TProductPageExtraContent;
 
 export interface RecommendedProducts {
   id: number;
@@ -100,6 +100,20 @@ export enum EReviewFilterOption {
   MOST_RECENT = "Most Recent",
   MOST_OLDEST = "Most Oldest",
 }
+
+export interface ISingleProductForLocalStorage {
+  image: string;
+  title: string;
+  maxPrice: number;
+  quantity?: number;
+  totalPrice?: number;
+  id: number;
+}
+
+export type ILocalStorage = Record<
+  ProductType["id"],
+  ISingleProductForLocalStorage
+>;
 
 export enum EDefaultProductProps {
   DEFAULT = "default",

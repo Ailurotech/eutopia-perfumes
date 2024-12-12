@@ -11,11 +11,7 @@ const playFair = Playfair_Display({
   subsets: ["latin"],
 });
 
-export default function Navigation({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Navigation() {
   const { All, ForHer, ForHim, Neutral, ...NavigationMenuRightPart } =
     NavigationRoute;
   const NavigationMenuLeftPart = { All, ForHer, ForHim, Neutral };
@@ -53,7 +49,6 @@ export default function Navigation({
           />
         </nav>
       </header>
-      {children}
     </>
   );
 }

@@ -2,6 +2,12 @@ import Image, { StaticImageData } from "next/image";
 import { Literata } from "next/font/google";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
+import {
+  ILocalStorage,
+  ISingleProductForLocalStorage,
+  ProductType,
+} from "@/type";
+import { storeProductToLocal } from "@/utils/local-storage-for-product";
 interface IndividualProductProps {
   image: string;
   tag: string;
@@ -34,7 +40,7 @@ export function IndividualProductForShoppingPage({
   }
 
   return (
-    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between">
+    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between cursor-pointer">
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image
           src={image}
@@ -44,15 +50,19 @@ export function IndividualProductForShoppingPage({
           onClick={() => clickHandler(id)}
         />
         {isHovered && (
-          <span
+          <button
+            type="button"
             className={clsx(
               `group-hover:block hidden ${themeColor} uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `,
               "border-2 border-default w-4/5 text-center py-1 rounded-xl font-extrabold cursor-pointer",
               "text-xs md:text-sm"
             )}
+            onClick={() => {
+              storeProductToLocal({ id, image, title, maxPrice: price });
+            }}
           >
             add to cart
-          </span>
+          </button>
         )}
       </div>
       <h5 className="capitalize text-xs xl:text-lg">{tag}</h5>
