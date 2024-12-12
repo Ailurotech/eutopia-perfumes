@@ -96,13 +96,15 @@ export function Cart() {
                   />
                 ))}
             </div>
-            <button
-              type="button"
-              className="px-16 py-3 bg-default text-white rounded-lg font-poppins text-sm font-bold disabled:bg-gray-400 disabled:cursor-not-allowed"
-              disabled={totalItems === 0}
-            >
-              CHECK OUT
-            </button>
+            <div className="w-full flex justify-center items-center">
+              <button
+                type="button"
+                className="px-16 py-3 bg-default text-white rounded-lg font-poppins text-sm font-bold disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled={totalItems === 0}
+              >
+                CHECK OUT
+              </button>
+            </div>
           </ModalBody>
         </ModalContent>
       </Modal>
