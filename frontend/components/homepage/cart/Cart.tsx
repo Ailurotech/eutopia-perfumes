@@ -17,6 +17,17 @@ import {
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { IndividualProductCard } from "./IndividualProductCard";
+import shopifyClient from "@/utils/shopify-client";
+
+interface ISingleProductForLocalStorage {
+  id: number;
+  variantId: number;
+  image: string;
+  title: string;
+  maxPrice: number;
+  quantity?: number;
+  totalPrice?: number;
+}
 
 export function Cart() {
   const [cart, setCart] = useState<ILocalStorage>({});
@@ -41,6 +52,46 @@ export function Cart() {
     updateEntireLocal(cart);
     onClose();
   };
+  const handleCheckout = async () => {
+    try {
+      console.log("Starting checkout process");
+      const checkout = await shopifyClient.checkout.create();
+
+      const lineItems = Object.values(cart).map((item) => {
+        console.log("Cart item:", item);
+
+        const variantId = btoa(
+          `gid://shopify/ProductVariant/${item.variantId}`
+        );
+        console.log("Formatted variantId:", variantId);
+
+        return {
+          variantId: variantId,
+          quantity: item.quantity,
+        };
+      });
+
+      console.log("Prepared line items:", lineItems);
+
+      const checkoutWithItems = await shopifyClient.checkout.addLineItems(
+        checkout.id,
+        lineItems
+      );
+
+      // Get the current URL for the return_to parameter
+      const currentUrl = window.location.href;
+      const checkoutUrl = new URL(checkoutWithItems.webUrl);
+
+      // Add return_to parameter
+      checkoutUrl.searchParams.append("return_to", currentUrl);
+
+      console.log("Checkout URL:", checkoutUrl.toString());
+      window.location.href = checkoutUrl.toString();
+    } catch (error) {
+      console.error("Detailed checkout error:", error);
+    }
+  };
+  console.log("Current cart state:", cart); // Debug log
   return (
     <>
       <button onClick={onOpen}>
@@ -101,6 +152,7 @@ export function Cart() {
                 type="button"
                 className="px-16 py-3 bg-default text-white rounded-lg font-poppins text-sm font-bold disabled:bg-gray-400 disabled:cursor-not-allowed"
                 disabled={totalItems === 0}
+                onClick={handleCheckout}
               >
                 CHECK OUT
               </button>

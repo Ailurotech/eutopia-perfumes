@@ -1,17 +1,18 @@
 export function productPageQuery(id: number) {
   return `
       *[_type == "product" && store.id == ${id}]{
-            "image":store.previewImageUrl,
-            "maxPrice":store.priceRange.maxVariantPrice,
-            "title":store.title,
-            "tag":store.tags,
-            "productType":store.options[0].values[0],
-            "inspiredBy":store.options[1].values[0],
+            "image": store.previewImageUrl,
+            "maxPrice": store.priceRange.maxVariantPrice,
+            "title": store.title,
+            "tag": store.tags,
+            "productType": store.options[0].values[0],
+            "inspiredBy": store.options[1].values[0],
             "description": store.descriptionHtml,
-            "id":store.id,
+            "productId": store.id,
+            "variantId": store.variants[0]->store.id,
             comments
-            }
-        `;
+      }
+  `;
 }
 
 export function skuQuery(id: number) {

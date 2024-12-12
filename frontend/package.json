@@ -29,6 +29,7 @@
     "react-leaflet": "^4.2.1",
     "react-slick": "^0.30.2",
     "react-youtube": "^10.1.0",
+    "shopify-buy": "^2.22.0",
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
