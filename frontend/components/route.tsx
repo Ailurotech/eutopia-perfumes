@@ -106,7 +106,7 @@ const AboutUs = {
 };
 
 const StoreLocation = {
-  Path: "/store-location",
+  Path: "/site",
   Name: "Store Location",
   Link: ({ children, className }: LinkProps) => (
     <Link href={StoreLocation.Path} className={className}>

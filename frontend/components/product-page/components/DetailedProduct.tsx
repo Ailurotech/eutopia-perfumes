@@ -6,10 +6,12 @@ import { StarRating } from "./StarRating";
 import { NumberAdder } from "./NumberAdder";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@/components/common/Icon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProductPageContent } from "@/type";
 import { parseWeight } from "@/utils";
 import { covertPageToPathName } from "@/utils/page-path-name-convert";
+import { StoreLocator } from "./StoreLocator";
+import { sanityClient } from "@/lib/sanityClient";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
@@ -27,6 +29,49 @@ export function DetailedProduct({
   const [quantity, setQuantity] = useState(1);
   const pathName = covertPageToPathName(tag);
   const weightOfOz = parseWeight(weight);
+  const [isStoreLocatorOpen, setIsStoreLocatorOpen] = useState(false);
+  const [selectedStore, setSelectedStore] = useState("");
+  const [locations, setLocations] = useState([]);
+  const [selectedStoreData, setSelectedStoreData] = useState<{
+    locationName: string;
+    address: {
+      street: string;
+      suburb: string;
+      state: string;
+      postcode: string;
+    };
+  } | null>(null);
+
+  useEffect(() => {
+    // Fetch store locations from Sanity
+    const fetchLocations = async () => {
+      const locations = await sanityClient.fetch(`
+        *[_type == "storeLocation"] {
+          locationName,
+          address
+        }
+      `);
+      setLocations(locations);
+    };
+    fetchLocations();
+  }, []);
+
+  const handleStoreSelect = (store: any) => {
+    setSelectedStore(store.locationName);
+    setSelectedStoreData(store);
+  };
+
+  const openGoogleMaps = () => {
+    if (selectedStoreData) {
+      const address = `${selectedStoreData.address.street}, ${selectedStoreData.address.suburb}, ${selectedStoreData.address.state} ${selectedStoreData.address.postcode}`;
+      const encodedAddress = encodeURIComponent(address);
+      window.open(
+        `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
+        "_blank"
+      );
+    }
+  };
+
   return (
     <div
       className={clsx(
@@ -103,11 +148,34 @@ export function DetailedProduct({
           <div className="bg-[#e4f0f5] py-4 px-8 border-l-4 border-[#79b6cb] grid grid-cols-[50px_1fr] grid-rows-2 items-center max-w-[80%] xl:max-w-full">
             <Icon name="info" className="text-[#79b6cb] text-3xl"></Icon>
             <h5 className="text-xs text-black">
-              We are unable to determine your nearest store
+              {selectedStore ? (
+                <>
+                  Your selected store is:{" "}
+                  <span
+                    onClick={openGoogleMaps}
+                    className="underline text-[#0d5257] hover:text-[#0a3f43] cursor-pointer"
+                  >
+                    {selectedStore}
+                  </span>
+                </>
+              ) : (
+                "We are unable to determine your nearest store"
+              )}
             </h5>
             <Icon name="search" className="text-black text-xl font-thin" />
-            <h5 className="text-xs text-black font-bold">Set your store</h5>
+            <h5
+              className="text-xs text-black font-bold cursor-pointer hover:text-primary"
+              onClick={() => setIsStoreLocatorOpen(true)}
+            >
+              Set your store
+            </h5>
           </div>
+          <StoreLocator
+            isOpen={isStoreLocatorOpen}
+            onClose={() => setIsStoreLocatorOpen(false)}
+            onSelectStore={handleStoreSelect}
+            locations={locations}
+          />
         </div>
       </div>
     </div>
