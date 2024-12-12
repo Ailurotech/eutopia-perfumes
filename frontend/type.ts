@@ -1,3 +1,5 @@
+import { MutableRefObject } from "react";
+
 interface BasicProductType {
   image: string;
   description: string;

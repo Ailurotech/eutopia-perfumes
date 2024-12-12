@@ -19,10 +19,12 @@ const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
 
 interface DetailedProductProps {
   detailedProductContent: Omit<ProductPageContent, "description" | "comments">;
+  scrollToReview: () => void;
 }
 
 export function DetailedProduct({
   detailedProductContent,
+  scrollToReview,
 }: DetailedProductProps) {
   const { title, maxPrice, image, tag, avgStar, weight, productType, sku, id } =
     detailedProductContent;
@@ -108,9 +110,12 @@ export function DetailedProduct({
           </div>
           <span className="flex gap-3">
             <StarRating starNum={avgStar} />
-            <Link href="/product" className="underline text-lg 2xl:text-xl">
+            <button
+              className="underline text-lg 2xl:text-xl"
+              onClick={scrollToReview}
+            >
               Read Review
-            </Link>
+            </button>
           </span>
           <div className="space-y-1">
             <h3 className="text-2xl font-semibold">
@@ -120,7 +125,7 @@ export function DetailedProduct({
             </h3>
             <span className="text-xl">
               {"This item has\n"}
-              <Link href="/product" className="underline">
+              <Link href="#" className="underline">
                 special conditions for returns
               </Link>
             </span>
