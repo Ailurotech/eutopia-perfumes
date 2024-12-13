@@ -16,6 +16,7 @@ interface IndividualProductProps {
   isHovered?: boolean;
   themeColor?: string;
   id?: number;
+  variantId?: number;
 }
 
 const literata = Literata({ weight: "700", subsets: ["latin"] });
@@ -29,6 +30,7 @@ export function IndividualProductForShoppingPage({
   id,
   isHovered = false,
   themeColor,
+  variantId,
 }: IndividualProductProps) {
   const router = useRouter();
   const parsedTitle = title.includes(splitOperator)
@@ -58,7 +60,13 @@ export function IndividualProductForShoppingPage({
               "text-xs md:text-sm"
             )}
             onClick={() => {
-              storeProductToLocal({ id, image, title, maxPrice: price });
+              storeProductToLocal({
+                id: id,
+                variantId: variantId,
+                image,
+                title,
+                maxPrice: price,
+              });
             }}
           >
             add to cart

@@ -7,6 +7,7 @@ export function storeProductToLocal(product: ISingleProductForLocalStorage) {
   const cart: string | null = localStorage.getItem(STORAGE_TOKEN);
   const newProduct = {
     ...product,
+    variantId: product.variantId,
     quantity: product.quantity || 1,
     totalPrice: product.quantity
       ? product.quantity * product.maxPrice

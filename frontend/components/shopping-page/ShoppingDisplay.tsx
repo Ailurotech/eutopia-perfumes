@@ -123,6 +123,7 @@ export function ShoppingDisplay({
             tag={product.tag}
             price={product.maxPrice}
             id={product.id}
+            variantId={product.variantId}
             isHovered={true}
             themeColor={shoppingDisplayVariants({ variant })}
           />

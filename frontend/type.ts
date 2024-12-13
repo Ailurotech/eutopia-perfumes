@@ -48,6 +48,7 @@ export interface VideoType {
 
 export type ProductType = BasicProductType & {
   id: number;
+  variantId: number;
 };
 
 export interface PageSettingType {
@@ -110,12 +111,22 @@ export interface ISingleProductForLocalStorage {
   quantity?: number;
   totalPrice?: number;
   id: number;
+  variantId: number;
 }
 
-export type ILocalStorage = Record<
-  ProductType["id"],
-  ISingleProductForLocalStorage
->;
+export interface CartItem {
+  id: number;
+  variantId: number;
+  image: string;
+  title: string;
+  maxPrice: number;
+  quantity: number;
+  totalPrice: number;
+}
+
+export interface ILocalStorage {
+  [key: string]: CartItem;
+}
 
 export enum EDefaultProductProps {
   DEFAULT = "default",

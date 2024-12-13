@@ -26,8 +26,18 @@ export function DetailedProduct({
   detailedProductContent,
   scrollToReview,
 }: DetailedProductProps) {
-  const { title, maxPrice, image, tag, avgStar, weight, productType, sku, id } =
-    detailedProductContent;
+  const {
+    title,
+    maxPrice,
+    image,
+    tag,
+    avgStar,
+    weight,
+    productType,
+    sku,
+    id,
+    variantId,
+  } = detailedProductContent;
   const [quantity, setQuantity] = useState(1);
   const pathName = covertPageToPathName(tag);
   const weightOfOz = parseWeight(weight);
@@ -136,7 +146,14 @@ export function DetailedProduct({
               className="bg-default text-white px-24 rounded-xl font-bold text-sm uppercase"
               onClick={() => {
                 console.log("add to cart"),
-                  storeProductToLocal({ id, image, title, maxPrice, quantity });
+                  storeProductToLocal({
+                    id,
+                    image,
+                    title,
+                    maxPrice,
+                    quantity,
+                    variantId,
+                  });
               }}
             >
               Add To Cart

@@ -8,7 +8,8 @@ export function shoppingPageQuery(page?: string) {
         "tag":store.tags,
         "productType":store.options[0].values[0],
         "inspiredBy":store.options[1].values[0],
-        "id":store.id
+        "id":store.id,
+        "variantId": store.variants[0]->store.id
     }
     `;
 }
