@@ -5,7 +5,7 @@ import { sanityClient } from "@/lib/sanityClient";
 import { IPerfumeSectionContent, RecommendedProducts, VideoType } from "@/type";
 import JoinOurFamilyPage from "@/components/homepage/JoinOurFamily";
 import { ProductsCarousel } from "@/components/common/ProductsCarousel";
-import PerfumeSection from "@/components/homepage/perfumeSection";
+import PerfumeSection from "@/components/homepage/PerfumeSection";
 import {
   perfumeSectionQuery,
   videoSectionQuery,
