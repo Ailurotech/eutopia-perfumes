@@ -7,22 +7,25 @@ import { NumberAdder } from "./NumberAdder";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@/components/common/Icon";
 import { useState, useEffect } from "react";
-import { ProductPageContent } from "@/type";
+import { EDefaultProductProps, ProductPageContent } from "@/type";
 import { parseWeight } from "@/utils";
 import { covertPageToPathName } from "@/utils/page-path-name-convert";
 import { StoreLocator } from "./StoreLocator";
 import { sanityClient } from "@/lib/sanityClient";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
+import { FooterRoute } from "@/components/route";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
 
 interface DetailedProductProps {
   detailedProductContent: Omit<ProductPageContent, "description" | "comments">;
+  scrollToReview: () => void;
 }
 
 export function DetailedProduct({
   detailedProductContent,
+  scrollToReview,
 }: DetailedProductProps) {
   const {
     title,
@@ -81,7 +84,6 @@ export function DetailedProduct({
       );
     }
   };
-
   return (
     <div
       className={clsx(
@@ -119,15 +121,22 @@ export function DetailedProduct({
           </div>
           <span className="flex gap-3">
             <StarRating starNum={avgStar} />
-            <Link href="/product" className="underline text-lg 2xl:text-xl">
+            <button
+              className="underline text-lg 2xl:text-xl"
+              onClick={scrollToReview}
+            >
               Read Review
-            </Link>
+            </button>
           </span>
           <div className="space-y-1">
-            <h3 className="text-2xl font-semibold">{`${weight}/${weightOfOz}`}</h3>
+            <h3 className="text-2xl font-semibold">
+              {weight === EDefaultProductProps.WEIGHT
+                ? `${weight}`
+                : `${weight}/${weightOfOz}`}
+            </h3>
             <span className="text-xl">
               {"This item has\n"}
-              <Link href="/product" className="underline">
+              <Link href={FooterRoute.FRR.Path} className="underline">
                 special conditions for returns
               </Link>
             </span>

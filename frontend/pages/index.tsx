@@ -5,7 +5,7 @@ import { sanityClient } from "@/lib/sanityClient";
 import { RecommendedProducts, VideoType } from "@/type";
 import JoinOurFamilyPage from "@/components/homepage/JoinOurFamily";
 import { ProductsCarousel } from "@/components/common/ProductsCarousel";
-import { recommendedProductQuery } from "@/query/product-page.query";
+import { recommendedProductQuery } from "@/query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -51,13 +51,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   `;
 
-  const productsQuery = `
-    *[_type == "product" && store.status == "active" && store.isDeleted == false]{
-      "title": store.title,
-      "image": store.previewImageUrl,
-      "price": store.priceRange.maxVariantPrice
-    }[0...10]
-  `;
+  const productsQuery = recommendedProductQuery();
 
   let videos = [];
   let bestSellers = [];
