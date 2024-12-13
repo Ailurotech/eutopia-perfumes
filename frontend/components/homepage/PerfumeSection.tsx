@@ -6,14 +6,6 @@ import { NavigationRoute } from "../route";
 const PerfumeSection: React.FC<{ content: IPerfumeSectionContent }> = ({
   content,
 }) => {
-  if (!content) {
-    return (
-      <div className="container mx-auto px-4 text-center">
-        <p>Failed to load homepage content. Please try again later.</p>
-      </div>
-    );
-  }
-
   return (
     <>
       <PerfumeNav

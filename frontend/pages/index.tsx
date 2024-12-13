@@ -28,10 +28,10 @@ export default function Home({
 }: HomeProps) {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}
+      className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-32 lg:gap-40 xl:gap-64`}
     >
       <HomeBanner videos={videos} />
-      <section className="text-default mb-20">
+      <section className="text-default">
         <div className="px-16 lg:px-24 flex flex-col gap-14">
           <ProductsCarousel
             category="all"
@@ -44,9 +44,9 @@ export default function Home({
             recommendedProducts={newArrivals}
           />
         </div>
-        <div className="container mx-auto px-4">
-          <PerfumeSection content={perfumeSectionContent} />
-        </div>
+      </section>
+      <section className="container px-8 flex flex-col gap-16 lg:gap-36">
+        <PerfumeSection content={perfumeSectionContent} />
       </section>
       <JoinOurFamilyPage />
     </main>

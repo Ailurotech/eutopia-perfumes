@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "@/styles/homepage.module.css";
 import { IBasePerfumeSection } from "@/type";
 import { urlForImage } from "@/lib/sanity.image";
 
@@ -19,10 +18,10 @@ const PerfumeNav = ({
   imageOnLeft = true,
 }: IPerfumeNavProps) => {
   return (
-    <section
-      className={`flex flex-col md:flex-row mt-10 ${imageOnLeft ? "" : "md:flex-row-reverse"}`}
+    <div
+      className={`flex flex-1 flex-col lg:flex-row ${imageOnLeft ? "" : "lg:flex-row-reverse"} gap-10 lg:gap-20 xl:gap-40 justify-center items-center`}
     >
-      <div className="flex-1 flex justify-center md:justify-start">
+      <div className="flex justify-end md:justify-start">
         <Image
           src={urlForImage(image).url()}
           alt={description}
@@ -31,26 +30,25 @@ const PerfumeNav = ({
           className="max-w-full max-h-[500px] w-auto h-auto object-contain"
         />
       </div>
-
-      <div className="flex-1 mt-4 md:ml-4 text-center">
+      <div className="flex flex-col items-center lg:items-start justify-center gap-4">
         <h2
-          className={`text-[24px] md:text-[32px] lg:text-[48px] font-playfair font-black text-[#66685A] mt-4 tracking-tight md:tracking-normal`}
+          className={`text-[40px] lg:text-[48px] font-playfair font-black text-[#66685A] tracking-tight md:tracking-normal`}
         >
           {title}
         </h2>
         <p
-          className={`text-[20px] md:text-[24px] lg:text-[32px] font-poppins text-[#66685A] mt-2 md:mt-4 tracking-tight md:tracking-normal`}
+          className={`text-[24px] lg:text-[32px] font-poppins text-[#66685A]  tracking-tight md:tracking-normal`}
         >
           {description}
         </p>
         <Link
           href={linkUrl}
-          className={`text-[20px] md:text-[24px] lg:text-[36px] ${styles["font-Poppins"]} text-[#66685A] underline mt-4 ml-3 md:mt-20 inline-block tracking-tight md:tracking-normal`}
+          className={`text-[30px] lg:text-[36px] font-poppins text-[#66685A] underline ml-3 mt-6 lg:mt-20 inline-block tracking-tight md:tracking-normal`}
         >
           Shop now
         </Link>
       </div>
-    </section>
+    </div>
   );
 };
 
