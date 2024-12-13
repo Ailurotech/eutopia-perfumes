@@ -115,7 +115,7 @@ export function IndividualProductForProductPage({
       <h2
         className={clsx(
           literata.className,
-          "xl:min-h-24 2xl:min-h-12 text-[20px] mt-6 mb-4 uppercase text-center"
+          "lg:min-h-16 xl:min-h-24 2xl:min-h-12 text-[20px] mt-6 mb-4 uppercase text-center"
         )}
       >
         {parsedTitle}

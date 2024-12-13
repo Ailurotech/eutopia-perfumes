@@ -32,7 +32,7 @@ const PerfumeNav = ({
       </div>
       <div className="flex flex-col items-center lg:items-start justify-center gap-4">
         <h2
-          className={`text-[40px] lg:text-[48px] font-playfair font-black text-[#66685A] tracking-tight md:tracking-normal`}
+          className={`text-[40px] lg:text-[48px] font-playfair font-bold text-[#66685A] tracking-tight md:tracking-normal`}
         >
           {title}
         </h2>

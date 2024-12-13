@@ -32,7 +32,7 @@ export default function Home({
     >
       <HomeBanner videos={videos} />
       <section className="text-default">
-        <div className="px-16 lg:px-24 flex flex-col gap-14">
+        <div className="px-16 lg:px-24 flex flex-col gap-14 items-center xl:grid xl:grid-rows-[auto_auto] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-20">
           <ProductsCarousel
             category="all"
             title="Best Sellers"
