@@ -124,3 +124,24 @@ export interface CartItem {
 export interface ILocalStorage {
   [key: string]: CartItem;
 }
+
+export interface IBasePerfumeSection {
+  description: string;
+  image: string;
+}
+
+export interface IPerfumeSectionContent {
+  women: IBasePerfumeSection;
+  men: IBasePerfumeSection;
+  neutral: IBasePerfumeSection;
+}
+
+export interface Product {
+  name: string;
+  slug: {
+    current: string;
+  };
+  price: number;
+  image: string;
+  categories: string;
+}
