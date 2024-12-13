@@ -13,6 +13,7 @@ import { covertPageToPathName } from "@/utils/page-path-name-convert";
 import { StoreLocator } from "./StoreLocator";
 import { sanityClient } from "@/lib/sanityClient";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
+import { FooterRoute } from "@/components/route";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
@@ -135,7 +136,7 @@ export function DetailedProduct({
             </h3>
             <span className="text-xl">
               {"This item has\n"}
-              <Link href="#" className="underline">
+              <Link href={FooterRoute.FRR.Path} className="underline">
                 special conditions for returns
               </Link>
             </span>
