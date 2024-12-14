@@ -1,3 +1,5 @@
+import { MutableRefObject } from "react";
+
 interface BasicProductType {
   image: string;
   description: string;
@@ -30,6 +32,7 @@ export type TProductPageExtraContent = {
 export type ProductPageContent = ProductType & TProductPageExtraContent;
 
 export interface RecommendedProducts {
+  id: number;
   title: string;
   image: string;
   price: number;
@@ -123,6 +126,14 @@ export interface CartItem {
 
 export interface ILocalStorage {
   [key: string]: CartItem;
+}
+
+export enum EDefaultProductProps {
+  DEFAULT = "default",
+  DESCRIPTION = "No description available",
+  MAX_PRICE = 0,
+  TITLE = "Untitled",
+  WEIGHT = "no weight available",
 }
 
 export interface IBasePerfumeSection {

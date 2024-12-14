@@ -10,6 +10,7 @@ import {
   perfumeSectionQuery,
   videoSectionQuery,
 } from "@/query/home-page.query";
+import { recommendedProductQuery } from "@/query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,13 +57,7 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async () => {
   const videosQuery = videoSectionQuery();
 
-  const productsQuery = `
-    *[_type == "product" && store.status == "active" && store.isDeleted == false]{
-      "title": store.title,
-      "image": store.previewImageUrl,
-      "price": store.priceRange.maxVariantPrice
-    }[0...10]
-  `;
+  const productsQuery = recommendedProductQuery();
 
   const perfumeQuery = perfumeSectionQuery();
 

@@ -98,6 +98,7 @@ export function ProductsCarousel({
                 tag={category}
                 title={product.title}
                 price={product.price}
+                id={product.id}
               />
             ))}
           </Slider>

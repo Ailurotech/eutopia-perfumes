@@ -101,13 +101,21 @@ export function IndividualProductForProductPage({
   tag,
   title,
   price,
+  id,
 }: IndividualProductProps) {
   const parsedTitle = title.includes(splitOperator)
     ? title.split(splitOperator).slice(0, 1)
     : [title];
+  const router = useRouter();
+  function clickHandler(id: number) {
+    router.push(`/product/${id}`);
+  }
 
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className="flex flex-col items-center cursor-pointer"
+      onClick={() => clickHandler(id)}
+    >
       <div className="h-64 aspect-[23/30] relative">
         <Image src={image} alt={title} className="object-contain" fill />
       </div>

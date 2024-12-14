@@ -23,12 +23,13 @@ export function skuQuery(id: number) {
   `;
 }
 
-export function recommendedProductQuery(tag: string) {
+export function recommendedProductQuery(tag?: string) {
   return `
-        *[_type == "product" && store.status == "active" && store.isDeleted == false && store.tags == "${tag}"]{
+        *[_type == "product" && store.status == "active" && store.isDeleted == false ${tag ? `&& store.tags == "${tag}"` : ""}]{
             "title":store.title,
             "image":store.previewImageUrl,
             "price":store.priceRange.maxVariantPrice,
+            "id":store.id
             }[0...10]
         `;
 }
