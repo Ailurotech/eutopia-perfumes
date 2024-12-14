@@ -8,6 +8,7 @@ import products from './productStructure'
 import settings from './settingStructure'
 import aboutUs from './aboutUsStructure'
 import wysiwygPages from './wysiwygPageStructure'
+import joinForm from './joinFormStructure'
 
 /**
  * Structure overrides
@@ -40,6 +41,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'productVariant',
     'settings',
     'aboutUs',
+    'joinForm'
   ].includes(id)
 }
 
@@ -51,6 +53,7 @@ export const structure: StructureResolver = (S, context: ConfigContext) =>
       pages(S, context),
       wysiwygPages(S, context),
       aboutUs(S, context),
+      joinForm(S, context),
       S.divider(),
       collections(S, context),
       products(S, context),
