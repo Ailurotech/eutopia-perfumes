@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import { sanityClient } from "@/lib/sanityClient";
 import DynamicJoinForm from "@/components/join/DynamicJoinForm";
-import { joinFormQuery } from "@/query/join-form.query";
+import { joinFormQuery } from "@/query";
 
 interface JoinPageProps {
   formData: {

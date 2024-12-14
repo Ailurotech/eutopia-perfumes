@@ -20,7 +20,7 @@ const pattaOne = Potta_One({
 const videoVariants = cva("relative w-full", {
   variants: {
     page: {
-      home: ["h-[60vh] mx-auto rounded-lg overflow-hidden"],
+      home: ["h-[70vh] mx-auto rounded-lg overflow-hidden"],
       shopping: ["aspect-[1440/600]"],
     },
   },
@@ -39,6 +39,7 @@ export function VideoPlayer({ video, page, linkPath }: VideoPlayerProps) {
     <div>
       <div className={videoVariants({ page })}>
         <iframe
+          id="111"
           src={videoUrl}
           className="w-full h-full object-cover aspect-[4/3] md:aspect-[16/9]"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

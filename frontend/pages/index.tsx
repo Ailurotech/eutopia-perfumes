@@ -9,8 +9,8 @@ import PerfumeSection from "@/components/homepage/PerfumeSection";
 import {
   perfumeSectionQuery,
   videoSectionQuery,
-} from "@/query/home-page.query";
-import { recommendedProductQuery } from "@/query";
+  recommendedProductQuery,
+} from "@/query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -56,9 +56,7 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   const videosQuery = videoSectionQuery();
-
   const productsQuery = recommendedProductQuery();
-
   const perfumeQuery = perfumeSectionQuery();
 
   let videos = [];
