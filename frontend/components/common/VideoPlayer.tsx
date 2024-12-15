@@ -20,7 +20,7 @@ const pattaOne = Potta_One({
 const videoVariants = cva("relative w-full", {
   variants: {
     page: {
-      home: ["h-[70vh] mx-auto rounded-lg overflow-hidden"],
+      home: ["mx-auto rounded-lg overflow-hidden"],
       shopping: ["aspect-[1440/600]"],
     },
   },
@@ -36,12 +36,11 @@ export function VideoPlayer({ video, page, linkPath }: VideoPlayerProps) {
     : `${video.video}?autoplay=1&mute=1controls=0&loop=1&controls=0&showinfo=0&rel=0&playsinline=1&enablejsapi=1&modestbranding=1&iv_load_policy=3&playlist=${video.video.split("/").pop()}`;
 
   return (
-    <div>
+    <div className="w-full flex justify-center items-center">
       <div className={videoVariants({ page })}>
         <iframe
-          id="111"
           src={videoUrl}
-          className="w-full h-full object-cover aspect-[4/3] md:aspect-[16/9]"
+          className="w-full object-cover aspect-[4/3] md:aspect-[16/9]"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           frameBorder="0"

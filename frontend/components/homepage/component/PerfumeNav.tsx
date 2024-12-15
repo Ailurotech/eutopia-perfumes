@@ -30,20 +30,18 @@ const PerfumeNav = ({
           className="max-w-full max-h-[500px] w-auto h-auto object-contain"
         />
       </div>
-      <div className="flex flex-col items-center lg:items-start justify-center gap-4">
+      <div className="flex flex-col items-center lg:items-start justify-center gap-4 text-[#66685A] tracking-tight md:tracking-normal">
         <h2
-          className={`text-[40px] lg:text-[48px] font-playfair font-bold text-[#66685A] tracking-tight md:tracking-normal`}
+          className={`text-[36px] sm:text-[40px] lg:text-[48px] font-playfair font-bold `}
         >
           {title}
         </h2>
-        <p
-          className={`text-[24px] lg:text-[32px] font-poppins text-[#66685A]  tracking-tight md:tracking-normal`}
-        >
+        <p className={`text-[20px] sm:text-[24px] lg:text-[32px] font-poppins`}>
           {description}
         </p>
         <Link
           href={linkUrl}
-          className={`text-[30px] lg:text-[36px] font-poppins text-[#66685A] underline ml-3 mt-6 lg:mt-20 inline-block tracking-tight md:tracking-normal`}
+          className={`text-[30px] lg:text-[36px] font-poppins underline ml-3 mt-6 lg:mt-20 inline-block`}
         >
           Shop now
         </Link>

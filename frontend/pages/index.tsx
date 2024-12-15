@@ -29,11 +29,11 @@ export default function Home({
 }: HomeProps) {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-32 lg:gap-40 xl:gap-64`}
+      className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-20 sm:gap-32 lg:gap-40 xl:gap-64`}
     >
       <HomeBanner videos={videos} />
       <section className="text-default">
-        <div className="px-16 lg:px-24 flex flex-col gap-14 items-center xl:grid xl:grid-rows-[auto_auto] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-20">
+        <div className="sm:px-16 lg:px-24 flex flex-col gap-14 items-center xl:grid xl:grid-rows-[auto_auto] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-20">
           <ProductsCarousel
             category="all"
             title="Best Sellers"

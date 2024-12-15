@@ -6,7 +6,7 @@ import { NavigationRoute } from "@/components/route";
 const ShopNowSection = () => {
   return (
     <div className="flex flex-col gap-20 items-center justify-center h-auto pb-10 w-full px-20 md:px-28 bg-gradient-bg-shop-now">
-      <h1 className="text-center font-playfair front-semibold text-3xl md:text-4xl max-w-[1000px] lg:text-[50px] text-gray-500 md:leading-[60px] tracking-widest">
+      <h1 className="text-center font-playfair front-semibold text-3xl md:text-4xl max-w-[1000px] lg:text-[50px] text-default md:leading-[60px] tracking-widest">
         DISCOVER THE FULL FRAGRANCE COLLECTION.
       </h1>
       <div className="relative w-full max-w-screen mx-auto flex justify-center px-4 md:px-8">

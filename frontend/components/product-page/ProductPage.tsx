@@ -27,13 +27,13 @@ export function ProductPage({
   return (
     <>
       <section className="text-default mb-20">
-        <div className="px-16 xl:pr-24">
+        <div className="px-2 sm:px-16 xl:pr-24">
           <DetailedProduct
             detailedProductContent={detailedProductContent}
             scrollToReview={scrollToReview}
           />
         </div>
-        <div className="px-16 lg:px-24 flex flex-col gap-14 xl:grid xl:grid-rows-[100px_2fr] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-10">
+        <div className="px-2 sm:px-16 lg:px-24 flex flex-col gap-14 xl:grid xl:grid-rows-[100px_2fr] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-10">
           <Description description={parsedDescription} />
           <ProductsCarousel
             category={category}

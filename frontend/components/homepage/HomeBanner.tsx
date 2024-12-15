@@ -39,7 +39,7 @@ const HomeBanner = ({ videos }: HomeBannerProps) => {
   };
 
   return (
-    <div className="bg-[#F5E1C9] w-screen md:h-[80vh] flex items-center">
+    <div className="bg-[#F5E1C9] w-full lg:py-8 lg:px-14 2xl:px-24">
       <Splide hasTrack={false} options={options}>
         <SplideTrack>
           {videos.map((item) => (
