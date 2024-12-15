@@ -33,7 +33,7 @@ export function ProductPage({
             scrollToReview={scrollToReview}
           />
         </div>
-        <div className="px-2 sm:px-16 lg:px-24 flex flex-col gap-14 xl:grid xl:grid-rows-[100px_2fr] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-10">
+        <div className="px-2 sm:px-16 lg:px-24 flex flex-col gap-14 xl:grid xl:grid-rows-[repeat(3,auto)] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-10">
           <Description description={parsedDescription} />
           <ProductsCarousel
             category={category}
