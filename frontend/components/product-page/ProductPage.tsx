@@ -46,13 +46,13 @@ export function ProductPage({
             recommendedProducts={recommendedProducts}
           />
         </div>
+        <div className="scroll-mt-32" ref={reviewSectionRef}>
+          <ReviewSection
+            comments={comments}
+            avgStar={detailedProductContent.avgStar}
+          />
+        </div>
       </section>
-      <div className="scroll-mt-32" ref={reviewSectionRef}>
-        <ReviewSection
-          comments={comments}
-          avgStar={detailedProductContent.avgStar}
-        />
-      </div>
     </>
   );
 }
