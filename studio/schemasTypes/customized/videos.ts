@@ -27,7 +27,7 @@ export default defineType({
     defineField({
       name: 'video',
       title: 'Video URL',
-      type: 'url',
+      type: 'string',
       description: 'Enter the URL of the video (e.g., from a CDN or hosting service)',
     }),
   ],
