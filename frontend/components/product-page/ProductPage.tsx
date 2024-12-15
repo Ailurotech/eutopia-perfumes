@@ -26,7 +26,7 @@ export function ProductPage({
 
   return (
     <>
-      <section className="text-default mb-20">
+      <section className="text-default flex flex-col gap-28">
         <div className="px-2 sm:px-16 xl:pr-24">
           <DetailedProduct
             detailedProductContent={detailedProductContent}
