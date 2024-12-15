@@ -100,8 +100,9 @@ import {productVariantType} from './documents/productVariant'
 import {wysiwygPageType} from './documents/wysiwygPage'
 import storeLocation from './documents/storeLocation'
 import {joinFormSchema} from './documents/joinForm'
+import { formSubmissionSchema } from './documents/formSubmission'
 
-const documents = [collectionType, colorThemeType, pageType, productType, productVariantType, wysiwygPageType, storeLocation, joinFormSchema]
+const documents = [collectionType, colorThemeType, pageType, productType, productVariantType, wysiwygPageType, storeLocation, joinFormSchema, formSubmissionSchema]
 
 import {homeType} from './singletons/homeType'
 import {settingsType} from './singletons/settingsType'

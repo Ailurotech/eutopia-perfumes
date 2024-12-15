@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ServiceIconsRow from "./ServiceIconsRow";
 import { Playfair_Display, Poppins } from "next/font/google";
 import clsx from "clsx";
+import { Toast } from "../../common/Toast";
 
 const playFair = Playfair_Display({ weight: "400", subsets: ["latin"] });
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
@@ -9,14 +10,51 @@ const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const JoinFamilyForm = () => {
   const [email, setEmail] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error";
+    isVisible: boolean;
+  }>({
+    message: "",
+    type: "success",
+    isVisible: false,
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      console.log("Email submitted:", email);
-      setEmail("");
-      setErrorMessage(null);
+      try {
+        const response = await fetch("/api/submit-form", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            formType: "newsletter",
+            formData: { email },
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Form submission failed");
+        }
+
+        setEmail("");
+        setErrorMessage(null);
+        setToast({
+          message: "Form submitted successfully!",
+          type: "success",
+          isVisible: true,
+        });
+      } catch (error) {
+        setErrorMessage("Failed to submit. Please try again.");
+        setToast({
+          message: "Failed to submit. Please try again.",
+          type: "error",
+          isVisible: true,
+        });
+      }
     } else {
       setErrorMessage("Invalid email format");
     }
@@ -93,6 +131,13 @@ const JoinFamilyForm = () => {
       <div className="w-full">
         <ServiceIconsRow />
       </div>
+
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.isVisible}
+        onClose={() => setToast((prev) => ({ ...prev, isVisible: false }))}
+      />
     </div>
   );
 };
