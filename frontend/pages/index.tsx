@@ -29,7 +29,7 @@ export default function Home({
 }: HomeProps) {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-20 sm:gap-32 lg:gap-40 xl:gap-64`}
+      className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-20 sm:gap-32 lg:gap-40`}
     >
       <HomeBanner videos={videos} />
       <section className="text-default">
