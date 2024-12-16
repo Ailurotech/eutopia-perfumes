@@ -17,34 +17,38 @@ import { IndividualSearchProduct } from "./IndividualSearchProduct";
 import { Pagination } from "@/components/shopping-page/Pagination";
 import { usePagination } from "@/hooks/usePagination";
 
+interface ISearchResultState {
+  result: RecommendedProducts[];
+  isSearched: boolean;
+}
+
 export function Search() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchItem, setSearchItem] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [isSearched, setIsSearched] = useState<boolean>(false);
-  const [searchResult, setSearchResult] = useState<RecommendedProducts[]>([]);
+  const [searchResult, setSearchResult] = useState<ISearchResultState>({
+    result: [],
+    isSearched: false,
+  });
   const [displayNum, setDisplayNum] = useState<number>(9);
   const { currentPage, setCurrentPage, displayProducts } = usePagination({
-    filteredProducts: searchResult,
+    filteredProducts: searchResult.result,
     displayNum,
   });
   const handleOnClose = () => {
     onClose();
     setSearchItem("");
-    setSearchResult([]);
-    setIsSearched(false);
+    setSearchResult({ result: [], isSearched: false });
   };
   const handleKeydown = async (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const searchQuery = searchProductQuery(searchItem);
       try {
         setLoading(true);
-        setSearchResult([]);
-        setIsSearched(false);
+        setSearchResult({ result: [], isSearched: false });
         const res = await sanityClient.fetch(searchQuery);
-        setSearchResult(res);
+        setSearchResult({ result: res, isSearched: true });
         setLoading(false);
-        setIsSearched(true);
       } catch (error) {
         console.error(error);
       }
@@ -113,8 +117,10 @@ export function Search() {
               onKeyDown={handleKeydown}
             />
             {loading && <LoadingSpinner />}
-            {isSearched && searchResult.length === 0 && "No result found!"}
-            {searchResult.length > 0 && (
+            {searchResult.isSearched &&
+              searchResult.result.length === 0 &&
+              "No result found!"}
+            {searchResult.result.length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
                 {displayProducts.map((item) => (
                   <IndividualSearchProduct
@@ -126,7 +132,7 @@ export function Search() {
               </div>
             )}
             <Pagination
-              maxPage={Math.ceil(searchResult.length / displayNum)}
+              maxPage={Math.ceil(searchResult.result.length / displayNum)}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
