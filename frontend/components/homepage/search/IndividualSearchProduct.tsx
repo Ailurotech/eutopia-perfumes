@@ -25,7 +25,7 @@ export function IndividualSearchProduct({
         <Image src={item.image} alt={item.title} fill />
       </div>
       {/* title */}
-      <div className="max-w-[220px] text-pretty">
+      <div className="max-w-[150px] md:max-w-[180px] lg:max-w-[220px] text-pretty">
         {item.title.split("|").map((title, index) =>
           index === 0 ? (
             <h1 key={index} className="text-sm font-bold text-center">

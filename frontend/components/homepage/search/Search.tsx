@@ -68,7 +68,7 @@ export function Search() {
       <Modal isOpen={isOpen} onClose={handleOnClose}>
         <ModalOverlay />
         <ModalContent
-          className="p-6 lg:p-12 min-w-[600px] lg:min-w-[800px]"
+          className="p-6 lg:p-12 min-w-[400px] sm:min-w-[600px] lg:min-w-[800px]"
           maxW="fit-content"
         >
           <ModalHeader
@@ -100,7 +100,7 @@ export function Search() {
             {loading && <LoadingSpinner />}
             {isSearched && searchResult.length === 0 && "No result found!"}
             {searchResult.length > 0 && (
-              <div className="grid grid-cols-3 gap-8">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
                 {displayProducts.map((item) => (
                   <IndividualSearchProduct
                     key={item.id}
