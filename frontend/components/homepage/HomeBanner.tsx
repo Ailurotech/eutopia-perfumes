@@ -39,8 +39,8 @@ const HomeBanner = ({ videos }: HomeBannerProps) => {
   };
 
   return (
-    <div className="bg-[#F5E1C9] w-screen md:h-[80vh] flex items-center">
-      <Splide hasTrack={false} options={options} className="">
+    <div className="bg-[#F5E1C9] w-full p-0 sm:px-6 md:px-12 lg:px-28 2xl:px-32">
+      <Splide hasTrack={false} options={options} style={{ padding: "2rem 0" }}>
         <SplideTrack>
           {videos.map((item) => (
             <SplideSlide key={item._id} className="flex justify-center">
@@ -52,11 +52,17 @@ const HomeBanner = ({ videos }: HomeBannerProps) => {
             </SplideSlide>
           ))}
         </SplideTrack>
-        <div className="splide__arrows !text-white !fill-white">
-          <button className="splide__arrow splide__arrow--prev md:ml-36 text-1xl md:text-5xl !left-16 md:!left-0">
+        <div className="splide__arrows !text-white !fill-white text-xs sm:text-2xl xl:text-4xl">
+          <button
+            className="splide__arrow splide__arrow--prev"
+            style={{ left: "2%" }}
+          >
             <Icon name="arrow" style={{ fill: "white" }} />
           </button>
-          <button className="splide__arrow splide__arrow--next md:mr-36 text-1xl md:text-5xl !right-16 md:!right-0">
+          <button
+            className="splide__arrow splide__arrow--next"
+            style={{ right: "2%" }}
+          >
             <Icon name="arrow" style={{ fill: "white" }} />
           </button>
         </div>

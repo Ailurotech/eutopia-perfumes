@@ -135,3 +135,24 @@ export enum EDefaultProductProps {
   TITLE = "Untitled",
   WEIGHT = "no weight available",
 }
+
+export interface IBasePerfumeSection {
+  description: string;
+  image: string;
+}
+
+export interface IPerfumeSectionContent {
+  women: IBasePerfumeSection;
+  men: IBasePerfumeSection;
+  neutral: IBasePerfumeSection;
+}
+
+export interface Product {
+  name: string;
+  slug: {
+    current: string;
+  };
+  price: number;
+  image: string;
+  categories: string;
+}

@@ -23,7 +23,7 @@ export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
       <div className="bg-[#f3f0f0] py-10 px-20 w-full text-default">
         <div className="flex flex-col items-center justify-center min-h-[200px]">
           <h1 className="uppercase text-5xl font-black mb-4">REVIEWS</h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 text-center">
             There are no reviews at the moment.
           </p>
         </div>

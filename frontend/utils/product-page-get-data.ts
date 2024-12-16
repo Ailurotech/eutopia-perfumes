@@ -3,7 +3,7 @@ import { shoppingPageQuery, shoppingVideoQuery } from "@/query";
 import { PageType } from "@/type";
 import { productFormat } from "./product-format";
 import { convertPathToPageName } from "./page-path-name-convert";
-import { shoppingPageSettingQuery } from "@/query/shopping-page-setting.query";
+import { shoppingPageSettingQuery } from "@/query";
 
 export async function productPageGetData(page: PageType) {
   const videoQuery = shoppingVideoQuery(page);

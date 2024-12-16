@@ -5,7 +5,7 @@ import { ServiceIcon } from "./components/ServiceIcon";
 const ServiceIconsRow = () => {
   return (
     <div className="overflow-x-auto">
-      <div className="w-full bg-white py-14 lg:py-32 xl:py-56 px-24 lg:px-32 xl:px-48">
+      <div className="w-full bg-white p-4 sm:py-14 lg:py-32 xl:py-56 sm:px-24 lg:px-32 xl:px-48">
         <div className="flex justify-start md:justify-center items-center gap-8 lg:gap-10 2xl:gap-36">
           <ServiceIcon
             src="/Halal.svg"

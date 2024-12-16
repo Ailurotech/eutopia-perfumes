@@ -2,10 +2,15 @@ import { Inter } from "next/font/google";
 import HomeBanner from "../components/homepage/HomeBanner";
 import { GetStaticProps } from "next";
 import { sanityClient } from "@/lib/sanityClient";
-import { RecommendedProducts, VideoType } from "@/type";
+import { IPerfumeSectionContent, RecommendedProducts, VideoType } from "@/type";
 import JoinOurFamilyPage from "@/components/homepage/JoinOurFamily";
 import { ProductsCarousel } from "@/components/common/ProductsCarousel";
-import { recommendedProductQuery } from "@/query";
+import PerfumeSection from "@/components/homepage/PerfumeSection";
+import {
+  perfumeSectionQuery,
+  videoSectionQuery,
+  recommendedProductQuery,
+} from "@/query";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,16 +18,22 @@ interface HomeProps {
   videos: VideoType[];
   bestSellers: RecommendedProducts[];
   newArrivals: RecommendedProducts[];
+  perfumeSectionContent: IPerfumeSectionContent;
 }
 
-export default function Home({ videos, bestSellers, newArrivals }: HomeProps) {
+export default function Home({
+  videos,
+  bestSellers,
+  newArrivals,
+  perfumeSectionContent,
+}: HomeProps) {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}
+      className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-20 sm:gap-32 lg:gap-40`}
     >
       <HomeBanner videos={videos} />
-      <section className="text-default mb-20">
-        <div className="px-16 lg:px-24 flex flex-col gap-14">
+      <section className="text-default">
+        <div className="sm:px-16 lg:px-24 flex flex-col gap-14 items-center xl:grid xl:grid-rows-[auto_auto] xl:grid-cols-[25%_1fr] xl:gap-x-10 xl:gap-y-20">
           <ProductsCarousel
             category="all"
             title="Best Sellers"
@@ -35,37 +46,35 @@ export default function Home({ videos, bestSellers, newArrivals }: HomeProps) {
           />
         </div>
       </section>
+      <section className="container px-8 flex flex-col gap-16 lg:gap-36">
+        <PerfumeSection content={perfumeSectionContent} />
+      </section>
       <JoinOurFamilyPage />
     </main>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const videosQuery = `
-    *[_type == "videos"]{
-      _id,
-      title,
-      "slug": slug.current,
-      description,
-      video
-    }
-  `;
-
+  const videosQuery = videoSectionQuery();
   const productsQuery = recommendedProductQuery();
+  const perfumeQuery = perfumeSectionQuery();
 
   let videos = [];
   let bestSellers = [];
   let newArrivals = [];
+  let perfumeSectionContent = {};
 
   try {
-    const [videosResult, productsResult] = await Promise.all([
+    const [videosResult, productsResult, perfumeResult] = await Promise.all([
       sanityClient.fetch(videosQuery),
       sanityClient.fetch(productsQuery),
+      sanityClient.fetch(perfumeQuery),
     ]);
 
     videos = videosResult;
     bestSellers = productsResult;
     newArrivals = [...productsResult].reverse();
+    perfumeSectionContent = perfumeResult[0].perfumeSection;
   } catch (error) {
     console.error("Error in getStaticProps:", error);
   }
@@ -75,6 +84,7 @@ export const getStaticProps: GetStaticProps = async () => {
       videos,
       bestSellers: bestSellers || [],
       newArrivals: newArrivals || [],
+      perfumeSectionContent: perfumeSectionContent || {},
     },
   };
 };

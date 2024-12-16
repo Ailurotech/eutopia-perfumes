@@ -185,7 +185,7 @@ export function DetailedProduct({
                   </span>
                 </>
               ) : (
-                "We are unable to determine your nearest store"
+                "Find your nearest store"
               )}
             </h5>
             <Icon name="search" className="text-black text-xl font-thin" />

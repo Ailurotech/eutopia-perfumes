@@ -20,13 +20,14 @@ const pattaOne = Potta_One({
 const videoVariants = cva("relative w-full", {
   variants: {
     page: {
-      home: ["h-[60vh] mx-auto rounded-lg overflow-hidden"],
+      home: ["w-full sm:w-[75%] rounded-lg overflow-hidden"],
       shopping: ["aspect-[1440/600]"],
     },
   },
 });
 
 export function VideoPlayer({ video, page, linkPath }: VideoPlayerProps) {
+  console.log(video);
   if (!video?.video) {
     return null;
   }
@@ -35,11 +36,11 @@ export function VideoPlayer({ video, page, linkPath }: VideoPlayerProps) {
   const videoUrl = video.video;
 
   return (
-    <div>
+    <div className="w-full flex justify-center items-center">
       <div className={videoVariants({ page })}>
         <video
           src={videoUrl}
-          className="w-full h-full object-cover aspect-[4/3] md:aspect-[16/9]"
+          className="w-full object-cover aspect-[4/3] md:aspect-[16/9]"
           autoPlay
           muted
           loop

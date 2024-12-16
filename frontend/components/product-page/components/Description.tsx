@@ -1,3 +1,4 @@
+import { Portal } from "@chakra-ui/react";
 import clsx from "clsx";
 import { Actor } from "next/font/google";
 
@@ -14,9 +15,10 @@ export function Description({ description }: { description: string }) {
       >
         Description
       </h1>
-      <p className="text-[20px] flex items-center justify-center">
-        {description}
-      </p>
+      <p
+        className="text-[20px] flex items-center justify-center"
+        dangerouslySetInnerHTML={{ __html: description }}
+      ></p>
     </>
   );
 }

@@ -42,7 +42,7 @@ export function IndividualProductForShoppingPage({
   }
 
   return (
-    <div className="flex flex-col items-center group gap-1 md:gap-2 2xl:gap-4 justify-between cursor-pointer">
+    <div className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center">
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image
           src={image}
@@ -56,8 +56,8 @@ export function IndividualProductForShoppingPage({
             type="button"
             className={clsx(
               `group-hover:block hidden ${themeColor} uppercase absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `,
-              "border-2 border-default w-4/5 text-center py-1 rounded-xl font-extrabold cursor-pointer",
-              "text-xs md:text-sm"
+              "border-2 border-default w-[90%] md:w-4/5 text-center p-1 rounded-xl font-extrabold cursor-pointer",
+              "text-[8px] sm:text-xs md:text-sm"
             )}
             onClick={() => {
               storeProductToLocal({
@@ -74,7 +74,7 @@ export function IndividualProductForShoppingPage({
         )}
       </div>
       <h5 className="capitalize text-xs xl:text-lg">{tag}</h5>
-      <div className="min-h-[140px] md:min-h-[120px] xl:min-h-28 2xl:min-h-32 flex flex-col justify-start gap-1 lg:gap-3">
+      <div className="flex flex-col justify-center gap-1 lg:gap-3 items-stretch min-h-[130px]">
         {parsedTitle.map((title, index) => {
           return (
             <h2
@@ -82,8 +82,9 @@ export function IndividualProductForShoppingPage({
               className={clsx(
                 literata.className,
                 "uppercase text-center text-pretty",
-                index === 0 && "text-[14px] xl:text-base 2xl:text-xl",
-                index != 0 && "text-[10px] xl:text-xs 2xl:text-sm"
+                index === 0 &&
+                  "text-[10px] sm:text-[14px] xl:text-base 2xl:text-xl",
+                index != 0 && "text-[8px] sm:text-[10px] xl:text-xs 2xl:text-sm"
               )}
             >
               {title}
@@ -123,7 +124,7 @@ export function IndividualProductForProductPage({
       <h2
         className={clsx(
           literata.className,
-          "xl:min-h-24 2xl:min-h-12 text-[20px] mt-6 mb-4 uppercase text-center"
+          "lg:min-h-16 xl:min-h-24 2xl:min-h-12 text-base sm:text-[20px] mt-6 mb-4 uppercase text-center"
         )}
       >
         {parsedTitle}

@@ -75,17 +75,17 @@ export function ShoppingDisplay({
     <div
       className={clsx(
         shoppingDisplayVariants({ variant }),
-        "px-14 md:px-20 lg:px-40 xl:px-48 2xl:px-56 py-20 space-y-20"
+        "px-6 sm:px-14 md:px-20 lg:px-40 xl:px-48 2xl:px-56 py-4 sm:py-20 space-y-10 md:space-y-20"
       )}
     >
       <div
         className={clsx(
-          "grid grid-cols-4 grid-rows-[3%_min(3%,1fr)_5fr]",
+          "grid grid-cols-4 grid-rows-[repeat(7,auto)]",
           "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-20"
         )}
       >
         <div className="col-span-4">
-          <div className="flex justify-between gap-4 lg:gap-10 xl:gap-16">
+          <div className="flex justify-between gap-4 lg:gap-10 xl:gap-16 flex-wrap">
             {filterLists.map((list) => (
               <DropdownMenu
                 key={list.title}

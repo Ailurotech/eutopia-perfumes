@@ -100,15 +100,26 @@ import {productVariantType} from './documents/productVariant'
 import {wysiwygPageType} from './documents/wysiwygPage'
 import storeLocation from './documents/storeLocation'
 import {joinFormSchema} from './documents/joinForm'
-import { formSubmissionSchema } from './documents/formSubmission'
+import {formSubmissionSchema} from './documents/formSubmission'
 
-const documents = [collectionType, colorThemeType, pageType, productType, productVariantType, wysiwygPageType, storeLocation, joinFormSchema, formSubmissionSchema]
+const documents = [
+  collectionType,
+  colorThemeType,
+  pageType,
+  productType,
+  productVariantType,
+  wysiwygPageType,
+  storeLocation,
+  joinFormSchema,
+  formSubmissionSchema,
+]
 
 import {homeType} from './singletons/homeType'
 import {settingsType} from './singletons/settingsType'
 import aboutUs from './singletons/aboutUsType'
+import {perfumeSectionType} from './singletons/perfumeSectionType'
 
-const singletons = [homeType, settingsType, aboutUs]
+const singletons = [homeType, settingsType, aboutUs, perfumeSectionType]
 
 import richText from './customized/richText'
 import videos from './customized/videos'
@@ -122,5 +133,5 @@ export const schemaTypes = [
   ...objects,
   ...blocks,
   ...documents,
-  ...customized
+  ...customized,
 ]
