@@ -31,7 +31,7 @@ export function useFilter(pageSetting: PageSettingType) {
   ];
 
   // Filter function
-  function filterProcessor(
+  function filter(
     products: ProductType[],
     selectedFilters: SelectedFilters[]
   ): ProductType[] {
@@ -96,6 +96,6 @@ export function useFilter(pageSetting: PageSettingType) {
     size,
     sortPrice,
     filterLists,
-    filterProcessor,
+    filter,
   };
 }

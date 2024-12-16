@@ -5,6 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { NavigationMenuTypes } from "../../route";
 import clsx from "clsx";
 import { Cart } from "../cart/Cart";
+import { Search } from "../search/Search";
 
 export interface NavigationMenuVariants
   extends VariantProps<typeof navigationMenuVariants> {}
@@ -55,7 +56,7 @@ export function NavigationMenu({
         direction == "vertical" && "space-y-4"
       )}
     >
-      {iconPosition == "left" && NavigationButton}
+      {iconPosition == "left" && <Search />}
       {Object.values(navigationMenuRoute).map((route) => (
         <li key={route.Name} className={navigationMenuVariants({ direction })}>
           <Link href={route.Path}>{route.Name}</Link>

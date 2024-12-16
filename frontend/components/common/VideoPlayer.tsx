@@ -27,7 +27,6 @@ const videoVariants = cva("relative w-full", {
 });
 
 export function VideoPlayer({ video, page, linkPath }: VideoPlayerProps) {
-  console.log(video);
   if (!video?.video) {
     return null;
   }

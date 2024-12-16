@@ -15,14 +15,14 @@ export function IndividualProductCard({
   return (
     <div className="border-[1px] border-inherit rounded-2xl p-3 grid grid-cols-[auto_45%_auto_auto_auto] lg:grid-cols-[auto_50%_auto_auto_auto] file:gap-4 items-center hover:shadow-md">
       {/* image */}
-      <div className="w-[80px] h-[80px] rounded-lg relative overflow-clip">
+      <div className="w-[50px] h-[50px] sm:w-[80px] sm:h-[80px] rounded-lg relative overflow-clip">
         <Image src={item.image} alt={item.title} fill />
       </div>
       {/* title */}
-      <div className="max-w-[240px] lg:max-w-[280px] lg:mr-10">
+      <div className="max-w-[180px] sm:max-w-[240px] lg:max-w-[280px] lg:mr-10">
         {item.title.split("|").map((title, index) =>
           index === 0 ? (
-            <h1 key={index} className="text-sm font-bold">
+            <h1 key={index} className="text-xs sm:text-sm font-bold">
               {title}
             </h1>
           ) : (
@@ -33,9 +33,9 @@ export function IndividualProductCard({
         )}
       </div>
       {/* quantity */}
-      <div className="flex items-center justify-end gap-2 mr-10 lg:mr-12">
-        <p className="text-xl font-bold">{item.quantity}</p>
-        <span className="flex flex-col">
+      <div className="flex items-center justify-end gap-2 mr-2 sm:mr-10 lg:mr-12">
+        <p className="text-base sm:text-xl font-bold">{item.quantity}</p>
+        <span className="flex flex-col text-xs sm:text-base">
           <button
             onClick={() => {
               setCart((prev) => {

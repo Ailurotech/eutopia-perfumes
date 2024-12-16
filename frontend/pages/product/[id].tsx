@@ -1,3 +1,4 @@
+import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { ProductPage } from "@/components/product-page/ProductPage";
 import { sanityClient } from "@/lib/sanityClient";
 import {
@@ -43,17 +44,7 @@ export default function Product() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-60">
-        <Spinner
-          thickness="5px"
-          speed="0.6s"
-          emptyColor="gray.200"
-          color="#808274"
-          size="xl"
-        />
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   if (!loading && productPageContent && recommendedProducts) {

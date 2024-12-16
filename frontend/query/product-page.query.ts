@@ -33,3 +33,14 @@ export function recommendedProductQuery(tag?: string) {
             }[0...10]
         `;
 }
+
+export function searchProductQuery(searchString: string) {
+  return `
+        *[_type == "product" && store.status == "active" && store.isDeleted == false && store.title match "${searchString}*"]{
+            "title":store.title,
+            "image":store.previewImageUrl,
+            "price":store.priceRange.maxVariantPrice,
+            "id":store.id
+            }
+        `;
+}

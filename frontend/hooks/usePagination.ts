@@ -1,19 +1,21 @@
-import { ProductType } from "@/type";
 import { useEffect, useState } from "react";
 
-export function usePagination({
-  filteredProducts,
-}: {
-  filteredProducts: ProductType[];
-}) {
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [displayProducts, setDisplayProducts] = useState<ProductType[]>([]);
-  const displayNum = 16;
+interface IUsePagination<T extends Array<any>> {
+  filteredProducts: T;
+  displayNum: number;
+}
 
-  function paginatedProducts(products: ProductType[]) {
+export function usePagination<T extends Array<any>>({
+  filteredProducts,
+  displayNum,
+}: IUsePagination<T>) {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [displayProducts, setDisplayProducts] = useState<T>([] as T);
+
+  function paginatedProducts(products: T): T {
     const startIndex = (currentPage - 1) * displayNum;
     const endIndex = startIndex + displayNum;
-    return products.slice(startIndex, endIndex);
+    return products.slice(startIndex, endIndex) as T;
   }
 
   useEffect(() => {
@@ -23,10 +25,9 @@ export function usePagination({
     }
     const parsedProducts = paginatedProducts(filteredProducts);
     setDisplayProducts(parsedProducts);
-  }, [currentPage, filteredProducts]);
+  }, [currentPage, filteredProducts, displayNum]);
 
   return {
-    displayNum,
     displayProducts,
     setCurrentPage,
     currentPage,

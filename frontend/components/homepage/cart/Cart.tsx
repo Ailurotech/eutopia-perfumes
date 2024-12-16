@@ -116,7 +116,7 @@ export function Cart() {
       <Modal isOpen={isOpen} onClose={handleOnClose}>
         <ModalOverlay />
         <ModalContent
-          className="p-6 lg:p-12 min-w-[600px] lg:min-w-[800px]"
+          className="p-6 lg:p-12 min-w-[400px] sm:min-w-[600px] lg:min-w-[800px]"
           maxW="fit-content"
         >
           <ModalHeader
