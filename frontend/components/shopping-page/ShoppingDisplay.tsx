@@ -33,24 +33,19 @@ export function ShoppingDisplay({
   products,
   pageSetting,
 }: ShoppingDisplayProps) {
-  const { filterLists } = useFilter(pageSetting);
+  const { filterLists, filter } = useFilter(pageSetting);
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>([]);
   const [filteredProducts, setFilteredProducts] =
     useState<ProductType[]>(products);
   const displayNum = 16;
   const { currentPage, setCurrentPage, displayProducts } = usePagination({
     filteredProducts,
-    displayNum
+    displayNum,
   });
 
-  const filterProcessor = useCallback(
-    () => {
-      // Your filter logic here
-    },
-    [
-      /* dependencies */
-    ]
-  );
+  const filterProcessor = useCallback(() => {
+    return filter(products, selectedFilters);
+  }, [selectedFilters, filter, products]);
 
   useEffect(() => {
     filterProcessor();
