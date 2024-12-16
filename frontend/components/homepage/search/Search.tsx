@@ -11,18 +11,23 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { KeyboardEvent, useState } from "react";
-import Image from "next/image";
+import { KeyboardEvent, useEffect, useState } from "react";
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
-import { useRouter } from "next/router";
+import { IndividualSearchProduct } from "./IndividualSearchProduct";
+import { Pagination } from "@/components/shopping-page/Pagination";
+import { usePagination } from "@/hooks/usePagination";
 
 export function Search() {
-  const [searchItem, setSearchItem] = useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [searchItem, setSearchItem] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<RecommendedProducts[]>([]);
-  const router = useRouter();
+  const displayNum = 9;
+  const { currentPage, setCurrentPage, displayProducts } = usePagination({
+    filteredProducts: searchResult,
+    displayNum,
+  });
   const handleOnClose = () => {
     onClose();
     setSearchItem("");
@@ -34,6 +39,8 @@ export function Search() {
       const searchQuery = searchProductQuery(searchItem);
       try {
         setLoading(true);
+        setSearchResult([]);
+        setIsSearched(false);
         const res = await sanityClient.fetch(searchQuery);
         setSearchResult(res);
         setLoading(false);
@@ -43,6 +50,10 @@ export function Search() {
       }
     }
   };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchResult, setCurrentPage]);
 
   return (
     <>
@@ -90,39 +101,20 @@ export function Search() {
             {isSearched && searchResult.length === 0 && "No result found!"}
             {searchResult.length > 0 && (
               <div className="grid grid-cols-3 gap-8">
-                {searchResult.map((item) => (
-                  <div key={item.id} className="flex flex-col items-center">
-                    {/* image */}
-                    <div
-                      className="w-[100px] h-[100px] rounded-lg relative overflow-clip cursor-pointer"
-                      onClick={() => {
-                        router.push(`/product/${item.id}`);
-                        handleOnClose();
-                      }}
-                    >
-                      <Image src={item.image} alt={item.title} fill />
-                    </div>
-                    {/* title */}
-                    <div className="max-w-[220px] text-pretty">
-                      {item.title.split("|").map((title, index) =>
-                        index === 0 ? (
-                          <h1
-                            key={index}
-                            className="text-sm font-bold text-center"
-                          >
-                            {title}
-                          </h1>
-                        ) : (
-                          <p key={index} className="text-xs text-center">
-                            {title}
-                          </p>
-                        )
-                      )}
-                    </div>
-                  </div>
+                {displayProducts.map((item) => (
+                  <IndividualSearchProduct
+                    key={item.id}
+                    item={item}
+                    handleOnClose={handleOnClose}
+                  />
                 ))}
               </div>
             )}
+            <Pagination
+              maxPage={Math.ceil(searchResult.length / displayNum)}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
           </ModalBody>
         </ModalContent>
       </Modal>

@@ -37,10 +37,11 @@ export function ShoppingDisplay({
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>([]);
   const [filteredProducts, setFilteredProducts] =
     useState<ProductType[]>(products);
-  const { displayNum, currentPage, setCurrentPage, displayProducts } =
-    usePagination({
-      filteredProducts,
-    });
+  const displayNum = 16;
+  const { currentPage, setCurrentPage, displayProducts } = usePagination({
+    filteredProducts,
+    displayNum
+  });
 
   const filterProcessor = useCallback(
     () => {
