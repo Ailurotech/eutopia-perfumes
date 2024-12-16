@@ -23,7 +23,7 @@ export function Search() {
   const [loading, setLoading] = useState<boolean>(false);
   const [isSearched, setIsSearched] = useState<boolean>(false);
   const [searchResult, setSearchResult] = useState<RecommendedProducts[]>([]);
-  const displayNum = 9;
+  const [displayNum, setDisplayNum] = useState<number>(9);
   const { currentPage, setCurrentPage, displayProducts } = usePagination({
     filteredProducts: searchResult,
     displayNum,
@@ -54,6 +54,21 @@ export function Search() {
   useEffect(() => {
     setCurrentPage(1);
   }, [searchResult, setCurrentPage]);
+
+  useEffect(() => {
+    const updateDisplayNum = () => {
+      if (window.innerWidth < 640) {
+        setDisplayNum(4);
+      } else {
+        setDisplayNum(9);
+      }
+    };
+    updateDisplayNum();
+    window.addEventListener("resize", updateDisplayNum);
+    return () => {
+      window.removeEventListener("resize", updateDisplayNum);
+    };
+  });
 
   return (
     <>
