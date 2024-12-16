@@ -40,6 +40,7 @@ export function Search() {
     setSearchItem("");
     setSearchResult({ result: [], isSearched: false });
   };
+
   const handleKeydown = async (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const searchQuery = searchProductQuery(searchItem);
@@ -101,7 +102,7 @@ export function Search() {
           </ModalHeader>
           <ModalBody
             padding={0}
-            className="text-default flex flex-col gap-4 items-center justify-center"
+            className="text-default flex flex-col gap-8 items-center justify-center"
           >
             <Input
               value={searchItem}
@@ -115,11 +116,12 @@ export function Search() {
               onChange={(e) => setSearchItem(e.target.value)}
               focusBorderColor="#808274"
               onKeyDown={handleKeydown}
+              onClick={() => setSearchItem("")}
             />
             {loading && <LoadingSpinner />}
-            {searchResult.isSearched &&
-              searchResult.result.length === 0 &&
-              "No result found!"}
+            {searchResult.isSearched && searchResult.result.length === 0 && (
+              <p className="text-2xl font-bold">{`No result found!`}</p>
+            )}
             {searchResult.result.length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
                 {displayProducts.map((item) => (
