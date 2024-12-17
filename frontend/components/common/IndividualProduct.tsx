@@ -2,11 +2,6 @@ import Image, { StaticImageData } from "next/image";
 import { Literata } from "next/font/google";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
-import {
-  ILocalStorage,
-  ISingleProductForLocalStorage,
-  ProductType,
-} from "@/type";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
 interface IndividualProductProps {
   image: string;
@@ -78,7 +73,7 @@ export function IndividualProductForShoppingPage({
         {parsedTitle.map((title, index) => {
           return (
             <h2
-              key={index}
+              key={title}
               className={clsx(
                 literata.className,
                 "uppercase text-center text-pretty",

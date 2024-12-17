@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { StarRating } from "../../StarRating";
-import { TCommentType } from "@/type";
 import { ReviewExpandButton } from "./ReviewExpandButton";
+import { IComment } from "@/interface/comment";
 
 interface IReviewCardProps {
   name: "MOST LIKED POSITIVE" | "MOST LIKED NEGATIVE";
-  comment: TCommentType;
+  comment: IComment;
 }
 const MAX_LENGTH = 350;
 

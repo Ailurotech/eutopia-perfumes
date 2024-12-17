@@ -1,9 +1,9 @@
 import React from "react";
 import PerfumeNav from "./component/PerfumeNav";
-import { IPerfumeSectionContent } from "@/type";
 import { NavigationRoute } from "../route";
+import { IPerfumeSection } from "@/interface/product";
 
-const PerfumeSection: React.FC<{ content: IPerfumeSectionContent }> = ({
+const PerfumeSection: React.FC<{ content: IPerfumeSection }> = ({
   content,
 }) => {
   return (

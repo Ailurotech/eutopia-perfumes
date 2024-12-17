@@ -9,8 +9,15 @@ import {
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
 import { Poppins } from "next/font/google";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { FilterLists, FilterListTitle, SelectedFilters } from "@/type";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { EFilterListTitle } from "@/constants/shoppingPage";
+import { IFilter, TFilterLists } from "@/interface/filter";
 
 const poppins = Poppins({
   weight: "400",
@@ -18,51 +25,39 @@ const poppins = Poppins({
 });
 
 interface DropdownMenuProps {
-  menuTitle: FilterListTitle;
-  menuItems: FilterLists;
-  setSelectedFilters: Dispatch<SetStateAction<SelectedFilters[]>>;
-  selectedFilters: SelectedFilters[];
+  menuTitle: EFilterListTitle;
+  menuItems: TFilterLists;
+  setSelectedFilters: Dispatch<SetStateAction<IFilter[]>>;
 }
 
 export function DropdownMenu({
   menuTitle,
   menuItems,
   setSelectedFilters,
-  selectedFilters,
 }: DropdownMenuProps) {
-  const [value, setValue] = useState<FilterLists>([]);
+  const [value, setValue] = useState<TFilterLists>([]);
 
-  useEffect(() => {
-    const selectedValues = selectedFilters?.find(
-      (filter) => filter.title === menuTitle
-    );
-    if (selectedValues?.filterLists === undefined) {
-      return setValue([]);
-    }
-    setValue(selectedValues?.filterLists);
-  }, [selectedFilters, menuTitle]);
+  const onChangeHandler = (e: TFilterLists) => {
+    setValue(e);
+    setSelectedFilters((prev) => {
+      if (e.length === 0) {
+        return prev.filter((item) => item.title !== menuTitle);
+      }
+      const existingFilter = prev.find((filter) => filter.title === menuTitle);
 
-  function onChangeHandler(e: FilterLists) {
-    if (e.length === 0) {
-      setSelectedFilters((prev) => {
-        return prev.filter((filter) => filter.title !== menuTitle);
-      });
-      return;
-    }
-    const selectedFilters = { title: menuTitle, filterLists: e };
-    setSelectedFilters((prev = []) => {
-      const isExisted = prev.some(
-        (filter) => filter.title === selectedFilters.title
-      );
+      if (existingFilter) {
+        const isEqual =
+          JSON.stringify(existingFilter.filterLists) === JSON.stringify(e);
+        if (isEqual) return prev;
 
-      if (isExisted) {
         return prev.map((filter) =>
-          filter.title === selectedFilters.title ? selectedFilters : filter
+          filter.title === menuTitle ? { ...filter, filterLists: e } : filter
         );
       }
-      return [...prev, selectedFilters];
+      return [...prev, { title: menuTitle, filterLists: e }];
     });
-  }
+  };
+
   return (
     <Menu closeOnSelect={false}>
       <MenuButton
@@ -78,10 +73,12 @@ export function DropdownMenu({
         {menuTitle}
       </MenuButton>
       <MenuList>
-        {menuTitle != FilterListTitle.SortPrice && (
+        {menuTitle != EFilterListTitle.SortPrice && (
           <MenuOptionGroup
             type="checkbox"
-            onChange={(value) => onChangeHandler(value as FilterLists)}
+            onChange={(e) => {
+              onChangeHandler(e as TFilterLists);
+            }}
             value={value}
           >
             {menuItems.map((item, index) => (
@@ -91,11 +88,11 @@ export function DropdownMenu({
             ))}
           </MenuOptionGroup>
         )}
-        {menuTitle === FilterListTitle.SortPrice && (
+        {menuTitle === EFilterListTitle.SortPrice && (
           <MenuOptionGroup
-            onChange={(value) => {
-              const data = [value];
-              onChangeHandler(data as FilterLists);
+            onChange={(e) => {
+              const data = [e];
+              onChangeHandler(data as TFilterLists);
             }}
             type="radio"
             value={value ? value[0] : ""}

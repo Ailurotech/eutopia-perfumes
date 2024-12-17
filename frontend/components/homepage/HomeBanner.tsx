@@ -8,11 +8,11 @@ import {
 import "@splidejs/react-splide/css/sea-green";
 import { Icon } from "../common/Icon";
 import { VideoPlayer } from "../common/VideoPlayer";
-import { VideoType } from "@/type";
 import { NavigationRoute, RoutRoute } from "../route";
+import { IVideo } from "@/interface/video";
 
 interface HomeBannerProps {
-  videos: VideoType[];
+  videos: IVideo[];
 }
 
 const HomeBanner = ({ videos }: HomeBannerProps) => {

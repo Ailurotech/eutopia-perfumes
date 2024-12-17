@@ -9,8 +9,9 @@ import {
 import clsx from "clsx";
 import { Poppins } from "next/font/google";
 import { Dispatch, SetStateAction } from "react";
-import { EReviewFilterOption, TCommentType } from "@/type";
 import { Icon } from "@/components/common/Icon";
+import { EReviewFilterOption } from "@/constants/productPage";
+import { IComment } from "@/interface/comment";
 
 const poppins = Poppins({
   weight: "400",
@@ -20,7 +21,7 @@ const poppins = Poppins({
 interface DropdownMenuProps {
   menuTitle: string;
   menuItems: string[];
-  setDisplayComments: Dispatch<SetStateAction<TCommentType[]>>;
+  setDisplayComments: Dispatch<SetStateAction<IComment[]>>;
 }
 
 export function DropdownMenu({

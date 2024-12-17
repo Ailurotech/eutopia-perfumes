@@ -1,7 +1,6 @@
 import { Icon } from "@/components/common/Icon";
 import { sanityClient } from "@/lib/sanityClient";
 import { searchProductQuery } from "@/query";
-import { RecommendedProducts } from "@/type";
 import {
   Input,
   Modal,
@@ -16,9 +15,10 @@ import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { IndividualSearchProduct } from "./IndividualSearchProduct";
 import { Pagination } from "@/components/shopping-page/Pagination";
 import { usePagination } from "@/hooks/usePagination";
+import { IRecommendedProduct } from "@/interface/product";
 
 interface ISearchResultState {
-  result: RecommendedProducts[];
+  result: IRecommendedProduct[];
   isSearched: boolean;
 }
 
@@ -57,10 +57,6 @@ export function Search() {
   };
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [searchResult, setCurrentPage]);
-
-  useEffect(() => {
     const updateDisplayNum = () => {
       if (window.innerWidth < 640) {
         setDisplayNum(4);
@@ -74,6 +70,10 @@ export function Search() {
       window.removeEventListener("resize", updateDisplayNum);
     };
   });
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchResult, setCurrentPage]);
 
   return (
     <>

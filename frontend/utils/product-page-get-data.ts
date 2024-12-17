@@ -1,11 +1,11 @@
 import { sanityClient } from "@/lib/sanityClient";
 import { shoppingPageQuery, shoppingVideoQuery } from "@/query";
-import { PageType } from "@/type";
 import { productFormat } from "./product-format";
 import { convertPathToPageName } from "./page-path-name-convert";
-import { shoppingPageSettingQuery } from "@/query";
+import { shoppingPageSettingQuery } from "@/query/shopping-page-setting.query";
+import { TPageName } from "@/interface/pages/pageSetting";
 
-export async function productPageGetData(page: PageType) {
+export async function productPageGetData(page: TPageName) {
   const videoQuery = shoppingVideoQuery(page);
   const pageName = convertPathToPageName(page);
   const pageQuery = shoppingPageQuery(page === "all" ? "" : pageName);

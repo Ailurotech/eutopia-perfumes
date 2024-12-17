@@ -4,14 +4,17 @@ import { IndividualProductForShoppingPage } from "../common/IndividualProduct";
 import { FilterTag } from "./FilterTag";
 import { Pagination } from "./Pagination";
 import { cva, type VariantProps } from "class-variance-authority";
-import { PageSettingType, ProductType, SelectedFilters } from "@/type";
-import { useFilter } from "@/hooks/usefilter";
 import { usePagination } from "@/hooks/usePagination";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useMemo } from "react";
+import { IProduct } from "@/interface/product";
+import { IFilter } from "@/interface/filter";
+import { IPageSetting } from "@/interface/pages/pageSetting";
+import { filter, getFilterLists } from "@/utils/filter";
 
 export type ShoppingDisplayVariants = VariantProps<
   typeof shoppingDisplayVariants
 >;
+
 export const shoppingDisplayVariants = cva("", {
   variants: {
     variant: {
@@ -23,49 +26,38 @@ export const shoppingDisplayVariants = cva("", {
   },
 });
 
-type ShoppingDisplayProps = {
-  products: ProductType[];
-  pageSetting: PageSettingType;
-} & ShoppingDisplayVariants;
+interface IShoppingDisplayProps extends ShoppingDisplayVariants {
+  products: IProduct[];
+  pageSetting: IPageSetting;
+}
 
 export function ShoppingDisplay({
   variant,
   products,
   pageSetting,
-}: ShoppingDisplayProps) {
-  const { filterLists, filter } = useFilter(pageSetting);
-  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters[]>([]);
+}: IShoppingDisplayProps) {
+  const filterLists = getFilterLists(pageSetting);
+  const [selectedFilters, setSelectedFilters] = useState<IFilter[]>([]);
   const [filteredProducts, setFilteredProducts] =
-    useState<ProductType[]>(products);
+    useState<IProduct[]>(products);
   const displayNum = 16;
   const { currentPage, setCurrentPage, displayProducts } = usePagination({
     filteredProducts,
     displayNum,
   });
 
-  const filterProcessor = useCallback(() => {
-    return filter(products, selectedFilters);
-  }, [selectedFilters, filter, products]);
-
-  useEffect(() => {
-    filterProcessor();
-  }, [filterProcessor]);
-
   useEffect(() => {
     if (selectedFilters.length > 0) {
-      const filtered = filterProcessor();
-      setFilteredProducts((filtered as unknown as ProductType[]) ?? products);
+      const filtered = filter(products, selectedFilters);
+      setFilteredProducts(filtered);
     } else {
       setFilteredProducts(products);
     }
-  }, [selectedFilters, products, filterProcessor]);
+  }, [products, selectedFilters]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [filteredProducts, setCurrentPage]);
-  useEffect(() => {
-    filterProcessor();
-  }, [filterProcessor, products, selectedFilters]);
 
   return (
     <div
@@ -88,7 +80,6 @@ export function ShoppingDisplay({
                 menuTitle={list.title}
                 menuItems={list.filterLists}
                 setSelectedFilters={setSelectedFilters}
-                selectedFilters={selectedFilters}
               />
             ))}
           </div>

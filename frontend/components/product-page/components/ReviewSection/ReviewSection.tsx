@@ -5,11 +5,12 @@ import { ReviewCard } from "./components/ReviewCard";
 import { SingleReview } from "./components/SingleReview";
 import { SummaryHighLight } from "./components/SummaryHighLight";
 import { DropdownMenu } from "./components/DropdownMenu";
-import { EReviewFilterOption, TProductPageExtraContent } from "@/type";
 import { ratingDistributionFormat } from "@/utils/rating-distribution-format";
 import { useState, useEffect } from "react";
+import { EReviewFilterOption } from "@/constants/productPage";
+import { IReviewSection } from "@/interface/pages/productPage";
 
-export function ReviewSection({ comments, avgStar }: TProductPageExtraContent) {
+export function ReviewSection({ comments, avgStar }: IReviewSection) {
   const [displayComments, setDisplayComments] = useState([]);
 
   useEffect(() => {

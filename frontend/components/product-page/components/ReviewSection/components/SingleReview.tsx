@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { StarRating } from "../../StarRating";
 import { Icon } from "@/components/common/Icon";
-import { TCommentType } from "@/type";
 import { postDateFormat } from "@/utils/post-date-format";
 import { ReviewDetails } from "./ReviewDetails";
+import { IComment } from "@/interface/comment";
 
 interface IReviewCardProps {
-  comment: TCommentType;
+  comment: IComment;
 }
 
 export function SingleReview({ comment }: IReviewCardProps) {

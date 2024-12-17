@@ -1,13 +1,10 @@
-import { PageSettingType, ProductType, VideoType } from "@/type";
 import { VideoPlayer } from "../common/VideoPlayer";
 import { ShoppingDisplay, ShoppingDisplayVariants } from "./ShoppingDisplay";
+import { IShoppingPage } from "@/interface/pages/shoppingPage";
 
-type ShoppingPageLayoutProps = {
-  video: VideoType;
+interface IShoppingPageLayout extends ShoppingDisplayVariants, IShoppingPage {
   linkPath: string;
-  products: ProductType[];
-  pageSetting: PageSettingType;
-} & ShoppingDisplayVariants;
+}
 
 export function ShoppingPageLayout({
   video,
@@ -15,7 +12,7 @@ export function ShoppingPageLayout({
   linkPath,
   products,
   pageSetting,
-}: ShoppingPageLayoutProps) {
+}: IShoppingPageLayout) {
   return (
     <section className="space-y-16 text-default">
       <VideoPlayer video={video} linkPath={linkPath} />

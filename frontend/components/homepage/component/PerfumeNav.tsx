@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { IBasePerfumeSection } from "@/type";
 import { urlForImage } from "@/lib/sanity.image";
+import { IPerfume } from "@/interface/product";
 
-interface IPerfumeNavProps extends IBasePerfumeSection {
+interface IPerfumeNavProps extends IPerfume {
   title: string;
   linkUrl: string;
   imageOnLeft?: boolean;

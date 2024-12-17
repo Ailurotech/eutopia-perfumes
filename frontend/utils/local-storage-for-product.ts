@@ -1,9 +1,10 @@
-import { ILocalStorage, ISingleProductForLocalStorage } from "@/type";
+import { ICartItem } from "@/interface/cart";
+import { ILocalStorage } from "@/interface/localStorage";
 
 export const STORAGE_TOKEN = "cart";
 export const STORAGE_EVENT = "cartUpdated";
 
-export function storeProductToLocal(product: ISingleProductForLocalStorage) {
+export function storeProductToLocal(product: ICartItem) {
   const cart: string | null = localStorage.getItem(STORAGE_TOKEN);
   const newProduct = {
     ...product,

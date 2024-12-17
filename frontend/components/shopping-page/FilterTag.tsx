@@ -1,12 +1,12 @@
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
 import { Dispatch, SetStateAction } from "react";
-import { SelectedFilters } from "@/type";
 import { Button } from "@chakra-ui/react";
+import { IFilter } from "@/interface/filter";
 
 interface FilterTagProps {
   filter: string;
-  setSelectedFilters: Dispatch<SetStateAction<SelectedFilters[]>>;
+  setSelectedFilters: Dispatch<SetStateAction<IFilter[]>>;
 }
 
 export function FilterTag({ filter, setSelectedFilters }: FilterTagProps) {

@@ -1,6 +1,8 @@
-import { EDefaultProductProps, ProductPageContent, ProductType } from "@/type";
+import { IProduct } from "@/interface/product";
+import { EDefaultProductProps } from "@/constants/productPage";
+import { IProductPageContent } from "@/interface/pages/productPage";
 
-export function productFormat<T extends ProductPageContent | ProductType>(
+export function productFormat<T extends IProductPageContent | IProduct>(
   products: T[],
   sku?: number
 ): T[] {
@@ -12,7 +14,7 @@ export function productFormat<T extends ProductPageContent | ProductType>(
   return res;
 }
 
-function setDefaultValues<T extends ProductPageContent | ProductType>(
+function setDefaultValues<T extends IProductPageContent | IProduct>(
   products: T[]
 ): T[] {
   const res = products.map((product) => {
@@ -48,7 +50,7 @@ function setDefaultValues<T extends ProductPageContent | ProductType>(
   return res;
 }
 
-function addWeightByTitle(product: ProductPageContent | ProductType) {
+function addWeightByTitle(product: IProductPageContent | IProduct) {
   const sizeRegex = /\d+ml/g;
   const weight = product.title.match(sizeRegex);
   if (weight === null) {
