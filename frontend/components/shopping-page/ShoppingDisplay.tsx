@@ -45,7 +45,7 @@ export function ShoppingDisplay({
     filteredProducts,
     displayNum,
   });
-  console.log(selectedFilters);
+
   useEffect(() => {
     if (selectedFilters && Object.keys(selectedFilters).length > 0) {
       const filtered = filter(products, selectedFilters);
