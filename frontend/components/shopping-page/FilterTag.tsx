@@ -6,31 +6,31 @@ import { IFilter } from "@/interface/filter";
 
 interface FilterTagProps {
   filter: string;
-  setSelectedFilters: Dispatch<SetStateAction<IFilter[]>>;
+  setSelectedFilters: Dispatch<SetStateAction<IFilter>>;
 }
 
 export function FilterTag({ filter, setSelectedFilters }: FilterTagProps) {
   const handleFilterTagsClick = (filter: string) => {
     setSelectedFilters((prev) => {
-      const remainSelectedConditions = prev.map((item) => {
-        const newCondition = item.filterLists.filter((f: string) => {
-          return f.toLowerCase() !== filter.toLowerCase();
-        });
-
-        return { ...item, filterLists: newCondition };
-      });
-
-      const exceptEmptyConditions = remainSelectedConditions.filter(
-        (item) => item.filterLists.length > 0
-      );
-      return exceptEmptyConditions;
+      const updatedFilters = { ...prev };
+      for (const key in updatedFilters) {
+        if (updatedFilters[key].includes(filter)) {
+          updatedFilters[key] = updatedFilters[key].filter(
+            (item) => item !== filter
+          );
+        }
+        if (updatedFilters[key].length === 0) {
+          delete updatedFilters[key];
+        }
+      }
+      return updatedFilters;
     });
   };
 
   return (
     <Button
       className={clsx(
-        "bg-[#D9D9D9] rounded-lg uppercase py-2 px-2 xl:px-4 flex items-center font-black",
+        "bg-[#D9D9D9] rounded-lg py-2 px-2 xl:px-4 flex items-center font-black",
         "text-[10px] lg:text-xs xl:text-[14px] 2xl:text-[16px]",
         "flex gap-2"
       )}

@@ -37,7 +37,7 @@ export function ShoppingDisplay({
   pageSetting,
 }: IShoppingDisplayProps) {
   const filterLists = getFilterLists(pageSetting);
-  const [selectedFilters, setSelectedFilters] = useState<IFilter[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<IFilter>(null);
   const [filteredProducts, setFilteredProducts] =
     useState<IProduct[]>(products);
   const displayNum = 16;
@@ -45,9 +45,9 @@ export function ShoppingDisplay({
     filteredProducts,
     displayNum,
   });
-
+  console.log(selectedFilters);
   useEffect(() => {
-    if (selectedFilters.length > 0) {
+    if (selectedFilters && Object.keys(selectedFilters).length > 0) {
       const filtered = filter(products, selectedFilters);
       setFilteredProducts(filtered);
     } else {
@@ -80,21 +80,23 @@ export function ShoppingDisplay({
                 menuTitle={list.title}
                 menuItems={list.filterLists}
                 setSelectedFilters={setSelectedFilters}
+                selectedFilters={selectedFilters}
               />
             ))}
           </div>
         </div>
         <div className="col-span-4">
           <div className="flex justify-start gap-x-4 lg:gap-x-8 flex-wrap gap-y-2">
-            {selectedFilters?.map((filter) =>
-              filter.filterLists.map((filter, index) => (
-                <FilterTag
-                  key={index}
-                  filter={filter}
-                  setSelectedFilters={setSelectedFilters}
-                />
-              ))
-            )}
+            {selectedFilters &&
+              Object.values(selectedFilters).map((filter) =>
+                filter.map((filter) => (
+                  <FilterTag
+                    key={filter}
+                    filter={filter}
+                    setSelectedFilters={setSelectedFilters}
+                  />
+                ))
+              )}
           </div>
         </div>
         {!displayProducts.length && (

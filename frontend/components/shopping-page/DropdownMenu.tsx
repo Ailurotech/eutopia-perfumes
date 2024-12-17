@@ -9,13 +9,7 @@ import {
 import { Icon } from "../common/Icon";
 import clsx from "clsx";
 import { Poppins } from "next/font/google";
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { EFilterListTitle } from "@/constants/shoppingPage";
 import { IFilter, TFilterLists } from "@/interface/filter";
 
@@ -27,34 +21,35 @@ const poppins = Poppins({
 interface DropdownMenuProps {
   menuTitle: EFilterListTitle;
   menuItems: TFilterLists;
-  setSelectedFilters: Dispatch<SetStateAction<IFilter[]>>;
+  setSelectedFilters: Dispatch<SetStateAction<IFilter>>;
+  selectedFilters: IFilter;
 }
 
 export function DropdownMenu({
   menuTitle,
   menuItems,
+  selectedFilters,
   setSelectedFilters,
 }: DropdownMenuProps) {
   const [value, setValue] = useState<TFilterLists>([]);
+
+  useEffect(() => {
+    if (!selectedFilters) return;
+    const selected = selectedFilters[menuTitle];
+    selected ? setValue(selected) : setValue([]);
+  }, [selectedFilters, menuTitle]);
 
   const onChangeHandler = (e: TFilterLists) => {
     setValue(e);
     setSelectedFilters((prev) => {
       if (e.length === 0) {
-        return prev.filter((item) => item.title !== menuTitle);
+        const { [menuTitle]: _, ...rest } = prev;
+        return;
       }
-      const existingFilter = prev.find((filter) => filter.title === menuTitle);
-
-      if (existingFilter) {
-        const isEqual =
-          JSON.stringify(existingFilter.filterLists) === JSON.stringify(e);
-        if (isEqual) return prev;
-
-        return prev.map((filter) =>
-          filter.title === menuTitle ? { ...filter, filterLists: e } : filter
-        );
-      }
-      return [...prev, { title: menuTitle, filterLists: e }];
+      return {
+        ...prev,
+        [menuTitle]: e,
+      };
     });
   };
 
