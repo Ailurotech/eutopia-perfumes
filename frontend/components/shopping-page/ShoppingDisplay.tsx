@@ -10,6 +10,7 @@ import { IProduct } from "@/interface/product";
 import { IFilter } from "@/interface/filter";
 import { IPageSetting } from "@/interface/pages/pageSetting";
 import { filter, getFilterLists } from "@/utils/filter";
+import { LoadingSpinner } from "../common/LoadingSpinner";
 
 export type ShoppingDisplayVariants = VariantProps<
   typeof shoppingDisplayVariants
@@ -45,15 +46,15 @@ export function ShoppingDisplay({
     filteredProducts,
     displayNum,
   });
-
+  const hasFilters = selectedFilters && Object.keys(selectedFilters).length > 0;
   useEffect(() => {
-    if (selectedFilters && Object.keys(selectedFilters).length > 0) {
+    if (hasFilters) {
       const filtered = filter(products, selectedFilters);
       setFilteredProducts(filtered);
     } else {
       setFilteredProducts(products);
     }
-  }, [products, selectedFilters]);
+  }, [products, selectedFilters, hasFilters]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -87,7 +88,7 @@ export function ShoppingDisplay({
         </div>
         <div className="col-span-4">
           <div className="flex justify-start gap-x-4 lg:gap-x-8 flex-wrap gap-y-2">
-            {selectedFilters &&
+            {hasFilters &&
               Object.values(selectedFilters).map((filter) =>
                 filter.map((filter) => (
                   <FilterTag
@@ -99,7 +100,12 @@ export function ShoppingDisplay({
               )}
           </div>
         </div>
-        {!displayProducts.length && (
+        {!displayProducts.length && !hasFilters && (
+          <div className="col-span-4">
+            <LoadingSpinner />
+          </div>
+        )}
+        {!displayProducts.length && hasFilters && (
           <div className="col-span-4 flex justify-center">
             <h1 className="text-3xl font-black">No products found</h1>
           </div>
