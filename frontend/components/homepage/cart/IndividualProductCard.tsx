@@ -1,10 +1,11 @@
 import { Icon } from "@/components/common/Icon";
-import { ILocalStorage, ISingleProductForLocalStorage } from "@/type";
+import { ICartItem } from "@/interface/cart";
+import { ILocalStorage } from "@/interface/localStorage";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 
 interface IIndividualProductCard {
-  item: ISingleProductForLocalStorage;
+  item: ICartItem;
   setCart: Dispatch<SetStateAction<ILocalStorage>>;
 }
 

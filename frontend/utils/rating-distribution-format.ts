@@ -1,13 +1,15 @@
-import { ERatingOption, TCommentType, TRatingDistribution } from "@/type";
+import { ERatingOption } from "@/constants/productPage";
+import { IComment } from "@/interface/comment";
+import { IRatingDistribution } from "@/interface/ratingDistribution";
 
 function calPercentage(rate: number, total: number) {
   return Number(((rate / total) * 100).toFixed(2));
 }
 
 export function ratingDistributionFormat(
-  comments: TCommentType[]
-): TRatingDistribution {
-  const res = {} as TRatingDistribution;
+  comments: IComment[]
+): IRatingDistribution {
+  const res = {} as IRatingDistribution;
   const totalComments = comments.length;
   const totalRating = Object.keys(ERatingOption).length;
   const ratingSummary = comments.reduce((acc, comment) => {

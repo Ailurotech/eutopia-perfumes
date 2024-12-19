@@ -9,7 +9,6 @@ interface PaginationProps {
 }
 
 interface PageButtonProps {
-  key?: number;
   variant: "pageNumberButton" | "pageArrowButton";
   page: number | React.ReactNode;
   onClick: () => void;
@@ -21,6 +20,13 @@ export function Pagination({
   currentPage,
   setCurrentPage,
 }: PaginationProps) {
+  const displayPageNum = 4;
+  const multiplyPageNum = 5;
+  const numBetweenFirstAndLast = maxPage - currentPage + 1;
+  const maxNumOfFirst = maxPage - displayPageNum + 1;
+  const numBetweenSecondAndLast = numBetweenFirstAndLast + 1;
+  const maxNumOfSecond = maxNumOfFirst + 1;
+
   function nextPage() {
     if (currentPage < maxPage) {
       setCurrentPage(currentPage + 1);
@@ -79,60 +85,55 @@ export function Pagination({
   }
 
   //when maxPage more than five only show one page
-  const displayPageNum = 4;
-  const multiplyPageNum = 5;
-  const numBetweenFirstAndLast = maxPage - currentPage + 1;
-  const maxNumOfFirst = maxPage - displayPageNum + 1;
-  const numBetweenSecondAndLast = numBetweenFirstAndLast + 1;
-  const maxNumOfSecond = maxNumOfFirst + 1;
+  if (maxPage > 5) {
+    const paginationList = [
+      numBetweenFirstAndLast <= displayPageNum ? maxNumOfFirst : currentPage,
+      numBetweenSecondAndLast <= displayPageNum
+        ? maxNumOfSecond
+        : currentPage + 1,
+      "...",
+      maxPage - 1,
+      maxPage,
+    ];
 
-  const paginationList = [
-    numBetweenFirstAndLast <= displayPageNum ? maxNumOfFirst : currentPage,
-    numBetweenSecondAndLast <= displayPageNum
-      ? maxNumOfSecond
-      : currentPage + 1,
-    "...",
-    maxPage - 1,
-    maxPage,
-  ];
-
-  return (
-    <PageContainer>
-      <PageButton
-        variant="pageArrowButton"
-        page={<Icon name="back" />}
-        onClick={previousPage}
-        isDisabled={currentPage === 1 && true}
-      />
-      {paginationList.map((page, index) => {
-        switch (index) {
-          case 2:
-            return (
-              <PageButton
-                key={index}
-                variant="pageNumberButton"
-                onClick={goToNextFivePages}
-                page={page}
-                isDisabled={currentPage + multiplyPageNum >= maxPage && true}
-              />
-            );
-          default:
-            return (
-              <PageButton
-                key={index}
-                variant="pageNumberButton"
-                onClick={() => goToPage(page as number)}
-                page={page}
-              />
-            );
-        }
-      })}
-      <PageButton
-        variant="pageArrowButton"
-        isDisabled={currentPage + displayPageNum > maxPage && true}
-        onClick={nextPage}
-        page={<Icon name="forward" />}
-      />
-    </PageContainer>
-  );
+    return (
+      <PageContainer>
+        <PageButton
+          variant="pageArrowButton"
+          page={<Icon name="back" />}
+          onClick={previousPage}
+          isDisabled={currentPage === 1 && true}
+        />
+        {paginationList.map((page, index) => {
+          switch (index) {
+            case 2:
+              return (
+                <PageButton
+                  key={index}
+                  variant="pageNumberButton"
+                  onClick={goToNextFivePages}
+                  page={page}
+                  isDisabled={currentPage + multiplyPageNum >= maxPage && true}
+                />
+              );
+            default:
+              return (
+                <PageButton
+                  key={index}
+                  variant="pageNumberButton"
+                  onClick={() => goToPage(page as number)}
+                  page={page}
+                />
+              );
+          }
+        })}
+        <PageButton
+          variant="pageArrowButton"
+          isDisabled={currentPage + displayPageNum > maxPage && true}
+          onClick={nextPage}
+          page={<Icon name="forward" />}
+        />
+      </PageContainer>
+    );
+  }
 }

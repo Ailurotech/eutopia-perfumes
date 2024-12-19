@@ -1,14 +1,10 @@
 import { NavigationRoute } from "@/components/route";
 import { ShoppingPageLayout } from "@/components/shopping-page/ShoppingPageLayout";
-import { ShoppingPageProps } from "@/type";
 import { GetStaticProps } from "next";
 import { productPageGetData } from "@/utils/product-page-get-data";
+import { IShoppingPage } from "@/interface/pages/shoppingPage";
 
-export default function Page({
-  video,
-  products,
-  pageSetting,
-}: ShoppingPageProps) {
+export default function Page({ video, products, pageSetting }: IShoppingPage) {
   return (
     <ShoppingPageLayout
       variant="neutral"

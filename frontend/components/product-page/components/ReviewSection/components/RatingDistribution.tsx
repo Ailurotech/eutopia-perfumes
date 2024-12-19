@@ -1,7 +1,7 @@
-import { TRatingDistribution } from "@/type";
+import { IRatingDistribution } from "@/interface/ratingDistribution";
 import { RatingDisplay } from "./RatingDisplay";
 interface IRatingDistributionProps {
-  ratingDistribution: TRatingDistribution;
+  ratingDistribution: IRatingDistribution;
 }
 
 export function RatingDistribution({

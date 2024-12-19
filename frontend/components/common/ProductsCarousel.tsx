@@ -1,18 +1,18 @@
 import Link from "next/link";
 import { Playfair_Display, Poppins } from "next/font/google";
 import clsx from "clsx";
-import { RecommendedProducts } from "@/type";
 import Slider from "react-slick";
 import { Icon } from "@/components/common/Icon";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useRef } from "react";
 import { IndividualProductForProductPage } from "./IndividualProduct";
+import { IRecommendedProduct } from "@/interface/product";
 
-interface ProductsCarouselProps {
+interface IProductsCarouselProps {
   title: string;
   category: string;
-  recommendedProducts: RecommendedProducts[];
+  recommendedProducts: IRecommendedProduct[];
 }
 
 const playFair = Playfair_Display({ weight: "400", subsets: ["latin"] });
@@ -22,7 +22,7 @@ export function ProductsCarousel({
   title,
   category,
   recommendedProducts,
-}: ProductsCarouselProps) {
+}: IProductsCarouselProps) {
   const settings = {
     infinite: true,
     speed: 500,

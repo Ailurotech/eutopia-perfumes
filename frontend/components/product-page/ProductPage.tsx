@@ -1,20 +1,21 @@
-import { ProductPageContent, RecommendedProducts } from "@/type";
 import { Description } from "./components/Description";
 import { DetailedProduct } from "./components/DetailedProduct";
 import { ProductsCarousel } from "../common/ProductsCarousel";
 import { descriptionFormat } from "@/utils";
 import { ReviewSection } from "./components/ReviewSection/ReviewSection";
+import { IProductPageContent } from "@/interface/pages/productPage";
+import { IRecommendedProduct } from "@/interface/product";
 import { useRef } from "react";
 
-interface ProductPageProps {
-  productPageContent: ProductPageContent;
-  recommendedProducts: RecommendedProducts[];
+interface IProductPage {
+  productPageContent: IProductPageContent;
+  recommendedProducts: IRecommendedProduct[];
 }
 
 export function ProductPage({
   productPageContent,
   recommendedProducts,
-}: ProductPageProps) {
+}: IProductPage) {
   const { description, comments, ...detailedProductContent } =
     productPageContent;
   const parsedDescription = descriptionFormat(description);

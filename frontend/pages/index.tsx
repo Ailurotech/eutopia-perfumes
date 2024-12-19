@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import HomeBanner from "../components/homepage/HomeBanner";
 import { GetStaticProps } from "next";
 import { sanityClient } from "@/lib/sanityClient";
-import { IPerfumeSectionContent, RecommendedProducts, VideoType } from "@/type";
 import JoinOurFamilyPage from "@/components/homepage/JoinOurFamily";
 import { ProductsCarousel } from "@/components/common/ProductsCarousel";
 import PerfumeSection from "@/components/homepage/PerfumeSection";
@@ -11,22 +10,24 @@ import {
   videoSectionQuery,
   recommendedProductQuery,
 } from "@/query";
+import { IVideo } from "@/interface/video";
+import { IPerfumeSection, IRecommendedProduct } from "@/interface/product";
+
+interface IHomePage {
+  videos: IVideo[];
+  bestSellers: IRecommendedProduct[];
+  newArrivals: IRecommendedProduct[];
+  perfumeSectionContent: IPerfumeSection;
+}
 
 const inter = Inter({ subsets: ["latin"] });
-
-interface HomeProps {
-  videos: VideoType[];
-  bestSellers: RecommendedProducts[];
-  newArrivals: RecommendedProducts[];
-  perfumeSectionContent: IPerfumeSectionContent;
-}
 
 export default function Home({
   videos,
   bestSellers,
   newArrivals,
   perfumeSectionContent,
-}: HomeProps) {
+}: IHomePage) {
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-20 sm:gap-32 lg:gap-40`}

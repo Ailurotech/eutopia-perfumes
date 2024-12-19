@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Potta_One } from "next/font/google";
 import { cva, type VariantProps } from "class-variance-authority";
-import { VideoType } from "@/type";
+import { IVideo } from "@/interface/video";
 
 type VideoPlayerProps = {
-  video: VideoType;
+  video: IVideo;
   linkPath: string;
 } & VideoPlayerVariants;
 

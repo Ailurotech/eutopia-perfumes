@@ -1,5 +1,4 @@
 import { Icon } from "@/components/common/Icon";
-import { ILocalStorage } from "@/type";
 import {
   getProductsFromLocal,
   STORAGE_EVENT,
@@ -18,16 +17,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { IndividualProductCard } from "./IndividualProductCard";
 import shopifyClient from "@/utils/shopify-client";
-
-interface ISingleProductForLocalStorage {
-  id: number;
-  variantId: number;
-  image: string;
-  title: string;
-  maxPrice: number;
-  quantity?: number;
-  totalPrice?: number;
-}
+import { ILocalStorage } from "@/interface/localStorage";
 
 export function Cart() {
   const [cart, setCart] = useState<ILocalStorage>({});

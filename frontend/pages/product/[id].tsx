@@ -1,14 +1,14 @@
 import { LoadingSpinner } from "@/components/common/LoadingSpinner";
 import { ProductPage } from "@/components/product-page/ProductPage";
+import { IProductPageContent } from "@/interface/pages/productPage";
+import { IRecommendedProduct } from "@/interface/product";
 import { sanityClient } from "@/lib/sanityClient";
 import {
   productPageQuery,
   recommendedProductQuery,
   skuQuery,
 } from "@/query/product-page.query";
-import { ProductPageContent, RecommendedProducts } from "@/type";
 import { productFormat } from "@/utils";
-import { Spinner } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -17,9 +17,9 @@ export default function Product() {
   const id = router.query.id as string;
 
   const [productPageContent, setProductPageContent] =
-    useState<ProductPageContent>();
+    useState<IProductPageContent>();
   const [recommendedProducts, setRecommendedProducts] =
-    useState<RecommendedProducts[]>();
+    useState<IRecommendedProduct[]>();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function Product() {
         const secondSanityQuery = recommendedProductQuery(parsedProduct.tag);
         const recommendedItem = await sanityClient.fetch(secondSanityQuery);
         setRecommendedProducts(recommendedItem);
-        setProductPageContent(parsedProduct as ProductPageContent);
+        setProductPageContent(parsedProduct as IProductPageContent);
         setLoading(false);
       };
       fetchProduct();

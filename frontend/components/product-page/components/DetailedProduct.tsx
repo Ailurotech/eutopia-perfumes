@@ -7,26 +7,27 @@ import { NumberAdder } from "./NumberAdder";
 import { Button } from "@chakra-ui/react";
 import { Icon } from "@/components/common/Icon";
 import { useState, useEffect } from "react";
-import { EDefaultProductProps, ProductPageContent } from "@/type";
 import { parseWeight } from "@/utils";
 import { covertPageToPathName } from "@/utils/page-path-name-convert";
 import { StoreLocator } from "./StoreLocator";
 import { sanityClient } from "@/lib/sanityClient";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
 import { FooterRoute } from "@/components/route";
+import { EDefaultProductProps } from "@/constants/productPage";
+import { IProductPageContent } from "@/interface/pages/productPage";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"] });
 const libreBodoni = Libre_Bodoni({ weight: "400", subsets: ["latin"] });
 
-interface DetailedProductProps {
-  detailedProductContent: Omit<ProductPageContent, "description" | "comments">;
+interface IDetailedProductProps {
+  detailedProductContent: Omit<IProductPageContent, "description" | "comments">;
   scrollToReview: () => void;
 }
 
 export function DetailedProduct({
   detailedProductContent,
   scrollToReview,
-}: DetailedProductProps) {
+}: IDetailedProductProps) {
   const {
     title,
     maxPrice,
