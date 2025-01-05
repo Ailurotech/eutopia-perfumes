@@ -13,7 +13,6 @@ interface HomeBannerProps {
 
 const HomeBanner = ({ videos }: HomeBannerProps) => {
   const swiperRef = useRef<any>(null);
-
   const matchPath = (path: string) => {
     switch (path) {
       case "for-him":
