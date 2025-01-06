@@ -45,7 +45,7 @@ const HomeBanner = ({ videos }: HomeBannerProps) => {
         {videos.map((item) => (
           <SwiperSlide
             key={item._id}
-            className="flex justify-center"
+            className="flex justify-center py-12"
             onMouseEnter={() => swiperRef.current?.autoplay?.stop()}
             onMouseLeave={() => swiperRef.current?.autoplay?.start()}
           >
