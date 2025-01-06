@@ -61,7 +61,7 @@ const HomeBanner = ({ videos }: HomeBannerProps) => {
       <div className="splide__arrows !text-white !fill-white text-xs sm:text-2xl xl:text-4xl absolute inset-0 flex justify-between items-center">
         <button
           id="swiper-button-prev"
-          className="splide__arrow splide__arrow--prev"
+          className="splide__arrow splide__arrow--prev hidden sm:flex"
           style={{
             marginLeft: "8rem",
             zIndex: 10,
@@ -80,7 +80,7 @@ const HomeBanner = ({ videos }: HomeBannerProps) => {
 
         <button
           id="swiper-button-next"
-          className="splide__arrow splide__arrow--next"
+          className="splide__arrow splide__arrow--next hidden sm:flex"
           style={{
             marginRight: "8rem",
             zIndex: 10,
