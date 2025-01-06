@@ -32,7 +32,8 @@
     "react-slick": "^0.30.2",
     "react-youtube": "^10.1.0",
     "shopify-buy": "^2.22.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "swiper": "^11.2.0"
   },
   "devDependencies": {
     "@types/google.maps": "^3.58.1",
