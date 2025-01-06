@@ -62,17 +62,38 @@ const HomeBanner = ({ videos }: HomeBannerProps) => {
         <button
           id="swiper-button-prev"
           className="splide__arrow splide__arrow--prev"
+          style={{
+            marginLeft: "8rem",
+            zIndex: 10,
+          }}
         >
           <Icon
             name="arrow"
-            style={{ fill: "white", transform: "rotate(180deg)" }}
+            style={{
+              fill: "white",
+              width: "100px",
+              height: "100px",
+              transform: "rotate(180deg)",
+            }}
           />
         </button>
+
         <button
           id="swiper-button-next"
           className="splide__arrow splide__arrow--next"
+          style={{
+            marginRight: "8rem",
+            zIndex: 10,
+          }}
         >
-          <Icon name="arrow" style={{ fill: "white" }} />
+          <Icon
+            name="arrow"
+            style={{
+              fill: "white",
+              width: "100px",
+              height: "100px",
+            }}
+          />
         </button>
       </div>
     </div>
