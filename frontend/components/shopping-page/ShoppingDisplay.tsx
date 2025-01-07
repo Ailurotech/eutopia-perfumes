@@ -68,10 +68,9 @@ export function ShoppingDisplay({
       )}
     >
       <div
-        className={clsx(
-          "grid grid-cols-4 grid-rows-[repeat(7,auto)]",
-          "gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-20"
-        )}
+        className={
+          "grid grid-cols-4 gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-20"
+        }
       >
         <div className="col-span-4">
           <div className="flex justify-between gap-4 lg:gap-10 xl:gap-16 flex-wrap">
@@ -110,6 +109,9 @@ export function ShoppingDisplay({
             <h1 className="text-3xl font-black">No products found</h1>
           </div>
         )}
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-y-4 lg:gap-y-7 xl:gap-y-10 gap-x-4 md:gap-x-6 lg:gap-x-8 xl:gap-x-12 2xl:gap-x-20">
         {displayProducts.map((product, index) => (
           <IndividualProductForShoppingPage
             key={index}
