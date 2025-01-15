@@ -87,5 +87,6 @@ export const getStaticProps: GetStaticProps = async () => {
       newArrivals: newArrivals || [],
       perfumeSectionContent: perfumeSectionContent || {},
     },
+    revalidate: 60, // Revalidate every 60 seconds
   };
 };
