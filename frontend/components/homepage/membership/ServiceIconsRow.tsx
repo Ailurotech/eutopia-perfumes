@@ -4,7 +4,6 @@ import { sanityClient } from "@/lib/sanityClient";
 import { footerQuery } from "@/query";
 import { ServiceIcon } from "./components/ServiceIcon";
 import { urlForImage } from "@/lib/sanity.image";
-
 interface FooterObj {
   title: string;
   description: string;
@@ -17,7 +16,6 @@ interface FooterObj {
 
 const ServiceIconsRow = () => {
   const [footerObjs, setFooterObjs] = useState<FooterObj[]>([]);
-
   useEffect(() => {
     async function getFooterObjs() {
       const data = await sanityClient.fetch(footerQuery());
@@ -25,10 +23,6 @@ const ServiceIconsRow = () => {
     }
     getFooterObjs();
   }, []);
-
-  useEffect(() => {
-    console.log("footerObjs updated: ", footerObjs);
-  }, [footerObjs]);
   return (
     <div className="overflow-x-auto">
       <div className="w-full bg-white p-4 sm:py-14 lg:py-32 xl:py-56 sm:px-24 lg:px-32 xl:px-48">
