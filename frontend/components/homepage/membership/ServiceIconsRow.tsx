@@ -9,27 +9,27 @@ const ServiceIconsRow = () => {
         <div className="flex justify-start md:justify-center items-center gap-8 lg:gap-10 2xl:gap-36">
           <ServiceIcon
             src="/Halal.svg"
-            alt="100% Halal"
-            title="100% Halal"
-            description="Telah teruji halal MUI"
+            alt="Made in Australia"
+            title="Made in Australia"
+            description="Formulated and produced in Brisbane"
             imageWidth={30}
             imageHeight={30}
           />
 
           <ServiceIcon
             src="/Delivery.svg"
-            alt="Fast Delivery"
-            title="Pengiriman cepat & Terpercaya"
-            description="Mengirimkan pesanan anda dalam 1-3 hari"
+            alt="Free Shipping"
+            title="Free Shipping"
+            description="All orders include free shipping across Australia"
             imageWidth={30}
             imageHeight={30}
           />
 
           <ServiceIcon
             src="/Original.svg"
-            alt="100% Original"
-            title="100% Original"
-            description="Produk Resmi Khaf Official"
+            alt="Affordable Luxury"
+            title="Affordable Luxury"
+            description="Handcrafted Scents at affordable prices"
             imageWidth={30}
             imageHeight={30}
           />
@@ -39,8 +39,8 @@ const ServiceIconsRow = () => {
         <div className="flex flex-row justify-start md:justify-between items-center ">
           <ProductPoint
             src="/D1.svg"
-            alt="Free Delivery & Returns"
-            description="Free Delivery & Returns*"
+            alt="Free Delivery Across Australia"
+            description="Free Delivery Across Australia"
           />
           <ProductPoint
             src="/D2.svg"
