@@ -4,6 +4,7 @@ import { sanityClient } from "@/lib/sanityClient";
 import { footerQuery } from "@/query";
 import { ServiceIcon } from "./components/ServiceIcon";
 import { urlForImage } from "@/lib/sanity.image";
+
 interface FooterObj {
   title: string;
   description: string;
