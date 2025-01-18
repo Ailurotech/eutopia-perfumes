@@ -50,25 +50,8 @@ export function Support() {
             />
           </div>
         </Link>
-        <Link href="#">
-          <div className="w-[36px] h-[36px]">
-            <Image
-              src="/images/twitter.png"
-              alt="Twitter"
-              sx={twitterIconStyle}
-            />
-          </div>
-        </Link>
-        <Link href="#">
-          <div className="w-[36px] h-[36px]">
-            <Image
-              src="/images/youtube.png"
-              alt="Youtube"
-              sx={youtubeIconStyle}
-            />
-          </div>
-        </Link>
       </div>
     </div>
   );
 }
+
