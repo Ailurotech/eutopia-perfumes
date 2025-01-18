@@ -25,9 +25,9 @@ const PerfumeNav = ({
         <Image
           src={urlForImage(image).url()}
           alt={description}
-          width={383}
-          height={500}
-          className="max-w-full max-h-[500px] w-auto h-auto object-contain"
+          width={500}
+          height={650}
+          className="max-w-full max-h-[650px] w-auto h-auto object-contain"
         />
       </div>
       <div className="flex flex-col items-center lg:items-start justify-center gap-4 text-[#66685A] tracking-tight md:tracking-normal">
