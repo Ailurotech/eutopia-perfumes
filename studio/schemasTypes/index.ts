@@ -124,8 +124,9 @@ const singletons = [homeType, settingsType, aboutUs, perfumeSectionType]
 import richText from './customized/richText'
 import videos from './customized/videos'
 import pageSettings from './customized/pageSettings'
+import footer from './customized/footer'
 
-const customized = [pageSettings, richText, videos]
+const customized = [pageSettings, richText, videos, footer]
 
 export const schemaTypes = [
   ...annotations,

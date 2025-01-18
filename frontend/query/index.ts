@@ -4,3 +4,4 @@ export * from "./shopping-page.query";
 export * from "./home-page.query";
 export * from "./join-form.query";
 export * from "./shopping-page-setting.query";
+export * from "./footer-query";
