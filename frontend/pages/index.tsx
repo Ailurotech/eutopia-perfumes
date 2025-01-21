@@ -9,6 +9,8 @@ import {
   perfumeSectionQuery,
   videoSectionQuery,
   recommendedProductQuery,
+  getBestSellersProductQuery,
+  getNewArrivalsProductQuery,
 } from "@/query";
 import { IVideo } from "@/interface/video";
 import { IPerfumeSection, IRecommendedProduct } from "@/interface/product";
@@ -28,6 +30,8 @@ export default function Home({
   newArrivals,
   perfumeSectionContent,
 }: IHomePage) {
+  console.log("bestSellers: ", bestSellers);
+  console.log("newArrivals: ", bestSellers);
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-20 sm:gap-32 lg:gap-40`}
@@ -57,7 +61,8 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   const videosQuery = videoSectionQuery();
-  const productsQuery = recommendedProductQuery();
+  const bestSellerQuery = getBestSellersProductQuery();
+  const newArrivalsQuery = getNewArrivalsProductQuery();
   const perfumeQuery = perfumeSectionQuery();
 
   let videos = [];
@@ -66,15 +71,17 @@ export const getStaticProps: GetStaticProps = async () => {
   let perfumeSectionContent = {};
 
   try {
-    const [videosResult, productsResult, perfumeResult] = await Promise.all([
-      sanityClient.fetch(videosQuery),
-      sanityClient.fetch(productsQuery),
-      sanityClient.fetch(perfumeQuery),
-    ]);
+    const [videosResult, bestSellerResult, newArrivalsResult, perfumeResult] =
+      await Promise.all([
+        sanityClient.fetch(videosQuery),
+        sanityClient.fetch(bestSellerQuery),
+        sanityClient.fetch(newArrivalsQuery),
+        sanityClient.fetch(perfumeQuery),
+      ]);
 
     videos = videosResult;
-    bestSellers = productsResult;
-    newArrivals = [...productsResult].reverse();
+    bestSellers = bestSellerResult;
+    newArrivals = newArrivalsResult;
     perfumeSectionContent = perfumeResult[0].perfumeSection;
   } catch (error) {
     console.error("Error in getStaticProps:", error);
