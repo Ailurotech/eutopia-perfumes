@@ -9,8 +9,7 @@ import {
   perfumeSectionQuery,
   videoSectionQuery,
   recommendedProductQuery,
-  getBestSellersProductQuery,
-  getNewArrivalsProductQuery,
+  bestSellersOrNewArrivalsQuery,
 } from "@/query";
 import { IVideo } from "@/interface/video";
 import { IPerfumeSection, IRecommendedProduct } from "@/interface/product";
@@ -30,8 +29,6 @@ export default function Home({
   newArrivals,
   perfumeSectionContent,
 }: IHomePage) {
-  console.log("bestSellers: ", bestSellers);
-  console.log("newArrivals: ", bestSellers);
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between ${inter.className} gap-20 sm:gap-32 lg:gap-40`}
@@ -61,8 +58,8 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   const videosQuery = videoSectionQuery();
-  const bestSellerQuery = getBestSellersProductQuery();
-  const newArrivalsQuery = getNewArrivalsProductQuery();
+  const bestSellerQuery = bestSellersOrNewArrivalsQuery("bestSeller", "");
+  const newArrivalsQuery = bestSellersOrNewArrivalsQuery("newArrivals", "");
   const perfumeQuery = perfumeSectionQuery();
 
   let videos = [];

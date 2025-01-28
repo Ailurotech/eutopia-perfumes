@@ -32,17 +32,18 @@ export const productVariantType = defineType({
     }),
     defineField({
       name: 'MarkedAs',
-      type: 'number',
+      type: 'string',
       title: 'Marked As',
-      description: 'Choose among General, Bestseller or New Arrivals',
+      description: 'Choose among General, Bestseller, or New Arrivals',
       options: {
         list: [
-          {title: 'General', value: 0},
-          {title: 'Bestseller', value: 1},
-          {title: 'New Arrivals', value: 2},
+          {title: 'General', value: 'general'},
+          {title: 'Bestseller', value: 'bestSeller'},
+          {title: 'New Arrivals', value: 'newArrivals'},
         ],
       },
     }),
+
     defineField({
       name: 'store',
       title: 'Shopify',
