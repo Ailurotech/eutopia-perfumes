@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { sanityClient } from "@/lib/sanityClient";
 import { GetStaticProps } from "next";
 import Image from "next/image";
@@ -150,24 +151,30 @@ export default function AboutUs({ aboutData }) {
   if (!aboutData) return null;
 
   return (
-    <div className="min-h-screen">
-      <HeroSection
-        title={aboutData.hero.title}
-        subtitle={aboutData.hero.subtitle}
-        heroImage={aboutData.hero.heroImage}
-        imagePosition={aboutData.hero.imagePosition}
-      />
-
-      {aboutData.sections?.map((section, index) => (
-        <ContentSection
-          key={index}
-          heading={section.heading}
-          layout={section.layout}
-          image={section.image}
-          content={section.content}
+    <>
+      <Head>
+        <meta name="description" content="The Vision Behind Eutopia Perfumes: Crafting Affordable Luxury." />
+      </Head>
+      <div className="min-h-screen">
+        <HeroSection
+          title={aboutData.hero.title}
+          subtitle={aboutData.hero.subtitle}
+          heroImage={aboutData.hero.heroImage}
+          imagePosition={aboutData.hero.imagePosition}
         />
-      ))}
-    </div>
+
+        {aboutData.sections?.map((section, index) => (
+          <ContentSection
+            key={index}
+            heading={section.heading}
+            layout={section.layout}
+            image={section.image}
+            content={section.content}
+          />
+        ))}
+      </div>
+    </>
+    
   );
 }
 
