@@ -82,12 +82,9 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const getAllProductIds = async (): Promise<string[]> => {
     const query = `*[_type == "product"]._id`;
     const productIds = await sanityClient.fetch(query);
-    // console.log(productIds);
     return productIds.map((id: string) => id.split("-")[1]);
   }
-
   const productIds = await getAllProductIds();
-  console.log(typeof productIds);
 
   const fetchAllSlugs = async (): Promise<{ slug: string }[]> => {
     return sanityClient.fetch(`
@@ -97,9 +94,6 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     `);
   };
   const slugs = await fetchAllSlugs();
-  // console.log(typeof slugs);
-
-  // console.log(slugs);
 
   const dynamicRoutes: SitemapEntry[] = [
     ...productIds.map((id: string) => ({
@@ -110,12 +104,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     }))
   ];
 
-  // console.log(dynamicRoutes);
-
-
   // Combine all routes:
   const allRoutes = [...staticRoutes, ...dynamicRoutes];
-  console.log(allRoutes);
 
   // Generate the XML
   const sitemap = generateSiteMap(allRoutes);
