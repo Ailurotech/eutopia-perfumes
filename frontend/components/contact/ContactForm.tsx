@@ -75,31 +75,34 @@ export function ContactForm() {
     setSubmitStatus("idle");
 
     try {
-      const response = await fetch("/api/submit-form", {
+      const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          formType: "contact",
-          formData,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Form submission failed");
+        throw new Error("Email sending failed");
       }
+
+      setToast({
+        message: "Message sent successfully!",
+        type: "success",
+        isVisible: true,
+      });
 
       setFormData({
         name: "",
         email: "",
         subject: "",
         message: "",
-      });
-      setToast({
-        message: "Message sent successfully!",
-        type: "success",
-        isVisible: true,
       });
     } catch (error) {
       setToast({
