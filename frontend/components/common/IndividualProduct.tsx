@@ -3,6 +3,7 @@ import { Literata } from "next/font/google";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
+import React from "react";
 interface IndividualProductProps {
   image: string;
   tag: string;
@@ -32,19 +33,25 @@ export function IndividualProductForShoppingPage({
     ? title.split(splitOperator).slice(0, 2)
     : [title];
 
-  function clickHandler(id: number) {
-    router.push(`/product/${id}`);
+  function clickHandler(e: React.MouseEvent<HTMLElement>) {
+    const target = e.target as HTMLElement;
+    if (target.tagName === "IMG" || target.tagName === "H5" || target.tagName === "H2") {
+      router.push(`/product/${id}`);
+    }
   }
 
   return (
-    <div className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center">
+    <div 
+      className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center"
+      data-id={id}
+      onClick={(e) => clickHandler(e)}
+    >
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image
           src={image}
           alt={title}
           className="object-contain"
           fill
-          onClick={() => clickHandler(id)}
         />
         {isHovered && (
           <button
@@ -54,7 +61,8 @@ export function IndividualProductForShoppingPage({
               "border-2 border-default w-[90%] md:w-4/5 text-center p-1 rounded-xl font-extrabold cursor-pointer",
               "text-[8px] sm:text-xs md:text-sm"
             )}
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
               storeProductToLocal({
                 id: id,
                 variantId: variantId,
@@ -103,14 +111,18 @@ export function IndividualProductForProductPage({
     ? title.split(splitOperator).slice(0, 1)
     : [title];
   const router = useRouter();
-  function clickHandler(id: number) {
-    router.push(`/product/${id}`);
+  function clickHandler(e: React.MouseEvent<HTMLElement>) {
+    const target = e.target as HTMLElement;
+    if (target.tagName === "IMG" || target.tagName === "H5" || target.tagName === "H2") {
+      router.push(`/product/${id}`);
+    }
   }
 
   return (
     <div
       className="flex flex-col items-center cursor-pointer"
-      onClick={() => clickHandler(id)}
+      data-id={id}
+      onClick={(e) => clickHandler(e)}
     >
       <div className="h-64 aspect-[23/30] relative">
         <Image src={image} alt={title} className="object-contain" fill />
