@@ -57,15 +57,12 @@ export default function DynamicJoinForm({
     }
 
     try {
-      const response = await fetch("/api/submit-form", {
+      const response = await fetch("/api/join-form-notification", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          formType: "join",
-          formData,
-        }),
+        body: JSON.stringify({ formData }),
       });
 
       if (!response.ok) {
