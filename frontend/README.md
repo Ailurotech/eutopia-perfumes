@@ -24,6 +24,20 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Sitemap
+Please complete the following steps to make the sitemap accessible successfully:
+1. Please add
+```NEXT_PUBLIC_SITE_URL=your website domain (for example https://www.example.com)``` in .env.local
+
+2. In the ```robots.txt``` under the ```frontend/public``` folder, change
+```Sitemap: localhost:3000/sitemap.xml```
+to
+```Sitemap: your website domain/sitemap.xml (for example: Sitemap: https://www.example.com/sitemap.xml)```
+
+Then, you should be able to successfully access ```your website domain/sitemap.xml``` and ```your website domain/robots.txt```
+
+Note: If you add more static and dynamic routes, please add them to the ```staticRoutes``` and ```dynamicRoutes``` variables in ```frontend/pages/sitemap.xml.tsx```.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

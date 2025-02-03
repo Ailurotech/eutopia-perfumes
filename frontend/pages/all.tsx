@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { NavigationRoute } from "@/components/route";
 import { ShoppingPageLayout } from "@/components/shopping-page/ShoppingPageLayout";
 import { IShoppingPage } from "@/interface/pages/shoppingPage";
@@ -6,13 +7,19 @@ import { GetStaticProps } from "next";
 
 export default function Page({ video, products, pageSetting }: IShoppingPage) {
   return (
-    <ShoppingPageLayout
-      variant="all"
-      video={video}
-      linkPath={NavigationRoute.All.Path}
-      products={products}
-      pageSetting={pageSetting}
-    />
+    <>
+      <Head>
+        <meta name="description" content="Full Collection: Scents for Every Preference." />
+      </Head>
+      <ShoppingPageLayout
+        variant="all"
+        video={video}
+        linkPath={NavigationRoute.All.Path}
+        products={products}
+        pageSetting={pageSetting}
+      />
+    </>
+    
   );
 }
 export const getStaticProps: GetStaticProps = async () => {
