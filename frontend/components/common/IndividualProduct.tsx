@@ -44,7 +44,7 @@ export function IndividualProductForShoppingPage({
     <div 
       className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center"
       data-id={id}
-      onClick={(e) => clickHandler(e)}
+      onClick={clickHandler}
     >
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image
@@ -122,7 +122,7 @@ export function IndividualProductForProductPage({
     <div
       className="flex flex-col items-center cursor-pointer"
       data-id={id}
-      onClick={(e) => clickHandler(e)}
+      onClick={clickHandler}
     >
       <div className="h-64 aspect-[23/30] relative">
         <Image src={image} alt={title} className="object-contain" fill />
