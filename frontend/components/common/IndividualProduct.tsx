@@ -3,6 +3,8 @@ import { Literata } from "next/font/google";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
+import { createSlug } from "@/utils/slug";
+
 interface IndividualProductProps {
   image: string;
   tag: string;
@@ -33,7 +35,9 @@ export function IndividualProductForShoppingPage({
     : [title];
 
   function clickHandler(id: number) {
-    router.push(`/product/${id}`);
+    if (!title) return;
+    const slug = createSlug(title);
+    router.push(`/product/${slug}`);
   }
 
   return (
@@ -44,7 +48,7 @@ export function IndividualProductForShoppingPage({
           alt={title}
           className="object-contain"
           fill
-          onClick={() => clickHandler(id)}
+          onClick={() => id && clickHandler(id)}
         />
         {isHovered && (
           <button
@@ -103,14 +107,22 @@ export function IndividualProductForProductPage({
     ? title.split(splitOperator).slice(0, 1)
     : [title];
   const router = useRouter();
+
   function clickHandler(id: number) {
-    router.push(`/product/${id}`);
+    if (!title) return;
+    const slug = createSlug(title);
+    console.log("Navigating to product with:", {
+      originalTitle: title,
+      generatedSlug: slug,
+      id,
+    });
+    router.push(`/product/${slug}`);
   }
 
   return (
     <div
       className="flex flex-col items-center cursor-pointer"
-      onClick={() => clickHandler(id)}
+      onClick={() => id && clickHandler(id)}
     >
       <div className="h-64 aspect-[23/30] relative">
         <Image src={image} alt={title} className="object-contain" fill />
