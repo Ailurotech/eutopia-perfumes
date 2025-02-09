@@ -125,8 +125,9 @@ import richText from './customized/richText'
 import videos from './customized/videos'
 import pageSettings from './customized/pageSettings'
 import footer from './customized/footer'
+import floatingBanner from './customized/floatingBanner'
 
-const customized = [pageSettings, richText, videos, footer]
+const customized = [pageSettings, richText, videos, footer, floatingBanner]
 
 export const schemaTypes = [
   ...annotations,
