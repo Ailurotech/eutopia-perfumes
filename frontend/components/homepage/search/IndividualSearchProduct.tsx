@@ -1,6 +1,7 @@
 import { IRecommendedProduct } from "@/interface/product";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { createSlug } from "@/utils/slug";
 
 interface IIndividualSearchProduct {
   item: IRecommendedProduct;
@@ -12,13 +13,15 @@ export function IndividualSearchProduct({
   handleOnClose,
 }: IIndividualSearchProduct) {
   const router = useRouter();
+  const slug = createSlug(item.title);
+
   return (
     <div key={item.id} className="flex flex-col items-center">
       {/* image */}
       <div
         className="w-[100px] h-[100px] rounded-lg relative overflow-clip cursor-pointer"
         onClick={() => {
-          router.push(`/product/${item.id}`);
+          router.push(`/product/${slug}`);
           handleOnClose();
         }}
       >
