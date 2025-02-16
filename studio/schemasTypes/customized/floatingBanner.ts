@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'floatingBannerSettings',
-  title: 'Floating Banner Settings',
+  name: 'floatingBanner',
+  title: 'Floating Banner',
   type: 'document',
   fields: [
     defineField({
@@ -26,12 +26,23 @@ export default defineType({
       },
       description: 'Upload an icon for the banner',
     }),
+    defineField({
+      name: 'messages',
+      title: 'Messages',
+      type: 'array',
+      of: [{type: 'string'}],
+      description: 'Add multiple messages to scroll in the floating banner.',
+    }),
   ],
   preview: {
-    prepare() {
+    select: {
+      title: 'messages',
+    },
+    prepare(selection) {
+      const {title} = selection
       return {
-        title: 'Floating Banner Settings',
-        subtitle: 'Customize the floating banner appearance',
+        title: 'Floating Banner',
+        subtitle: title ? title.join(' | ') : 'No messages set',
       }
     },
   },

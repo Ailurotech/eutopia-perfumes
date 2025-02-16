@@ -3,56 +3,52 @@ import Image from "next/image";
 import { sanityClient } from "@/lib/sanityClient";
 import { urlForImage } from "@/lib/sanity.image";
 
-type BannerSettings = {
+type FloatingBannerData = {
   textColor: string;
   backgroundColor: string;
-  icon?: { asset: { url: string } };
-};
-
-type BannerMessages = {
+  icon?: string;
   messages: string[];
 };
 
 export default function FloatingBanner() {
-  const [settings, setSettings] = useState<BannerSettings | null>(null);
-  const [messages, setMessages] = useState<string[]>([]);
+  const [banner, setBanner] = useState<FloatingBannerData | null>(null);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
   useEffect(() => {
     const fetchBannerData = async () => {
-      const settingsQuery = `*[_type == "floatingBannerSettings"][0]{
+      const query = `*[_type == "floatingBanner"][0]{
         textColor,
         backgroundColor,
-        "icon": icon.asset->url
-      }`;
-      const messagesQuery = `*[_type == "floatingBannerMsgs"][0]{
+        "icon": icon.asset->url,
         messages
       }`;
-      const settingsData = await sanityClient.fetch(settingsQuery);
-      const messagesData = await sanityClient.fetch(messagesQuery);
-      setSettings(settingsData);
-      setMessages(messagesData?.messages || []);
-    };
 
+      const data = await sanityClient.fetch(query);
+      setBanner(data);
+    };
     fetchBannerData();
   }, []);
 
   useEffect(() => {
-    if (messages.length === 0) return;
-    const interval = setInterval(() => {
-      setCurrentMessageIndex((prevIndex) => (prevIndex + 1) % messages.length);
-    }, 15000);
-    return () => clearInterval(interval);
-  }, [messages]);
+    if (!banner || !banner.messages?.length) return;
 
-  if (!settings || messages.length === 0) return null;
+    const interval = setInterval(() => {
+      setCurrentMessageIndex(
+        (prevIndex) => (prevIndex + 1) % banner.messages.length
+      );
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, [banner]);
+
+  if (!banner || banner.messages?.length === 0) return null;
 
   return (
     <div
       className="relative w-full overflow-hidden py-2 px-4 flex items-center justify-center"
       style={{
-        backgroundColor: settings.backgroundColor,
-        color: settings.textColor,
+        backgroundColor: banner.backgroundColor,
+        color: banner.textColor,
       }}
     >
       <p
@@ -63,15 +59,15 @@ export default function FloatingBanner() {
         }}
       >
         <div className="w-full flex justify-center items-center space-x-2 gap-x-2">
-          {settings.icon && (
+          {banner.icon && (
             <Image
-              src={urlForImage(settings.icon).url()}
+              src={urlForImage(banner.icon).url()}
               alt="Banner Icon"
               width={30}
               height={30}
             />
           )}
-          {messages[currentMessageIndex]}
+          {banner.messages[currentMessageIndex]}
         </div>
       </p>
     </div>
