@@ -10,7 +10,7 @@ import { Text, Link, Image } from "@chakra-ui/react";
 
 export function Support() {
   return (
-    <div className="flex-1 flex flex-col justify-center text-center space-y-4 mt-[calc(10%)] order-2 lg:order-none">
+    <div className="flex-1 flex flex-col text-center space-y-4">
       <Text as="p" sx={footerTheme.baseStyle?.title}>
         SUPPORT
       </Text>
@@ -32,7 +32,7 @@ export function Support() {
       </Link>
 
       <div className="flex-1 flex justify-center text-center space-x-4">
-        <Link href="#">
+        <Link href="https://www.facebook.com/eutopiaperfumes/">
           <div className="w-[36px] h-[36px]">
             <Image
               src="/images/facebook.png"
@@ -41,7 +41,7 @@ export function Support() {
             />
           </div>
         </Link>
-        <Link href="#">
+        <Link href="https://www.instagram.com/eutopia.perfumes/">
           <div className="w-[36px] h-[36px]">
             <Image
               src="/images/instagram.png"
