@@ -1,16 +1,10 @@
 import {defineField, defineType} from 'sanity'
 
 export default defineType({
-  name: 'floatingBanner',
-  title: 'Floating Banner',
+  name: 'floatingBannerSettings',
+  title: 'Floating Banner Settings',
   type: 'document',
   fields: [
-    defineField({
-      name: 'text',
-      title: 'Banner Text',
-      type: 'string',
-      description: 'Enter the message that appears on the banner',
-    }),
     defineField({
       name: 'textColor',
       title: 'Text Color',
