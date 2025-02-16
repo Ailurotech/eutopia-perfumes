@@ -41,29 +41,7 @@ export default function FloatingBanner() {
     return () => clearInterval(interval);
   }, [banner]);
 
-  if (!banner || banner.messages?.length === 0) {
-    return (
-      <div
-        className="relative w-full overflow-hidden py-2 px-4 flex items-center justify-center"
-        style={{
-          backgroundColor: banner?.backgroundColor || "#F5E1C9",
-          color: banner?.textColor || "#000000",
-        }}
-      >
-        <div className="w-full flex justify-center items-center space-x-2 gap-x-2">
-          {banner?.icon && (
-            <Image
-              src={urlForImage(banner.icon).url()}
-              alt="Banner Icon"
-              width={30}
-              height={30}
-            />
-          )}
-          <p className="text-lg font-semibold">Welcome to Eutopia</p>
-        </div>
-      </div>
-    );
-  }
+  if (!banner || banner.messages?.length === 0) return;
 
   return (
     <div
