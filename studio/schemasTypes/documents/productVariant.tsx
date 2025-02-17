@@ -31,6 +31,20 @@ export const productVariantType = defineType({
       options: {field: 'store.title'},
     }),
     defineField({
+      name: 'MarkedAs',
+      type: 'string',
+      title: 'Marked As',
+      description: 'Choose among General, Bestseller, or New Arrivals',
+      options: {
+        list: [
+          {title: 'General', value: 'general'},
+          {title: 'Bestseller', value: 'bestSeller'},
+          {title: 'New Arrivals', value: 'newArrivals'},
+        ],
+      },
+    }),
+
+    defineField({
       name: 'store',
       title: 'Shopify',
       description: 'Variant data from Shopify (read-only)',

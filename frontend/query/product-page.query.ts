@@ -34,6 +34,25 @@ export function recommendedProductQuery(tag?: string) {
         `;
 }
 
+export function bestSellersOrNewArrivalsQuery(markedAs: string, tag?: string) {
+  return `
+        *[_type == "product" && store.status == "active" ${tag ? `&& store.tags == "${tag}"` : ""}]{
+        "title": store.title,
+        "image": store.previewImageUrl,
+        "price": store.priceRange.maxVariantPrice,
+        "id": store.id,
+        "variants": *[
+          _type == "productVariant" 
+          && store.productId == ^.store.id 
+          && MarkedAs == "${markedAs}"
+        ]{
+          "MarkedAs": MarkedAs,
+          "variantTitle": store.title,
+        }
+      }[count(variants) > 0]
+  `;
+}
+
 export function searchProductQuery(searchString: string) {
   return `
         *[_type == "product" && store.status == "active" && store.isDeleted == false && store.title match "${searchString}*"]{
