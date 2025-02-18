@@ -27,7 +27,6 @@ jobs:
           cache-dependency-path: yarn.lock
 
       - name: Install dependencies
-        working-directory: frontend
         run: yarn install --frozen-lockfile
 
       - name: Check formatting
