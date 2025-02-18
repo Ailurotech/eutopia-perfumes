@@ -47,7 +47,6 @@ export function IndividualProductForShoppingPage({
   return (
     <div 
       className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center"
-      data-id={id}
       onClick={(e) => id && clickHandler(e, id)}
     >
       <div className="w-full aspect-[23/30] relative rounded-xl">
@@ -66,6 +65,7 @@ export function IndividualProductForShoppingPage({
               "text-[8px] sm:text-xs md:text-sm"
             )}
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              // Stop propagation to prevent triggering the parent navigation click
               e.stopPropagation();
               storeProductToLocal({
                 id: id,
