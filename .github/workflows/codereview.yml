@@ -32,7 +32,7 @@ jobs:
 
       - name: Check formatting
         working-directory: frontend
-        run: yarn run format:check
+        run: cd frontend && yarn run format:check
 
   code-review:
     runs-on: ubuntu-latest
