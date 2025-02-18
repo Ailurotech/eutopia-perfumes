@@ -31,7 +31,6 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Check formatting
-        working-directory: frontend
         run: yarn run format:check
 
   code-review:
