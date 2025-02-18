@@ -9,7 +9,10 @@ export default function Page({ video, products, pageSetting }: IShoppingPage) {
   return (
     <>
       <Head>
-        <meta name="description" content="Full Collection: Scents for Every Preference." />
+        <meta
+          name="description"
+          content="Full Collection: Scents for Every Preference."
+        />
       </Head>
       <ShoppingPageLayout
         variant="all"
@@ -19,7 +22,6 @@ export default function Page({ video, products, pageSetting }: IShoppingPage) {
         pageSetting={pageSetting}
       />
     </>
-    
   );
 }
 export const getStaticProps: GetStaticProps = async () => {
