@@ -33,8 +33,3 @@
     transform: translateX(-100vw);
   }
 }
-
-.animate-marquee {
-  display: inline-block;
-  animation: marquee 15s ease-in-out;
-}

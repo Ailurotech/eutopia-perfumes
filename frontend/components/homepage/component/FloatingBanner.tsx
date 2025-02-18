@@ -7,7 +7,7 @@ type FloatingBannerData = {
   textColor: string;
   backgroundColor: string;
   icon?: string;
-  messages: string[];
+  messages?: string[];
 };
 
 export default function FloatingBanner() {
@@ -16,15 +16,18 @@ export default function FloatingBanner() {
 
   useEffect(() => {
     const fetchBannerData = async () => {
-      const query = `*[_type == "floatingBanner"][0]{
+      try {
+        const query = `*[_type == "floatingBanner"][0]{
         textColor,
         backgroundColor,
         "icon": icon.asset->url,
         messages
       }`;
-
-      const data = await sanityClient.fetch(query);
-      setBanner(data);
+        const data = await sanityClient.fetch(query);
+        setBanner(data);
+      } catch (error) {
+        console.log("Failed to fetch banner data:", error);
+      }
     };
     fetchBannerData();
   }, []);
@@ -41,10 +44,12 @@ export default function FloatingBanner() {
     return () => clearInterval(interval);
   }, [banner]);
 
-  if (!banner || banner.messages?.length === 0) return;
+  if (!banner || !banner.messages || banner.messages.length === 0) return null;
 
   return (
     <div
+      role="alert"
+      aria-live="polite"
       className="relative w-full overflow-hidden py-2 px-4 flex items-center justify-center"
       style={{
         backgroundColor: banner.backgroundColor,
@@ -52,13 +57,13 @@ export default function FloatingBanner() {
       }}
     >
       <p
-        className="text-lg font-semibold animate-marquee"
-        key={currentMessageIndex}
+        className="text-lg font-semibold"
         style={{
+          display: "inline-block",
           animation: "marquee 15s linear infinite",
         }}
       >
-        <div className="w-full flex justify-center items-center space-x-2 gap-x-2">
+        <p className="w-full flex justify-center items-center space-x-2 gap-x-2">
           {banner.icon && (
             <Image
               src={urlForImage(banner.icon).url()}
@@ -68,7 +73,7 @@ export default function FloatingBanner() {
             />
           )}
           {banner.messages[currentMessageIndex]}
-        </div>
+        </p>
       </p>
     </div>
   );
