@@ -13,5 +13,5 @@ export function joinFormQuery() {
         layoutGroup
       }
     }
-  `
-} 
+  `;
+}

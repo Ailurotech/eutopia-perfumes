@@ -54,4 +54,3 @@ export function Support() {
     </div>
   );
 }
-
