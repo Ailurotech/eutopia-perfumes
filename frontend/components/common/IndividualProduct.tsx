@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
 import React from "react";
 import { createSlug } from "@/utils/slug";
-import { NextRouter } from "next/router";
 
 interface IndividualProductProps {
   image: string;
@@ -21,7 +20,8 @@ interface IndividualProductProps {
 const literata = Literata({ weight: "700", subsets: ["latin"] });
 const splitOperator = "|";
 
-function clickHandler(
+// Navigate to product page
+function navigateToProduct(
   e: React.MouseEvent<HTMLElement>,
   title: string,
   router: ReturnType<typeof useRouter>
@@ -56,7 +56,7 @@ export function IndividualProductForShoppingPage({
   return (
     <div
       className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center"
-      onClick={(e) => id && clickHandler(e, title, router)}
+      onClick={(e) => id && navigateToProduct(e, title, router)}
     >
       <div className="w-full aspect-[23/30] relative rounded-xl">
         <Image src={image} alt={title} className="object-contain" fill />
@@ -123,7 +123,7 @@ export function IndividualProductForProductPage({
   return (
     <div
       className="flex flex-col items-center cursor-pointer"
-      onClick={(e) => id && clickHandler(e, title, router)}
+      onClick={(e) => id && navigateToProduct(e, title, router)}
     >
       <div className="h-64 aspect-[23/30] relative">
         <Image src={image} alt={title} className="object-contain" fill />
