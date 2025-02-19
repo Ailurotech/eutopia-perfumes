@@ -9,7 +9,10 @@ export default function Page({ video, products, pageSetting }: IShoppingPage) {
   return (
     <>
       <Head>
-        <meta name="description" content="Distinctive Allure: Explore Our Range of Bold Fragrances." />
+        <meta
+          name="description"
+          content="Distinctive Allure: Explore Our Range of Bold Fragrances."
+        />
       </Head>
       <ShoppingPageLayout
         variant="forHim"

@@ -4,6 +4,7 @@ import { Support } from "./components/Support";
 import { Categories } from "./components/Categories";
 import { ShopInfo } from "./components/ShopInfo";
 import { LogoAndPartners } from "./components/LogoAndPartners";
+import { EmailAndAddress } from "./components/EmailAndAddress";
 
 const Footer = () => {
   return (
@@ -13,7 +14,10 @@ const Footer = () => {
         <ShopInfo />
       </div>
       <LogoAndPartners />
-      <Support />
+      <div className="flex-1 flex justify-center text-center mt-[calc(10%)] order-1 lg:order-none">
+        <Support />
+        <EmailAndAddress />
+      </div>
     </footer>
   );
 };

@@ -22,7 +22,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <Head>
-        <meta name="description" content="Revolutionising the Essence of Luxury with Affordable, Locally Crafted Fragrances for Everyone. Born from a Vision of Inclusivity and Sustainability in Brisbane." />
+        <meta
+          name="description"
+          content="Revolutionising the Essence of Luxury with Affordable, Locally Crafted Fragrances for Everyone. Born from a Vision of Inclusivity and Sustainability in Brisbane."
+        />
       </Head>
       <Navigation />
       <main>

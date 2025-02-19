@@ -11,7 +11,10 @@ export default function ContactPage() {
   return (
     <>
       <Head>
-        <meta name="description" content="Get in Touch: We're Here to Assist You.\nChris Huang, Jan 20, 11:10PM.\nThe Main one (Under the Eutopia Perfumes)" />
+        <meta
+          name="description"
+          content="Get in Touch: We're Here to Assist You.\nChris Huang, Jan 20, 11:10PM.\nThe Main one (Under the Eutopia Perfumes)"
+        />
       </Head>
       <main className="min-h-screen bg-white py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
@@ -66,7 +69,10 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3
-                        className={clsx(poppins.className, "font-semibold mb-2")}
+                        className={clsx(
+                          poppins.className,
+                          "font-semibold mb-2"
+                        )}
                       >
                         Email
                       </h3>
@@ -103,7 +109,10 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3
-                        className={clsx(poppins.className, "font-semibold mb-2")}
+                        className={clsx(
+                          poppins.className,
+                          "font-semibold mb-2"
+                        )}
                       >
                         Address
                       </h3>
