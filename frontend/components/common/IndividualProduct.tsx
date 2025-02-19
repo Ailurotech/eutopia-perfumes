@@ -39,23 +39,22 @@ export function IndividualProductForShoppingPage({
     if (!title) return;
     const slug = createSlug(title);
     const target = e.target as HTMLElement;
-    if (target.tagName === "IMG" || target.tagName === "H5" || target.tagName === "H2") {
+    if (
+      target.tagName === "IMG" ||
+      target.tagName === "H5" ||
+      target.tagName === "H2"
+    ) {
       router.push(`/product/${slug}`);
     }
   }
 
   return (
-    <div 
+    <div
       className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center"
       onClick={(e) => id && clickHandler(e, id)}
     >
       <div className="w-full aspect-[23/30] relative rounded-xl">
-        <Image
-          src={image}
-          alt={title}
-          className="object-contain"
-          fill
-        />
+        <Image src={image} alt={title} className="object-contain" fill />
         {isHovered && (
           <button
             type="button"
@@ -124,7 +123,11 @@ export function IndividualProductForProductPage({
       id,
     });
     const target = e.target as HTMLElement;
-    if (target.tagName === "IMG" || target.tagName === "H5" || target.tagName === "H2") {
+    if (
+      target.tagName === "IMG" ||
+      target.tagName === "H5" ||
+      target.tagName === "H2"
+    ) {
       router.push(`/product/${slug}`);
     }
   }
