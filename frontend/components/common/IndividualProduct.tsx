@@ -3,6 +3,7 @@ import { Literata } from "next/font/google";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { storeProductToLocal } from "@/utils/local-storage-for-product";
+import React from "react";
 import { createSlug } from "@/utils/slug";
 
 interface IndividualProductProps {
@@ -19,6 +20,24 @@ interface IndividualProductProps {
 const literata = Literata({ weight: "700", subsets: ["latin"] });
 const splitOperator = "|";
 
+// Navigate to product page
+function navigateToProduct(
+  e: React.MouseEvent<HTMLElement>,
+  title: string,
+  router: ReturnType<typeof useRouter>
+) {
+  if (!title) return;
+  const slug = createSlug(title);
+  const target = e.target as HTMLElement;
+  if (
+    target.tagName === "IMG" ||
+    target.tagName === "H5" ||
+    target.tagName === "H2"
+  ) {
+    router.push(`/product/${slug}`);
+  }
+}
+
 export function IndividualProductForShoppingPage({
   image,
   tag,
@@ -34,22 +53,13 @@ export function IndividualProductForShoppingPage({
     ? title.split(splitOperator).slice(0, 2)
     : [title];
 
-  function clickHandler(id: number) {
-    if (!title) return;
-    const slug = createSlug(title);
-    router.push(`/product/${slug}`);
-  }
-
   return (
-    <div className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center">
+    <div
+      className="grid grid-rows-[repeat(4,auto)] items-center justify-center group gap-1 md:gap-2 2xl:gap-4 cursor-pointer text-center"
+      onClick={(e) => id && navigateToProduct(e, title, router)}
+    >
       <div className="w-full aspect-[23/30] relative rounded-xl">
-        <Image
-          src={image}
-          alt={title}
-          className="object-contain"
-          fill
-          onClick={() => id && clickHandler(id)}
-        />
+        <Image src={image} alt={title} className="object-contain" fill />
         {isHovered && (
           <button
             type="button"
@@ -58,7 +68,9 @@ export function IndividualProductForShoppingPage({
               "border-2 border-default w-[90%] md:w-4/5 text-center p-1 rounded-xl font-extrabold cursor-pointer",
               "text-[8px] sm:text-xs md:text-sm"
             )}
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              // Stop propagation to prevent triggering the parent navigation click
+              e.stopPropagation();
               storeProductToLocal({
                 id: id,
                 variantId: variantId,
@@ -108,21 +120,10 @@ export function IndividualProductForProductPage({
     : [title];
   const router = useRouter();
 
-  function clickHandler(id: number) {
-    if (!title) return;
-    const slug = createSlug(title);
-    console.log("Navigating to product with:", {
-      originalTitle: title,
-      generatedSlug: slug,
-      id,
-    });
-    router.push(`/product/${slug}`);
-  }
-
   return (
     <div
       className="flex flex-col items-center cursor-pointer"
-      onClick={() => id && clickHandler(id)}
+      onClick={(e) => id && navigateToProduct(e, title, router)}
     >
       <div className="h-64 aspect-[23/30] relative">
         <Image src={image} alt={title} className="object-contain" fill />
