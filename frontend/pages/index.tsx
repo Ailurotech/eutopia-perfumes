@@ -9,6 +9,7 @@ import {
   perfumeSectionQuery,
   videoSectionQuery,
   recommendedProductQuery,
+  bestSellersOrNewArrivalsQuery,
 } from "@/query";
 import { IVideo } from "@/interface/video";
 import { IPerfumeSection, IRecommendedProduct } from "@/interface/product";
@@ -57,7 +58,8 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async () => {
   const videosQuery = videoSectionQuery();
-  const productsQuery = recommendedProductQuery();
+  const bestSellerQuery = bestSellersOrNewArrivalsQuery("bestSeller", "");
+  const newArrivalsQuery = bestSellersOrNewArrivalsQuery("newArrivals", "");
   const perfumeQuery = perfumeSectionQuery();
 
   let videos = [];
@@ -66,15 +68,17 @@ export const getStaticProps: GetStaticProps = async () => {
   let perfumeSectionContent = {};
 
   try {
-    const [videosResult, productsResult, perfumeResult] = await Promise.all([
-      sanityClient.fetch(videosQuery),
-      sanityClient.fetch(productsQuery),
-      sanityClient.fetch(perfumeQuery),
-    ]);
+    const [videosResult, bestSellerResult, newArrivalsResult, perfumeResult] =
+      await Promise.all([
+        sanityClient.fetch(videosQuery),
+        sanityClient.fetch(bestSellerQuery),
+        sanityClient.fetch(newArrivalsQuery),
+        sanityClient.fetch(perfumeQuery),
+      ]);
 
     videos = videosResult;
-    bestSellers = productsResult;
-    newArrivals = [...productsResult].reverse();
+    bestSellers = bestSellerResult;
+    newArrivals = newArrivalsResult;
     perfumeSectionContent = perfumeResult[0].perfumeSection;
   } catch (error) {
     console.error("Error in getStaticProps:", error);

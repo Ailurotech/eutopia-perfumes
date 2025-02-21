@@ -153,7 +153,10 @@ export default function AboutUs({ aboutData }) {
   return (
     <>
       <Head>
-        <meta name="description" content="The Vision Behind Eutopia Perfumes: Crafting Affordable Luxury." />
+        <meta
+          name="description"
+          content="The Vision Behind Eutopia Perfumes: Crafting Affordable Luxury."
+        />
       </Head>
       <div className="min-h-screen">
         <HeroSection
@@ -174,7 +177,6 @@ export default function AboutUs({ aboutData }) {
         ))}
       </div>
     </>
-    
   );
 }
 
