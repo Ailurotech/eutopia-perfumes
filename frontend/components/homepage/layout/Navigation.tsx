@@ -4,6 +4,7 @@ import { Playfair_Display } from "next/font/google";
 import clsx from "clsx";
 import Link from "next/link";
 import { NavigationDrawer } from "./NavigationDrawer";
+import FloatingBanner from "../component/FloatingBanner";
 
 const playFair = Playfair_Display({
   weight: "400",
@@ -48,6 +49,7 @@ export default function Navigation() {
             direction="horizontal"
           />
         </nav>
+        <FloatingBanner />
       </header>
     </>
   );
