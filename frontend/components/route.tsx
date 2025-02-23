@@ -116,8 +116,8 @@ const StoreLocation = {
 };
 
 const Privacy = {
-  Path: "/privacy",
-  Name: "Privacy",
+  Path: "/privacy-policy",
+  Name: "Privacy Policy",
   Link: ({ children, className }: LinkProps) => (
     <Link href={Privacy.Path} className={className}>
       {children}
@@ -126,8 +126,8 @@ const Privacy = {
 };
 
 const Terms = {
-  Path: "/terms",
-  Name: "Terms",
+  Path: "/terms-of-service",
+  Name: "Terms of Service",
   Link: ({ children, className }: LinkProps) => (
     <Link href={Terms.Path} className={className}>
       {children}
@@ -145,11 +145,31 @@ const FAQ = {
   ),
 };
 
-const FRR = {
-  Path: "/frr",
-  Name: "FRR",
+const RRP = {
+  Path: "returns-and-refund-policy",
+  Name: "Returns and Refund Policy",
   Link: ({ children, className }: LinkProps) => (
-    <Link href={FRR.Path} className={className}>
+    <Link href={RRP.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
+const Payment = {
+  Path: "/payment-method",
+  Name: "Payment Method",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={Payment.Path} className={className}>
+      {children}
+    </Link>
+  ),
+};
+
+const Shipping = {
+  Path: "/shipping-policy",
+  Name: "Shipping Policy",
+  Link: ({ children, className }: LinkProps) => (
+    <Link href={Shipping.Path} className={className}>
       {children}
     </Link>
   ),
@@ -175,8 +195,10 @@ export const FooterRoute = {
   StoreLocation,
   Privacy,
   FAQ,
-  FRR,
+  RRP,
   Terms,
+  Payment,
+  Shipping,
 };
 
 export type NavigationMenuTypes = typeof NavigationRoute;

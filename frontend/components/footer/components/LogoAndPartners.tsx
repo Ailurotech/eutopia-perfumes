@@ -28,6 +28,24 @@ export function LogoAndPartners() {
         >
           Terms of Service
         </Link>
+        <Text sx={footerTheme.baseStyle?.text}>|</Text>
+        <Link
+          href={FooterRoute.Payment.Path}
+          sx={{
+            ...footerTheme.baseStyle?.link,
+          }}
+        >
+          Payment Method
+        </Link>
+        <Text sx={footerTheme.baseStyle?.text}>|</Text>
+        <Link
+          href={FooterRoute.Shipping.Path}
+          sx={{
+            ...footerTheme.baseStyle?.link,
+          }}
+        >
+          Shipping Policy
+        </Link>
       </div>
       <div>
         <Image src="/images/payment.png" alt="Payment Methods" />

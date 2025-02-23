@@ -3,8 +3,6 @@ import {
   facebookIconStyle,
   footerTheme,
   instagramIconStyle,
-  twitterIconStyle,
-  youtubeIconStyle,
 } from "@/components/styles/footer-style";
 import { Text, Link, Image } from "@chakra-ui/react";
 
@@ -23,12 +21,12 @@ export function Support() {
         FAQ
       </Link>
       <Link
-        href={FooterRoute.FRR.Path}
+        href={FooterRoute.RRP.Path}
         sx={{
           ...footerTheme.baseStyle?.link,
         }}
       >
-        Shipping, Returns and Refund
+        Returns and Refund Policy
       </Link>
 
       <div className="flex-1 flex justify-center text-center space-x-4">

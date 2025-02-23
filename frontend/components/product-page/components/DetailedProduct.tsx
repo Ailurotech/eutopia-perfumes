@@ -137,7 +137,7 @@ export function DetailedProduct({
             </h3>
             <span className="text-xl">
               {"This item has\n"}
-              <Link href={FooterRoute.FRR.Path} className="underline">
+              <Link href={FooterRoute.RRP.Path} className="underline">
                 special conditions for returns
               </Link>
             </span>
