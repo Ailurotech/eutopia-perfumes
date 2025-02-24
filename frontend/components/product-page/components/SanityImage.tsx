@@ -44,13 +44,15 @@ const SanityImage = ({ value }: SanityImageProps) => {
         value.position && positionClasses[value.position]
       )}
     >
-      <div className="relative aspect-video">
+      <div className="relative w-full">
         <Image
           src={urlForImage(value).url()}
           alt={value.alt || " "}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="object-cover rounded-lg"
+          width={0}
+          height={0}
+          sizes="100vw"
+          className="w-full h-auto object-contain rounded-lg"
+          style={{ maxHeight: "80vh" }}
         />
       </div>
       {value.caption && (
