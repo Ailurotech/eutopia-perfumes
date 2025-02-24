@@ -28,7 +28,22 @@ export function Support() {
       >
         Returns and Refund Policy
       </Link>
-
+      <Link
+        href={FooterRoute.Privacy.Path}
+        sx={{
+          ...footerTheme.baseStyle?.link,
+        }}
+      >
+        Privacy Policy
+      </Link>
+      <Link
+        href={FooterRoute.Terms.Path}
+        sx={{
+          ...footerTheme.baseStyle?.link,
+        }}
+      >
+        Terms of Service
+      </Link>
       <div className="flex-1 flex justify-center text-center space-x-4">
         <Link href="https://www.facebook.com/eutopiaperfumes/">
           <div className="w-[36px] h-[36px]">

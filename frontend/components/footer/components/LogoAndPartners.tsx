@@ -12,24 +12,6 @@ export function LogoAndPartners() {
       </div>
       <div className="flex-1 flex justify-center text-center space-x-1">
         <Link
-          href={FooterRoute.Privacy.Path}
-          sx={{
-            ...footerTheme.baseStyle?.link,
-          }}
-        >
-          Privacy Policy
-        </Link>
-        <Text sx={footerTheme.baseStyle?.text}>|</Text>
-        <Link
-          href={FooterRoute.Terms.Path}
-          sx={{
-            ...footerTheme.baseStyle?.link,
-          }}
-        >
-          Terms of Service
-        </Link>
-        <Text sx={footerTheme.baseStyle?.text}>|</Text>
-        <Link
           href={FooterRoute.Payment.Path}
           sx={{
             ...footerTheme.baseStyle?.link,
