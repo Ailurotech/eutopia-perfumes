@@ -6,7 +6,7 @@ export function LogoAndPartners() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <div className="flex-1 flex-col flex items-center justify-center text-center space-y-8 mt-[calc(10%)] mb-[calc(4%)] order-3 lg:order-none">
+    <div className="flex-1 flex-col flex items-center justify-center text-center space-y-8 mt-[calc(5%)] mb-[calc(4%)] order-3 lg:order-none">
       <div>
         <Image src="/images/eutopia.png" alt="Eutopia Logo" />
       </div>
