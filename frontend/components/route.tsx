@@ -146,7 +146,7 @@ const FAQ = {
 };
 
 const RRP = {
-  Path: "returns-and-refund-policy",
+  Path: "/returns-and-refund-policy",
   Name: "Returns and Refund Policy",
   Link: ({ children, className }: LinkProps) => (
     <Link href={RRP.Path} className={className}>

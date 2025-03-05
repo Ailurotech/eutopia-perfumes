@@ -15,6 +15,13 @@ export function EmailAndAddress() {
       </Link>
 
       <Text as="p" sx={footerTheme.baseStyle?.title}>
+        PHONE
+      </Text>
+      <Link href="tel:+61420367614" sx={footerTheme.baseStyle?.link}>
+        +61 420 367 614
+      </Link>
+
+      <Text as="p" sx={footerTheme.baseStyle?.title}>
         ADDRESS
       </Text>
       <Text as="p" sx={footerTheme.baseStyle?.text}>
