@@ -54,19 +54,9 @@ const ServiceIconsRow = () => {
             description="Online Self-Service"
           />
           <ProductPoint
-            src="/D3.svg"
-            alt="100% Genuine Guaranteed"
-            description="100% Genuine Guaranteed"
-          />
-          <ProductPoint
             src="/D4.svg"
             alt="Secure Payment"
             description="Secure Payment"
-          />
-          <ProductPoint
-            src="/D5.svg"
-            alt="100% Authentic Products"
-            description="100% Authentic Products"
           />
         </div>
       </div>
