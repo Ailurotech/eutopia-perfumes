@@ -18,7 +18,7 @@ export function LogoAndPartners() {
           © Copyright {currentYear} Eutopia Perfumes. All Rights Reserved
         </Text>
       </div>
-      <div>
+      {/* <div>
         <Text sx={footerTheme.baseStyle?.text}>
           Site designed and created by{" "}
           <Link
@@ -33,7 +33,7 @@ export function LogoAndPartners() {
             Ailurotech Solutions
           </Link>
         </Text>
-      </div>
+      </div> */}
     </div>
   );
 }
