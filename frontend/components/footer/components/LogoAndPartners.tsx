@@ -10,25 +10,6 @@ export function LogoAndPartners() {
       <div>
         <Image src="/images/eutopia.png" alt="Eutopia Logo" />
       </div>
-      <div className="flex-1 flex justify-center text-center space-x-1">
-        <Link
-          href={FooterRoute.Payment.Path}
-          sx={{
-            ...footerTheme.baseStyle?.link,
-          }}
-        >
-          Payment Method
-        </Link>
-        <Text sx={footerTheme.baseStyle?.text}>|</Text>
-        <Link
-          href={FooterRoute.Shipping.Path}
-          sx={{
-            ...footerTheme.baseStyle?.link,
-          }}
-        >
-          Shipping Policy
-        </Link>
-      </div>
       <div>
         <Image src="/images/payment.png" alt="Payment Methods" />
       </div>

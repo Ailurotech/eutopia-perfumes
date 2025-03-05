@@ -13,12 +13,20 @@ export function Support() {
         SUPPORT
       </Text>
       <Link
-        href={FooterRoute.FAQ.Path}
+        href={FooterRoute.Payment.Path}
         sx={{
           ...footerTheme.baseStyle?.link,
         }}
       >
-        FAQ
+        Payment Method
+      </Link>
+      <Link
+        href={FooterRoute.Shipping.Path}
+        sx={{
+          ...footerTheme.baseStyle?.link,
+        }}
+      >
+        Shipping Policy
       </Link>
       <Link
         href={FooterRoute.RRP.Path}
